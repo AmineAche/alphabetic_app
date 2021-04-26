@@ -11,7 +11,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SYLLABES',
-      home: Scaffold(
+      routes: {
+      '/': (context) => MyHomePage(),
+      '/secondPage': (context) => SecondPage(),
+    },
+    initialRoute: '/');
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+        return Scaffold(
         appBar: AppBar(
           title: Text('SYLLABES'),
           actions: <Widget>[
@@ -21,7 +32,7 @@ class MyApp extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                // do something
+                Navigator.pushNamed(context, '/secondPage');
               },
             )
           ],
@@ -30,10 +41,21 @@ class MyApp extends StatelessWidget {
           //color: Colors.red,
           child: BoutonWidget(),
         ),
-      ),
-    );
+      );
+  }
+  }
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('SETTINGS'),
+        ),
+        body: Center(
+          //color: Colors.red,
+          child: BoutonWidget(),
+        ),
+      );
   }
 }
-
-
-

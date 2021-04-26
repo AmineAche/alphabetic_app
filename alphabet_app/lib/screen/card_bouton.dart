@@ -3,10 +3,46 @@ import 'package:flutter_button/flutter_button.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-var _letter_1 = 'a';
-var _letter_2 = 'a';
-var _letter_3 = 'a';
+var _lettertot;
+int indiceletter_1 = 0;
+int indiceletter_2 = 0;
+int indiceletter_3 = 0;
+var _letter_1 = _alphabet[indiceletter_1];
+var _letter_2 = _alphabet[indiceletter_2];
+var _letter_3 = _alphabet[indiceletter_3];
+
+
+
+  var _alphabet = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z'
+  ];
 
 class BoutonWidget extends StatefulWidget {
   @override
@@ -21,7 +57,7 @@ class _BoutonWidget extends State<BoutonWidget> {
     return Column(
       children: [
         Container(
-          color: Colors.yellow,
+          color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
           children: [
@@ -139,58 +175,27 @@ class FavoriteWidget extends StatefulWidget {
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
 
+
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  //int favoriteCount = 41;
-  int indiceletter_1 = 0;
-  int indiceletter_2 = 0;
-  int indiceletter_3 = 0;
-  int letter = 0;
   AudioCache audioCache = AudioCache();
-
-  List visibilityList = [_letter_1, _letter_2, _letter_3];
-
-  var _alphabet = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z'
-  ];
+   void initState() {
+     super.initState();
+     _loadString();
+   }
 
   @override
   Widget build(BuildContext context) {
-    //print(widget.visibility);
+    _saveString();
     return Container(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-            for(int i = 0; i < widget.visibility; i++)
-              new SwipeGestureRecognizer(
+          for (int i = 0; i < widget.visibility; i++)
+            new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 10.0),
                 height: 150,
-                width: 200,
+                width: 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey,
@@ -201,14 +206,14 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                 // padding: EdgeInsets.all(8),
                 child: Center(
                   child: Text((() {
-                      if(i == 0 ){
-                        return '$_letter_1';
-                      } else if (i == 1){
-                        return '$_letter_2';
-                      } else {
-                        return '$_letter_3';
-                      }})(),
-                      style: TextStyle(fontSize: 50, color: Colors.blue)),
+                    if (i == 0) {
+                      return '$_letter_1';
+                    } else if (i == 1) {
+                      return '$_letter_2';
+                    } else {
+                      return '$_letter_3';
+                    }
+                  })(), style: TextStyle(fontSize: 50, color: Colors.red)),
                 ),
               ),
               onSwipeDown: () {
@@ -225,16 +230,16 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               onSwipeUp: () {
                 setState(() {
                   if (i == 0) {
-                  changeupletter_1();
+                    changeupletter_1();
                   } else if (i == 1) {
-                  changeupletter_2();
+                    changeupletter_2();
                   } else {
                     changeupletter_3();
                   }
                 });
               },
             ),
-            Container(
+          Container(
               decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black,
@@ -249,11 +254,50 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                   tooltip: 'Ecouter',
                   onPressed: () {
                     sound();
-                  })), 
+                  })),
         ],
       ),
     );
   }
+
+   _loadString() async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     setState(() {
+       indiceletter_1 = (prefs.getInt('indice'));
+       //_letter_1 = _alphabet[indiceletter_1];
+       indiceletter_2 = (prefs.getInt('indice2'));
+       //_letter_2 = _alphabet[indiceletter_2];
+       indiceletter_3 = (prefs.getInt('indice3'));
+       //_letter_3 = _alphabet[indiceletter_3];
+       //widget.visibility = (prefs.getInt('vis'));
+       //widget.isMaj = (prefs.getBool('boolValue'));
+
+       //prefs.setBool('boolValue', widget.isMaj);
+     });
+   }
+
+   _saveString() async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     setState(() {
+      //  print(indiceletter_3);
+       if (indiceletter_1 == null) {
+         indiceletter_1 = 1;
+         indiceletter_2 = 1;
+         indiceletter_3 = 1;
+       }
+       prefs.setInt('indice', indiceletter_1);
+       prefs.setInt('indice2', indiceletter_2);
+       prefs.setInt('indice3', indiceletter_3);
+        prefs.setInt('vis', widget.visibility);
+        prefs.setBool('boolValue', widget.isMaj);
+        prefs.getBool('boolValue');
+     });
+    //  print(_alphabet[indiceletter_1] +
+    //      _alphabet[indiceletter_2] +
+    //      _alphabet[indiceletter_3]);
+
+    //  print(widget.visibility);
+   }
 
   void changedownletter_1() {
     setState(() {
@@ -375,25 +419,22 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     });
   }
 
-    List<String> audio = ["dab_file.mp3", "do_file.mp3"];
+  List<String> audio = ["dab_file.mp3", "do_file.mp3"];
 
   void sound() {
-    var _lettertot = '';
     if (widget.visibility == 3) {
-      _lettertot = _letter_1 + _letter_2 + _letter_3;
+      _lettertot = _letter_1.toLowerCase() +
+          _letter_2.toLowerCase() +
+          _letter_3.toLowerCase();
     } else if (widget.visibility == 2) {
       _lettertot = _letter_1 + _letter_2;
     } else {
       _lettertot = _letter_1;
     }
-    print(_lettertot);
-    if (audio.contains(_lettertot + "_file.mp3")) {
-      if (widget.isMaj) {
-        audioCache.play((_lettertot.toLowerCase()) + "_file.mp3");
-      } else {
-        audioCache.play(_lettertot + "_file.mp3");
-      }
-    }
-  }
 
+    if (audio.contains(_lettertot + "_file.mp3")) {
+      audioCache.play(_lettertot + "_file.mp3");
+    }
+    print(_lettertot);
+  }
 }
