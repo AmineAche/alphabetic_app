@@ -1,61 +1,25 @@
 import 'package:flutter/material.dart';
-import 'screen/card_bouton.dart';
-
-
+import 'package:flutter/services.dart';
+import 'screen/settings.dart';
+import 'screen/home_page.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SYLLABES',
       routes: {
-      '/': (context) => MyHomePage(),
+      '/': (context) => MyHomePage(idxbackgroundcolor: 1),
       '/secondPage': (context) => SecondPage(),
     },
     initialRoute: '/');
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-        return Scaffold(
-        appBar: AppBar(
-          title: Text('SYLLABES'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/secondPage');
-              },
-            )
-          ],
-        ),
-        body: Center(
-          //color: Colors.red,
-          child: BoutonWidget(),
-        ),
-      );
-  }
-  }
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('SETTINGS'),
-        ),
-        body: Center(
-          //color: Colors.red,
-          child: BoutonWidget(),
-        ),
-      );
-  }
-}
