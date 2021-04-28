@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 var _lettertot;
 int indiceletter_1 = 0;
-int indiceletter_2 = 0;
-int indiceletter_3 = 0;
+int indiceletter_2 = 1;
+int indiceletter_3 = 2;
 var _letter_1 = _alphabet[indiceletter_1];
 var _letter_2 = _alphabet[indiceletter_2];
 var _letter_3 = _alphabet[indiceletter_3];
@@ -50,14 +50,22 @@ class BoutonWidget extends StatefulWidget {
 }
 
 class _BoutonWidget extends State<BoutonWidget> {
-  
+  @override
   void initState() { 
+        print('Avant load');
+        print(visibilityidx);
+        print(activeMaj);
+        print('Fin Avant load');
      _load();
      super.initState();
    }
   @override
   Widget build(BuildContext context) {
     _saveString();
+      //  print('Debut du widget');
+      //  print(visibilityidx);
+      //  print(activeMaj);
+      //  print('Fin Debut load');
     return Container(
       child: Column(
       children: [
@@ -143,8 +151,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                 offColor: Colors.grey,
                 onColor: Colors.blue,
                 onChange: (value) {
-                  activeMaj = value;
-
+                  activeMaj = value;           
                   setState(() {
                     if (activeMaj) {
                       _letter_1 = _letter_1.toUpperCase();
@@ -173,7 +180,29 @@ class _BoutonWidget extends State<BoutonWidget> {
      SharedPreferences prefs = await SharedPreferences.getInstance();
      setState(() {
        visibilityidx = (prefs.getInt('vis'));
+       if (visibilityidx == null) {
+         visibilityidx = 1;
+       }
+
        activeMaj = (prefs.getBool('boolValue'));
+       if (activeMaj == null) {
+          activeMaj = false;
+       }
+
+       if (activeMaj == true) {
+        _letter_1 = _letter_1.toUpperCase();
+        _letter_2 = _letter_2.toUpperCase();
+        _letter_3 = _letter_3.toUpperCase();
+       } else {
+        _letter_1 = _letter_1.toLowerCase();
+        _letter_2 = _letter_2.toLowerCase();
+        _letter_3 = _letter_3.toLowerCase();
+      }
+
+        print('Debut du load');
+        print(visibilityidx);
+        print(activeMaj);
+        print('Fin du load');
      });
    }
 
@@ -184,7 +213,7 @@ class _BoutonWidget extends State<BoutonWidget> {
           visibilityidx = 1;
        }
        if (activeMaj == null) {
-          activeMaj = false;
+         activeMaj = false;
        }
        prefs.setInt('vis', visibilityidx);
        prefs.setBool('boolValue', activeMaj);
@@ -344,31 +373,34 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     );
   }
 
-   _loadString() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-     setState(() {
-       if (indiceletter_1 != null) {
-       indiceletter_1 = (prefs.getInt('indice'));
-       _letter_1 = _alphabet[indiceletter_1];
-       } else {
-         _letter_1 = _alphabet[0];
-       }
+_loadString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      indiceletter_1 = (prefs.getInt('indice'));
+      if (indiceletter_1 == null) {
+        indiceletter_1 = 0;
+        _letter_1 = _alphabet[indiceletter_1];
+      } else {
+        _letter_1 = _alphabet[indiceletter_1];
+      }
 
-       if (indiceletter_2 != null) {
-       indiceletter_2 = (prefs.getInt('indice2'));
-       _letter_2 = _alphabet[indiceletter_2];
-       } else {
-         _letter_2 = _alphabet[0];
-       }
+      indiceletter_2 = (prefs.getInt('indice2'));
+      if (indiceletter_2 == null) {
+        indiceletter_2 = 1;
+        _letter_2 = _alphabet[indiceletter_2];
+      } else {
+        _letter_2 = _alphabet[indiceletter_2];
+      }
 
-       if (indiceletter_1 != null) {
-        indiceletter_3 = (prefs.getInt('indice3'));
-       _letter_3 = _alphabet[indiceletter_3];
-       } else {
-         _letter_3 = _alphabet[0];
-       }
-     });
-   }
+      indiceletter_3 = (prefs.getInt('indice3'));
+      if (indiceletter_3 == null) {
+        indiceletter_3 = 2;
+        _letter_3 = _alphabet[indiceletter_3];
+      } else {
+        _letter_3 = _alphabet[indiceletter_3];
+      }
+    });
+  }
 
    _saveString() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
