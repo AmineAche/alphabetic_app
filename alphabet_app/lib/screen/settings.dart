@@ -11,17 +11,17 @@ class SecondPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           //automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.keyboard_return,
-                color: Colors.white,
-              ),
-              onPressed: () {
-               //Navigator.pushNamed(context, idxbackgroundcolor: idx, '/');
-              },
-            )
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: Icon(
+          //       Icons.keyboard_return,
+          //       color: Colors.white,
+          //     ),
+          //     onPressed: () {
+          //      //Navigator.pushNamed(context, idxbackgroundcolor: idx, '/');
+          //     },
+          //   )
+          // ],
           title: Text('SETTINGS'),
         ),
         body: Center(

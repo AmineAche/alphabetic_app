@@ -14,7 +14,6 @@ var _letter_2 = _alphabet[indiceletter_2];
 var _letter_3 = _alphabet[indiceletter_3];
 bool activeMaj = false;
 int visibilityidx = 1;
-//var theme_color = Colors.pink[100];
 
   var _alphabet = [
     'a',
@@ -52,19 +51,17 @@ class BoutonWidget extends StatefulWidget {
 
 class _BoutonWidget extends State<BoutonWidget> {
   
-  void initState() {
-     super.initState();
+  void initState() { 
      _load();
+     super.initState();
    }
   @override
   Widget build(BuildContext context) {
     _saveString();
     return Container(
-      //color: colors[idx],
       child: Column(
       children: [
         Container(
-          //color: Colors.pink[100],
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
           children: [
@@ -146,7 +143,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                 offColor: Colors.grey,
                 onColor: Colors.blue,
                 onChange: (value) {
-                  //print(activeMaj);
                   activeMaj = value;
 
                   setState(() {
@@ -160,8 +156,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                       _letter_3 = _letter_3.toLowerCase();
                     }
                   });
-                  print("Sous le setState");
-                  print(activeMaj);
                 },
               ),
             ),
@@ -180,11 +174,6 @@ class _BoutonWidget extends State<BoutonWidget> {
      setState(() {
        visibilityidx = (prefs.getInt('vis'));
        activeMaj = (prefs.getBool('boolValue'));
-       print("Dans le premier Load");
-       print(visibilityidx);
-       print(activeMaj);
-
-        //prefs.setBool('boolValue', widget.isMaj);
      });
    }
 
@@ -198,13 +187,8 @@ class _BoutonWidget extends State<BoutonWidget> {
           activeMaj = false;
        }
        prefs.setInt('vis', visibilityidx);
-       //prefs.set('color', theme_color);
-      // print("Premier Save");
-      //  print(activeMaj);
        prefs.setBool('boolValue', activeMaj);
-       //prefs.getBool('boolValue');
      });
-    //  print(widget.visibility);
    }
 }
 
@@ -222,36 +206,31 @@ class FavoriteWidget extends StatefulWidget {
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   AudioCache audioCache = AudioCache();
    void initState() {
-     super.initState();
      _loadString();
+     super.initState();
    }
 
   @override
   Widget build(BuildContext context) {
     _saveString();
-    
-    //print("apres le save");
-    //print(widget.isMaj);
     return Container(
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        //colors: Color.pink[100],
         children: [
           for (int i = 0; i < widget.visibility; i++)
             new SwipeGestureRecognizer(
               child: Container(
-                margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                margin: new EdgeInsets.symmetric(horizontal: 3.0),
                 height: 150,
                 width: 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey,
+                  color: Colors.white,
                   border: Border.all(),
                   boxShadow: [
                     BoxShadow(color: Colors.white, spreadRadius: 1),
                   ],
                 ),
-                // padding: EdgeInsets.all(8),
                 child: Center(
                   child: (i == 0)
                   ? ((_letter_1 == 'a' )
@@ -259,7 +238,13 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     || (_letter_1 == 'i')
                     || (_letter_1 == 'o')
                     || (_letter_1 == 'u')
-                    || (_letter_1 == 'y') )
+                    || (_letter_1 == 'y')
+                    || (_letter_1 == 'A')
+                    || (_letter_1 == 'E')
+                    || (_letter_1 == 'I')
+                    || (_letter_1 == 'O')
+                    || (_letter_1 == 'U')
+                    || (_letter_1 == 'Y') )
                     ? Text(
                       '$_letter_1',
                     style: TextStyle(fontSize: 90, color: Colors.blue),
@@ -275,7 +260,13 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     || (_letter_2 == 'i')
                     || (_letter_2 == 'o')
                     || (_letter_2 == 'u')
-                    || (_letter_2 == 'y') )
+                    || (_letter_2 == 'y') 
+                    || (_letter_2 == 'A')
+                    || (_letter_2 == 'E')
+                    || (_letter_2 == 'I')
+                    || (_letter_2 == 'O')
+                    || (_letter_2 == 'U')
+                    || (_letter_2 == 'Y'))
                     ? Text(
                       '$_letter_2',
                     style: TextStyle(fontSize: 90, color: Colors.blue),
@@ -291,7 +282,13 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     || (_letter_3 == 'i')
                     || (_letter_3 == 'o')
                     || (_letter_3 == 'u')
-                    || (_letter_3 == 'y') )
+                    || (_letter_3 == 'y') 
+                    || (_letter_3 == 'A')
+                    || (_letter_3 == 'E')
+                    || (_letter_3 == 'I')
+                    || (_letter_3 == 'O')
+                    || (_letter_3 == 'U')
+                    || (_letter_3 == 'Y'))
                     ? Text(
                       '$_letter_3',
                     style: TextStyle(fontSize: 90, color: Colors.blue),
@@ -376,7 +373,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
    _saveString() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
      setState(() {
-      //  print(indiceletter_3);
        if (indiceletter_1 == null) {
          indiceletter_1 = 0;
          indiceletter_2 = 0;
@@ -386,9 +382,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
        prefs.setInt('indice2', indiceletter_2);
        prefs.setInt('indice3', indiceletter_3);
      });
-    //  print(_alphabet[indiceletter_1] +
-    //      _alphabet[indiceletter_2] +
-    //      _alphabet[indiceletter_3]);
    }
 
   void changedownletter_1() {
@@ -396,28 +389,36 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       if (indiceletter_1 <= 0) {
         indiceletter_1 = 25;
         if (indiceletter_1 == indiceletter_2) {
-          indiceletter_1 -= 1;
-        }
-        //print(widget.isMaj);
-        if (widget.isMaj) {
-          _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        } else {
-          _letter_1 = _alphabet[indiceletter_1];
+          if (widget.visibility > 1) {
+            indiceletter_1 -= 1;
+          } else {
+            indiceletter_2 -= 1;
+          }
         }
       } else {
         indiceletter_1 -= 1;
         if (indiceletter_1 == indiceletter_2) {
-          if (indiceletter_1 <= 0) {
-            indiceletter_1 = 25;
-          }else {
-          indiceletter_1 -= 1;
+          if (widget.visibility > 1) {
+            if (indiceletter_1 <= 0) {
+              indiceletter_1 = 25;
+            }else {
+              indiceletter_1 -= 1;
+            }
+          } else {
+            if (indiceletter_2 <= 0) {
+              indiceletter_2 = 25;
+            }else {
+              indiceletter_2 -= 1;
+            }
           }
         }
-        if (widget.isMaj) {
-          _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        } else {
-          _letter_1 = _alphabet[indiceletter_1];
-        }
+      }
+      if (widget.isMaj) {
+        _letter_1 = _alphabet[indiceletter_1].toUpperCase();
+        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+      } else {
+        _letter_1 = _alphabet[indiceletter_1];
+        _letter_2 = _alphabet[indiceletter_2];
       }
     });
   }
@@ -427,63 +428,105 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       if (indiceletter_1 >= 25) {
         indiceletter_1 = 0;
         if (indiceletter_1 == indiceletter_2) {
-          indiceletter_1 += 1;
-        }
-        print(widget.isMaj);
-        if (widget.isMaj) {
-          _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        } else {
-          _letter_1 = _alphabet[indiceletter_1];
+          if (widget.visibility > 1) {
+            indiceletter_1 += 1;
+          } else {
+            indiceletter_2 += 1;
+          }
         }
       } else {
         indiceletter_1 += 1;
         if (indiceletter_1 == indiceletter_2) {
-          indiceletter_1 += 1;
-          if (indiceletter_1 >= 25) {
-            indiceletter_1 = 0;
-          }else {
-          indiceletter_1 += 1;
+          if (widget.visibility > 1) {
+            if (indiceletter_1 >= 25) {
+              indiceletter_1 = 0;
+            }else {
+            indiceletter_1 += 1;
+            }
+          } else {
+            if (indiceletter_2 >= 25) {
+              indiceletter_2 = 0;
+            }else {
+            indiceletter_2 += 1;
+            }
           }
         }
-        if (widget.isMaj) {
-          _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        } else {
-          _letter_1 = _alphabet[indiceletter_1];
-        }
+      }
+      if (widget.isMaj) {
+        _letter_1 = _alphabet[indiceletter_1].toUpperCase();
+        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+      } else {
+        _letter_1 = _alphabet[indiceletter_1];
+        _letter_2 = _alphabet[indiceletter_2];
       }
     });
   }
 
   void changedownletter_2() {
     setState(() {
-      print(indiceletter_2);
+
       if (indiceletter_2 <= 0) {
-        indiceletter_2 = 25;
-        if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
-          indiceletter_2 -= 1;
-        }
-        if (widget.isMaj) {
-          _letter_2 = _alphabet[indiceletter_2].toUpperCase();
-        } else {
-          _letter_2 = _alphabet[indiceletter_2];
-        }
+        indiceletter_2 = 25;         //De base 
       } else {
         indiceletter_2 -= 1;
-        if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
+      }
+
+      if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 == indiceletter_3)) {
           if (indiceletter_2 <= 0) {
-            indiceletter_2 = 25;
-            if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
+            indiceletter_2 = 25;                  // si 1 = 2 et 2 = 3
+          } else {
+            indiceletter_2 -= 1;
+          }
+      } else if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 != indiceletter_3)) {
+        if (indiceletter_2 <= 0) {
+          indiceletter_2 = 25;                  //si 1 = 2 mais 2 != 3
+        } else {
+          indiceletter_2 -= 1;
+        }
+        if (indiceletter_2 == indiceletter_3) {
+          if (widget.visibility <= 2) {
+            if (indiceletter_3 <= 0) {
+              indiceletter_3 = 25;
+            } else {
+              indiceletter_3 -= 1;
+            }
+          } else {
+            if (indiceletter_2 <= 0) {
+              indiceletter_2 = 25;
+            } else {
               indiceletter_2 -= 1;
             }
-          }else {
-          indiceletter_2 -= 1;
+          }
+        }                                        
+      } else if ((indiceletter_2 != indiceletter_1) && (indiceletter_2 == indiceletter_3)){
+        if (widget.visibility <= 2) {
+          if (indiceletter_3 <= 0) {
+            indiceletter_3 = 25;                  //si 1 != 2 mais 2 == 3
+          } else {
+            indiceletter_3 -= 1;
+          }
+        } else {
+          if (indiceletter_2 <= 0) {
+            indiceletter_2 = 25;                  //si 1 != 2 mais 2 == 3
+          } else {
+            indiceletter_2 -= 1;
           }
         }
-        if (widget.isMaj) {
-          _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+        if (indiceletter_2 == indiceletter_1) {
+          if (indiceletter_2 <= 0) {
+          indiceletter_2 = 25;                  //si 1 = 2 mais 2 != 3
         } else {
-          _letter_2 = _alphabet[indiceletter_2];
+          indiceletter_2 -= 1;
         }
+      }
+    }
+
+      if (widget.isMaj) {
+        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+      } else {
+        _letter_2 = _alphabet[indiceletter_2];
+        _letter_3 = _alphabet[indiceletter_3];
       }
     });
   }
@@ -492,32 +535,65 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     setState(() {
       if (indiceletter_2 >= 25) {
         indiceletter_2 = 0;
-        if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
-          indiceletter_2 += 1;
-        }
-        if (widget.isMaj) {
-          _letter_2 = _alphabet[indiceletter_2].toUpperCase();
-        } else {
-          _letter_2 = _alphabet[indiceletter_2];
-        }
       } else {
         indiceletter_2 += 1;
-        if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
+      }
+      if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 == indiceletter_3)) {
+        if (indiceletter_2 >= 25) {
+          indiceletter_2 = 0;
+        } else {
           indiceletter_2 += 1;
+        }
+      } else if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 != indiceletter_3)) {
           if (indiceletter_2 >= 25) {
             indiceletter_2 = 0;
-            if ((indiceletter_2 == indiceletter_1) || (indiceletter_2 == indiceletter_3)) {
+          } else {
+            indiceletter_2 += 1;
+          }
+          if (indiceletter_2 == indiceletter_3) {
+            if (widget.visibility <= 2) {
+              if (indiceletter_3 >= 25) {
+                indiceletter_3 = 0;
+              } else {
+                indiceletter_3 += 1;
+              }
+            } else {
+              if (indiceletter_2 >= 25) {
+                indiceletter_2 = 0;
+              } else {
+                indiceletter_2 += 1;
+              }
+            }
+          }
+        } else if ( (indiceletter_2 == indiceletter_3) && (indiceletter_2 != indiceletter_1) ){
+          if (widget.visibility <= 2) {
+            if (indiceletter_3 >= 25) {
+              indiceletter_3 = 0;
+            } else {
+              indiceletter_3 += 1;
+            }
+          } else {
+          if (indiceletter_2 >= 25) {
+            indiceletter_2 = 0;
+          } else {
+            indiceletter_2 += 1;
+          }
+          if (indiceletter_2 == indiceletter_1) {
+            if (indiceletter_2 >= 25) {
+              indiceletter_2 = 0;
+            } else {
               indiceletter_2 += 1;
             }
-          }else {
-          indiceletter_2 += 1;
           }
         }
-        if (widget.isMaj) {
-          _letter_2 = _alphabet[indiceletter_2].toUpperCase();
-        } else {
-          _letter_2 = _alphabet[indiceletter_2];
-        }
+      }
+
+      if (widget.isMaj) {
+        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+      } else {
+        _letter_2 = _alphabet[indiceletter_2];
+        _letter_3 = _alphabet[indiceletter_3];
       }
     });
   }
@@ -529,26 +605,20 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         if (indiceletter_3 == indiceletter_2) {
           indiceletter_3 -= 1;
         }
-        if (widget.isMaj) {
-          _letter_3 = _alphabet[indiceletter_3].toUpperCase();
-        } else {
-          _letter_3 = _alphabet[indiceletter_3];
-        }
       } else {
         indiceletter_3 -= 1;
         if (indiceletter_3 == indiceletter_2) {
-          indiceletter_3 -= 1;
           if (indiceletter_3 <= 0) {
             indiceletter_3 = 25;
-          }else {
+          } else {
           indiceletter_3 -= 1;
           }
         }
-        if (widget.isMaj) {
-          _letter_3 = _alphabet[indiceletter_3].toUpperCase();
-        } else {
-          _letter_3 = _alphabet[indiceletter_3];
-        }
+      }
+      if (widget.isMaj) {
+        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+      } else {
+        _letter_3 = _alphabet[indiceletter_3];
       }
     });
   }
@@ -560,26 +630,20 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         if (indiceletter_3 == indiceletter_2) {
           indiceletter_3 += 1;
         }
-        if (widget.isMaj) {
-          _letter_3 = _alphabet[indiceletter_3].toUpperCase();
-        } else {
-          _letter_3 = _alphabet[indiceletter_3];
-        }
       } else {
         indiceletter_3 += 1;
         if (indiceletter_3 == indiceletter_2) {
-          indiceletter_3 += 1;
           if (indiceletter_3 >= 25) {
             indiceletter_3 = 0;
           }else {
           indiceletter_3 += 1;
           }
         }
-        if (widget.isMaj) {
-          _letter_3 = _alphabet[indiceletter_3].toUpperCase();
-        } else {
-          _letter_3 = _alphabet[indiceletter_3];
-        }
+      }
+      if (widget.isMaj) {
+        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+      } else {
+        _letter_3 = _alphabet[indiceletter_3];
       }
     });
   }
@@ -588,18 +652,19 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   void sound() {
     if (widget.visibility == 3) {
-      _lettertot = _letter_1.toLowerCase() +
-          _letter_2.toLowerCase() +
-          _letter_3.toLowerCase();
+      _lettertot = _letter_1 +
+          _letter_2 +
+          _letter_3;
     } else if (widget.visibility == 2) {
       _lettertot = _letter_1 + _letter_2;
     } else {
       _lettertot = _letter_1;
     }
 
+    _lettertot = _lettertot.toLowerCase();
+
     if (audio.contains(_lettertot + "_file.mp3")) {
       audioCache.play(_lettertot + "_file.mp3");
     }
-    print(_lettertot);
   }
 }

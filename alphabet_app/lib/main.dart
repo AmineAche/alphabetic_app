@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SYLLABES',
       routes: {
-      '/': (context) => MyHomePage(idxbackgroundcolor: 1),
+      '/': (context) => MyHomePage(idxbackgroundcolor: 0),
       '/secondPage': (context) => SecondPage(),
     },
     initialRoute: '/');
