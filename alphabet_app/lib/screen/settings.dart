@@ -10,18 +10,18 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: Icon(
-          //       Icons.keyboard_return,
-          //       color: Colors.white,
-          //     ),
-          //     onPressed: () {
-          //      //Navigator.pushNamed(context, idxbackgroundcolor: idx, '/');
-          //     },
-          //   )
-          // ],
+          automaticallyImplyLeading: false,
+           actions: <Widget>[
+             IconButton(
+               icon: Icon(
+                 Icons.keyboard_return,
+                 color: Colors.white,
+              ),
+               onPressed: () {
+                Navigator.pushNamed(context, '/');
+               },
+             )
+           ],
           title: Text('SETTINGS'),
         ),
         body: Center(
@@ -41,9 +41,9 @@ class SecondPage extends StatelessWidget {
                     height: 50,
                     width: 100,
                     onPressed: () {
-                      _saveString(0);
                       // setState(() {
                          idx = 0;
+                         _saveString();
                       //   visibilityidx = 1;
                       // });
                     },
@@ -63,9 +63,9 @@ class SecondPage extends StatelessWidget {
                     height: 50,
                     width: 100,
                     onPressed: () {
-                      _saveString(1);
                       // setState(() {
                          idx = 1;
+                         _saveString();
                       //   visibilityidx = 2;
                       // });
                     },
@@ -88,9 +88,9 @@ class SecondPage extends StatelessWidget {
                     height: 50,
                     width: 100,
                     onPressed: () {
-                      _saveString(2);
                       // setState(() {
                          idx = 2;
+                         _saveString();
                       //   visibilityidx = 3;
                       // });
                     },
@@ -101,13 +101,25 @@ class SecondPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+            )
                 ],
               ),
         ),
       );
   }
-  _saveString(int idx) async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-       prefs.setInt('idx_color_value', idx);
+  _saveString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (idx == null) {
+      idx = 0;
+    }
+    prefs.setInt('idx_color_value', idx);
    }
 }

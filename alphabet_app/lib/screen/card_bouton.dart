@@ -54,7 +54,7 @@ class _BoutonWidget extends State<BoutonWidget> {
   void initState() { 
         print('Avant load');
         print(visibilityidx);
-        print(activeMaj);
+        //print(activeMaj);
         print('Fin Avant load');
      _load();
      super.initState();
@@ -145,6 +145,24 @@ class _BoutonWidget extends State<BoutonWidget> {
                 ],
               ),
             ),
+            Button3D(
+              onPressed: () {
+                String lettre;
+                lettre = _letter_1.toLowerCase();
+              if ((lettre == 'a' )
+                    || (lettre == 'e')
+                    || (lettre == 'i')
+                    || (lettre == 'o')
+                    || (lettre == 'u')
+                    || (lettre == 'y')) {
+                      lettre =  _alphabet[indiceletter_1 + 1];
+                    }
+
+                Navigator.pushNamed(context, '/reliable',
+                arguments: lettre);
+              },
+              child: Text("RELIABLE"),
+            ),
             Container(
               child: SwitcherButton(
                 value: activeMaj,
@@ -184,24 +202,14 @@ class _BoutonWidget extends State<BoutonWidget> {
          visibilityidx = 1;
        }
 
-       activeMaj = (prefs.getBool('boolValue'));
-       if (activeMaj == null) {
-          activeMaj = false;
-       }
-
-       if (activeMaj == true) {
-        _letter_1 = _letter_1.toUpperCase();
-        _letter_2 = _letter_2.toUpperCase();
-        _letter_3 = _letter_3.toUpperCase();
-       } else {
-        _letter_1 = _letter_1.toLowerCase();
-        _letter_2 = _letter_2.toLowerCase();
-        _letter_3 = _letter_3.toLowerCase();
-      }
+      //  activeMaj = (prefs.getBool('boolValue'));
+      //  if (activeMaj == null) {
+      //     activeMaj = false;
+      //  }
 
         print('Debut du load');
         print(visibilityidx);
-        print(activeMaj);
+        //print(activeMaj);
         print('Fin du load');
      });
    }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screen/settings.dart';
 import 'screen/home_page.dart';
-
+import 'screen/reliablepage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SYLLABES',
       routes: {
-      '/': (context) => MyHomePage(idxbackgroundcolor: 0),
+      '/': (context) => MyHomePage(),
       '/secondPage': (context) => SecondPage(),
+      '/reliable': (context) => ReliablePage(),
     },
     initialRoute: '/');
   }
