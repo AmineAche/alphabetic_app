@@ -69,20 +69,12 @@ class _AccentPageState extends State<AccentPage> {
                 ),
               onSwipeRight: () {
                 setState(() {
-                  if (accentidx <= 0) {
-                    accentidx = 3;
-                  } else {
-                    accentidx -= 1;
-                  }
+                  accentright();
                 });
               },
               onSwipeLeft: () {
                 setState(() {
-                  if (accentidx >= 3) {
-                    accentidx = 0;
-                  } else {
-                    accentidx += 1;
-                  }
+                  accentleft();
                  });
               },
             ),
@@ -107,20 +99,12 @@ class _AccentPageState extends State<AccentPage> {
                 ),
               onSwipeRight: () {
                 setState(() {
-                  if (lettreidx <= 0) {
-                    lettreidx = 4;
-                  } else {
-                    lettreidx -= 1;
-                  }
+                  lettreright();
                 });
               },
               onSwipeLeft: () {
                 setState(() {
-                  if (lettreidx >= 4) {
-                    lettreidx = 0;
-                  } else {
-                    lettreidx += 1;
-                  }
+                  lettreleft();
                  });
               },
             ),
@@ -142,4 +126,55 @@ Future _load() async {
        });
    }
 
+   void accentright() {
+
+      if (accentidx <= 0) {
+        accentidx = 3;
+      } else {
+        accentidx -= 1;
+      }
+
+      if (lettreidx == 3) {
+         accentidx = 0;
+      }
+   }
+
+   void accentleft() {
+
+    if (accentidx >= 3) {
+      accentidx = 0;
+    } else {
+      accentidx += 1;
+    }
+
+    if (lettreidx == 3) {
+      accentidx = 0;
+    }
+
+  }
+
+  void lettreleft() {
+
+    if (lettreidx <= 0) {
+      lettreidx = 4;
+    } else {
+      lettreidx -= 1;
+    }
+
+    if (lettreidx == 3) {
+      accentidx = 0;
+    }
+  }
+
+    void lettreright() {
+      if (lettreidx >= 4) {
+        lettreidx = 0;
+      } else {
+        lettreidx += 1;
+      }
+
+    if (lettreidx == 3) {
+      accentidx = 0;
+    }
+    }
 }
