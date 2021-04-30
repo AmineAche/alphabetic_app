@@ -143,6 +143,8 @@ class _BoutonWidget extends State<BoutonWidget> {
               ),
             ),
             Button3D(
+              height: 50,
+              width: 80,
               onPressed: () {
                 String lettre;
                 lettre = _letter_1.toLowerCase();
@@ -167,6 +169,23 @@ class _BoutonWidget extends State<BoutonWidget> {
                 ),
                 ),
             ),
+            Button3D(
+                  width: 60,
+                  height: 50,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/accent',
+                    );
+                  },
+                  child: Text(
+                    "ACCENT",
+                    style: GoogleFonts.lato(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                ),
+                ),
+                ),
             Container(
               child: SwitcherButton(
                 value: false,

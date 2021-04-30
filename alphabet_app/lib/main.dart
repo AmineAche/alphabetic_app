@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'home_page/home_page.dart';
 import 'screen/settings.dart';
 import 'screen/reliablepage.dart';
+import 'screen/accentpage.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       '/': (context) => MyHomePage(),
       '/settingPage': (context) => SettingPage(),
       '/reliable': (context) => ReliablePage(),
+      '/accent': (context) => AccentPage(),
     },
     initialRoute: '/');
   }
