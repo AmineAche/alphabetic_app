@@ -101,15 +101,6 @@ class SecondPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
-              },
-            )
                 ],
               ),
         ),

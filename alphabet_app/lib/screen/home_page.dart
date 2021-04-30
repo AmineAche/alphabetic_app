@@ -23,7 +23,7 @@ class _MyHomePage extends State<MyHomePage> {
    }
   @override
   Widget build(BuildContext context) {
-    print(idx);
+    //print(idx);
         return Scaffold(
           backgroundColor: colors[idx],
         appBar: AppBar(
@@ -56,7 +56,7 @@ class _MyHomePage extends State<MyHomePage> {
        if (idx == null) {
          idx = 0;
        }
-       print(idx);
+       //print(idx);
        });
    }
   }

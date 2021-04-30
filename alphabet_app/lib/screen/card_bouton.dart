@@ -12,7 +12,6 @@ int indiceletter_3 = 2;
 var _letter_1 = _alphabet[indiceletter_1];
 var _letter_2 = _alphabet[indiceletter_2];
 var _letter_3 = _alphabet[indiceletter_3];
-bool activeMaj = false;
 int visibilityidx = 1;
 
   var _alphabet = [
@@ -52,20 +51,13 @@ class BoutonWidget extends StatefulWidget {
 class _BoutonWidget extends State<BoutonWidget> {
   @override
   void initState() { 
-        print('Avant load');
-        print(visibilityidx);
-        //print(activeMaj);
-        print('Fin Avant load');
      _load();
      super.initState();
    }
+   bool activeMaj = false;
   @override
   Widget build(BuildContext context) {
     _saveString();
-      //  print('Debut du widget');
-      //  print(visibilityidx);
-      //  print(activeMaj);
-      //  print('Fin Debut load');
     return Container(
       child: Column(
       children: [
@@ -89,6 +81,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                     width: 100,
                     onPressed: () {
                       setState(() {
+                        print('Maj : $activeMaj');
                         visibilityidx = 1;
                       });
                     },
@@ -165,7 +158,7 @@ class _BoutonWidget extends State<BoutonWidget> {
             ),
             Container(
               child: SwitcherButton(
-                value: activeMaj,
+                value: false,
                 offColor: Colors.grey,
                 onColor: Colors.blue,
                 onChange: (value) {
@@ -201,16 +194,6 @@ class _BoutonWidget extends State<BoutonWidget> {
        if (visibilityidx == null) {
          visibilityidx = 1;
        }
-
-      //  activeMaj = (prefs.getBool('boolValue'));
-      //  if (activeMaj == null) {
-      //     activeMaj = false;
-      //  }
-
-        print('Debut du load');
-        print(visibilityidx);
-        //print(activeMaj);
-        print('Fin du load');
      });
    }
 
@@ -220,11 +203,7 @@ class _BoutonWidget extends State<BoutonWidget> {
        if (visibilityidx == null) {
           visibilityidx = 1;
        }
-       if (activeMaj == null) {
-         activeMaj = false;
-       }
        prefs.setInt('vis', visibilityidx);
-       prefs.setBool('boolValue', activeMaj);
      });
    }
 }

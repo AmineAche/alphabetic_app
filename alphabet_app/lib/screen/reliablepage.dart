@@ -116,7 +116,13 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                 List<dynamic> accepted,
                                 List<dynamic> rejected,
                               ) {
-                                return Container(
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      waitdrag = "";
+                                    });
+                                  },
+                                  child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 45,
                                   width: 45,
@@ -138,6 +144,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                         fontSize: 30, color: Colors.red
                                       ),
                                     ),
+                                  ),
                                   ),
                                 );
                               },
@@ -166,7 +173,13 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                 List<dynamic> accepted,
                                 List<dynamic> rejected,
                               ) {
-                                return Container(
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      waitdrag2 = "";
+                                    });
+                                  },
+                                  child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 45,
                                   width: 45,
@@ -188,6 +201,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                         fontSize: 30, color: Colors.red
                                       ),
                                     ),
+                                  ),
                                   ),
                                 );
                               },
@@ -216,7 +230,13 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                 List<dynamic> accepted,
                                 List<dynamic> rejected,
                               ) {
-                                return Container(
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      waitdrag3 = "";
+                                    });
+                                  },
+                                  child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 45,
                                   width: 45,
@@ -238,6 +258,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                         fontSize: 30, color: Colors.red
                                       ),
                                     ),
+                                  ),
                                   ),
                                 );
                               },
@@ -266,7 +287,13 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                 List<dynamic> accepted,
                                 List<dynamic> rejected,
                               ) {
-                                return Container(
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      waitdrag4 = "";
+                                    });
+                                  },
+                                  child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 45,
                                   width: 45,
@@ -288,6 +315,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                         fontSize: 30, color: Colors.red
                                       ),
                                     ),
+                                  ),
                                   ),
                                 );
                               },
@@ -317,7 +345,13 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                 List<dynamic> accepted,
                                 List<dynamic> rejected,
                               ) {
-                                return Container(
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      waitdrag5 = "";
+                                    });
+                                  },
+                                  child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 45,
                                   width: 45,
@@ -339,6 +373,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                         fontSize: 30, color: Colors.red
                                       ),
                                     ),
+                                  ),
                                   ),
                                 );
                               },
