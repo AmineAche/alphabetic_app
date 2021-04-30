@@ -4,6 +4,7 @@ import 'package:switcher_button/switcher_button.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var _lettertot;
 int indiceletter_1 = 0;
@@ -87,8 +88,9 @@ class _BoutonWidget extends State<BoutonWidget> {
                     },
                     child: Text(
                       "a",
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -107,8 +109,9 @@ class _BoutonWidget extends State<BoutonWidget> {
                     },
                     child: Text(
                       "a a",
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -130,8 +133,9 @@ class _BoutonWidget extends State<BoutonWidget> {
                     },
                     child: Text(
                       "a a a",
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -154,7 +158,14 @@ class _BoutonWidget extends State<BoutonWidget> {
                 Navigator.pushNamed(context, '/reliable',
                 arguments: lettre);
               },
-              child: Text("RELIABLE"),
+              child: 
+              Text(
+                "RELIABLE",
+                style: GoogleFonts.lato(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                ),
+                ),
             ),
             Container(
               child: SwitcherButton(
@@ -235,6 +246,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         children: [
           for (int i = 0; i < widget.visibility; i++)
             new SwipeGestureRecognizer(
+
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
                 height: 150,
@@ -243,9 +255,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                   border: Border.all(),
-                  boxShadow: [
-                    BoxShadow(color: Colors.white, spreadRadius: 1),
-                  ],
+                  // boxShadow: [
+                  //   BoxShadow(color: Colors.white, spreadRadius: 1),
+                  // ],
                 ),
                 child: Center(
                   child: (i == 0)
@@ -344,7 +356,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                   border: Border.all(
                     color: Colors.black,
                   ),
-                  color: Colors.grey,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(50)),
               child: IconButton(
                   icon: Icon(

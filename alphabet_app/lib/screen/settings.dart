@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 int idx = 0;
 
-class SecondPage extends StatelessWidget {
+class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

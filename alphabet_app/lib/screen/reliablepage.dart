@@ -13,7 +13,7 @@ int idx = 2;
 List<Color> colors = [
   Colors.pink[100],
   Colors.blue[100],
-  Colors.black,
+  Colors.blueGrey,
 ];
 
 class _ReliablePageState extends State<ReliablePage> {
@@ -60,15 +60,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
               data: lettre,
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                height: 45,
-                width: 45,
+                height: 65,
+                width: 65,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey,
                   border: Border.all(),
-                  boxShadow: [
-                    BoxShadow(color: Colors.white, spreadRadius: 1),
-                  ],
                 ),
                 child: Center(
                   child: Text(
@@ -80,15 +77,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
               ),
               feedback: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                height: 45,
-                width: 45,
+                height: 65,
+                width: 65,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey,
                   border: Border.all(),
-                  boxShadow: [
-                    BoxShadow(color: Colors.white, spreadRadius: 1),
-                  ],
                 ),
                 child: Center(
                   child: Text(
@@ -124,18 +118,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   },
                                   child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 45,
-                                  width: 45,
+                                  height: 65,
+                                  width: 65,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.grey,
                                     border: Border.all(),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        spreadRadius: 1
-                                      ),
-                                    ],
                                   ),
                                   child: Center(
                                     child: Text(
@@ -181,18 +169,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   },
                                   child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 45,
-                                  width: 45,
+                                  height: 65,
+                                  width: 65,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.grey,
                                     border: Border.all(),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        spreadRadius: 1
-                                      ),
-                                    ],
                                   ),
                                   child: Center(
                                     child: Text(
@@ -238,18 +220,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   },
                                   child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 45,
-                                  width: 45,
+                                  height: 65,
+                                  width: 65,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.grey,
                                     border: Border.all(),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        spreadRadius: 1
-                                      ),
-                                    ],
                                   ),
                                   child: Center(
                                     child: Text(
@@ -295,18 +271,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   },
                                   child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 45,
-                                  width: 45,
+                                  height: 65,
+                                  width: 65,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.grey,
                                     border: Border.all(),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        spreadRadius: 1
-                                      ),
-                                    ],
                                   ),
                                   child: Center(
                                     child: Text(
@@ -353,18 +323,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   },
                                   child: Container(
                                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 45,
-                                  width: 45,
+                                  height: 65,
+                                  width: 65,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.grey,
                                     border: Border.all(),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        spreadRadius: 1
-                                      ),
-                                    ],
                                   ),
                                   child: Center(
                                     child: Text(
@@ -407,15 +371,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                       children: [
                         Container(
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: 45,
-                          width: 45,
+                          height: 65,
+                          width: 65,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey,
                             border: Border.all(),
-                            boxShadow: [
-                              BoxShadow(color: Colors.white, spreadRadius: 1),
-                            ],
                           ),
                           child: Center(
                             child: Text(
@@ -427,15 +388,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                         ),
                         Container(
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: 45,
-                          width: 45,
+                          height: 65,
+                          width: 65,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey,
                             border: Border.all(),
-                            boxShadow: [
-                              BoxShadow(color: Colors.white, spreadRadius: 1),
-                            ],
                           ),
                           child: Center(
                             child: Text(
@@ -447,15 +405,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                         ),
                         Container(
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: 45,
-                          width: 45,
+                          height: 65,
+                          width: 65,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey,
                             border: Border.all(),
-                            boxShadow: [
-                              BoxShadow(color: Colors.white, spreadRadius: 1),
-                            ],
                           ),
                           child: Center(
                             child: Text(
@@ -467,15 +422,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                         ),
                         Container(
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: 45,
-                          width: 45,
+                          height: 65,
+                          width: 65,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey,
                             border: Border.all(),
-                            boxShadow: [
-                              BoxShadow(color: Colors.white, spreadRadius: 1),
-                            ],
                           ),
                           child: Center(
                             child: Text(
@@ -487,15 +439,12 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                         ),
                         Container(
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: 45,
-                          width: 45,
+                          height: 65,
+                          width: 65,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey,
                             border: Border.all(),
-                            boxShadow: [
-                              BoxShadow(color: Colors.white, spreadRadius: 1),
-                            ],
                           ),
                           child: Center(
                             child: Text(

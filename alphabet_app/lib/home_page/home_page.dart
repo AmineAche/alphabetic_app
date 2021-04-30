@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'card_bouton.dart';
+import 'component/card_bouton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 List<Color> colors = [
   Colors.pink[100],
   Colors.blue[100],
-  Colors.black,
+  Colors.blueGrey,
 ];
-int idx = 2;
+int idx = 0;
 
 
 class MyHomePage extends StatefulWidget {
@@ -28,7 +29,12 @@ class _MyHomePage extends State<MyHomePage> {
           backgroundColor: colors[idx],
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('SYLLABES'),
+          title: Text(
+            'SYLLABES',
+             style: GoogleFonts.lato(
+              color: Colors.white,
+              ),
+            ),
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -36,7 +42,7 @@ class _MyHomePage extends State<MyHomePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/secondPage');
+                Navigator.pushNamed(context, '/settingPage');
               },
             )
           ],
@@ -51,8 +57,7 @@ class _MyHomePage extends State<MyHomePage> {
      Future _load() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
        setState(() {
-       int oe = (prefs.getInt('idx_color_value'));
-       idx = oe;
+       idx = (prefs.getInt('idx_color_value'));
        if (idx == null) {
          idx = 0;
        }
