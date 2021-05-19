@@ -122,7 +122,6 @@ Future _load() async {
        if (idx == null) {
          idx = 0;
        }
-       //print(idx);
        });
    }
 

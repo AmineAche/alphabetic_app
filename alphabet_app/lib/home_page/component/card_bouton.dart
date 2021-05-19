@@ -157,7 +157,9 @@ class _BoutonWidget extends State<BoutonWidget> {
                       lettre =  _alphabet[indiceletter_1 + 1];
                     }
 
-                Navigator.pushNamed(context, '/reliable',
+                //Navigator.pushNamed(context, '/reliable',
+                //arguments: lettre);
+                Navigator.pushNamed(context, '/slide',
                 arguments: lettre);
               },
               child: 
@@ -258,6 +260,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     _saveString();
     return Container(
       child: Row(
@@ -268,8 +271,8 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: 150,
-                width: 150,
+                height: size.height *0.38,
+                width: size.width *0.25,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
