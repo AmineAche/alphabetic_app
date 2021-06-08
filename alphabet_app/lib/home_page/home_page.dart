@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'component/card_bouton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../color_list.dart';
 
-List<Color> colors = [
-  Colors.pink[100],
-  Colors.blue[100],
-  Colors.blueGrey,
-];
-int idx = 0;
+int idxColorBackground = 0;
 
 
 class MyHomePage extends StatefulWidget {
@@ -25,27 +21,7 @@ class _MyHomePage extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
         return Scaffold(
-          backgroundColor: colors[idx],
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'SYLLABES',
-             style: GoogleFonts.lato(
-              color: Colors.white,
-              ),
-            ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/settingPage');
-              },
-            )
-          ],
-        ),
+          backgroundColor: backgroundColor[idxColorBackground],
         body: Center(
           //color: Colors.red,
           child: BoutonWidget(),
@@ -56,9 +32,9 @@ class _MyHomePage extends State<MyHomePage> {
      Future _load() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
        setState(() {
-       idx = (prefs.getInt('idx_color_value'));
-       if (idx == null) {
-         idx = 0;
+       idxColorBackground = (prefs.getInt('idx_color_background_value'));
+       if (idxColorBackground == null) {
+         idxColorBackground = 0;
        }
        });
     }  

@@ -5,6 +5,8 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../constants.dart';
+import '../../color_list.dart';
 
 var _lettertot;
 int indiceletter_1 = 0;
@@ -14,35 +16,36 @@ var _letter_1 = _alphabet[indiceletter_1];
 var _letter_2 = _alphabet[indiceletter_2];
 var _letter_3 = _alphabet[indiceletter_3];
 int visibilityidx = 1;
+int idxColorButton = 0;
 
-  var _alphabet = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-  ];
+var _alphabet = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
 
 class BoutonWidget extends StatefulWidget {
   @override
@@ -51,212 +54,211 @@ class BoutonWidget extends StatefulWidget {
 
 class _BoutonWidget extends State<BoutonWidget> {
   @override
-  void initState() { 
-     _load();
-     super.initState();
-   }
-   bool activeMaj = false;
+  void initState() {
+    _load();
+    super.initState();
+  }
+
+  bool activeMaj = false;
   @override
   Widget build(BuildContext context) {
     _saveString();
     return Container(
       child: Column(
-      children: [
-        Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
-          children: [
-            Container(
-              child: Row(
-                children: [
-                  Button3D(
-                    style: StyleOf3dButton(
-                      backColor: Colors.red[900],
-                      topColor: Colors.red[400],
-                      borderRadius: BorderRadius.only(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Button3D(
+                        style: StyleOf3dButton(
+                          backColor: buttonColor[idxColorButton],
+                          topColor: buttonColor[idxColorButton],
+                          borderRadius: BorderRadius.only(),
+                        ),
+                        height: 50,
+                        width: 80,
+                        onPressed: () {
+                          setState(() {
+                            print('Maj : $activeMaj');
+                            visibilityidx = 1;
+                          });
+                        },
+                        child: Text(
+                          "a",
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Button3D(
+                        style: StyleOf3dButton(
+                          backColor: buttonColor[idxColorButton],
+                          topColor: buttonColor[idxColorButton],
+                          borderRadius: BorderRadius.circular(0),
+                        ),
+                        height: 50,
+                        width: 80,
+                        onPressed: () {
+                          setState(() {
+                            visibilityidx = 2;
+                          });
+                        },
+                        child: Text(
+                          "a a",
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Button3D(
+                        style: StyleOf3dButton(
+                          backColor: buttonColor[idxColorButton],
+                          topColor: buttonColor[idxColorButton],
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(30),
+                            topRight: Radius.circular(5),
+                          ),
+                        ),
+                        height: 50,
+                        width: 80,
+                        onPressed: () {
+                          setState(() {
+                            visibilityidx = 3;
+                          });
+                        },
+                        child: Text(
+                          "a a a",
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    color: buttonColor[idxColorButton],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        child: Text(
+                          "Aa",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: SwitcherButton(
+                          value: false,
+                          offColor: Colors.grey,
+                          onColor: my_Violet,
+                          onChange: (value) {
+                            activeMaj = value;
+                            setState(() {
+                              if (activeMaj) {
+                                _letter_1 = _letter_1.toUpperCase();
+                                _letter_2 = _letter_2.toUpperCase();
+                                _letter_3 = _letter_3.toUpperCase();
+                              } else {
+                                _letter_1 = _letter_1.toLowerCase();
+                                _letter_2 = _letter_2.toLowerCase();
+                                _letter_3 = _letter_3.toLowerCase();
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(30),
-                      topLeft: Radius.circular(30),
-                      ),
                     ),
-                    height: 50,
-                    width: 100,
-                    onPressed: () {
-                      setState(() {
-                        print('Maj : $activeMaj');
-                        visibilityidx = 1;
-                      });
-                    },
-                    child: Text(
-                      "a",
-                      style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    color: buttonColor[idxColorButton],
                   ),
-                  Button3D(
-                    style: StyleOf3dButton(
-                      backColor: Colors.red[900],
-                      topColor: Colors.red[400],
-                      borderRadius: BorderRadius.circular(0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
                     ),
-                    height: 50,
-                    width: 100,
                     onPressed: () {
-                      setState(() {
-                        visibilityidx = 2;
-                      });
+                      Navigator.pushNamed(context, '/settingPage');
                     },
-                    child: Text(
-                      "a a",
-                      style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
                   ),
-                  Button3D(
-                    style: StyleOf3dButton(
-                      backColor: Colors.red[900],
-                      topColor: Colors.red[400],
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    height: 50,
-                    width: 100,
-                    onPressed: () {
-                      setState(() {
-                        visibilityidx = 3;
-                      });
-                    },
-                    child: Text(
-                      "a a a",
-                      style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-            Button3D(
-              height: 50,
-              width: 80,
-              onPressed: () {
-                String lettre;
-                lettre = _letter_1.toLowerCase();
-              if ((lettre == 'a' )
-                    || (lettre == 'e')
-                    || (lettre == 'i')
-                    || (lettre == 'o')
-                    || (lettre == 'u')
-                    || (lettre == 'y')) {
-                      lettre =  _alphabet[indiceletter_1 + 1];
-                    }
-
-                //Navigator.pushNamed(context, '/reliable',
-                //arguments: lettre);
-                Navigator.pushNamed(context, '/slide',
-                arguments: lettre);
-              },
-              child: 
-              Text(
-                "RELIABLE",
-                style: GoogleFonts.lato(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                ),
-                ),
-            ),
-            Button3D(
-                  width: 60,
-                  height: 50,
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/accent',
-                    );
-                  },
-                  child: Text(
-                    "ACCENT",
-                    style: GoogleFonts.lato(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                ),
-                ),
-                ),
-            Container(
-              child: SwitcherButton(
-                value: false,
-                offColor: Colors.grey,
-                onColor: Colors.blue,
-                onChange: (value) {
-                  activeMaj = value;           
-                  setState(() {
-                    if (activeMaj) {
-                      _letter_1 = _letter_1.toUpperCase();
-                      _letter_2 = _letter_2.toUpperCase();
-                      _letter_3 = _letter_3.toUpperCase();
-                    } else {
-                      _letter_1 = _letter_1.toLowerCase();
-                      _letter_2 = _letter_2.toLowerCase();
-                      _letter_3 = _letter_3.toLowerCase();
-                    }
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      SizedBox(height: 60),
-      FavoriteWidget( isMaj: activeMaj, visibility: visibilityidx),
-      ],
+          ),
+          FavoriteWidget(isMaj: activeMaj, visibility: visibilityidx),
+          BottomBar(),
+        ],
       ),
     );
   }
 
-   _load() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-     setState(() {
-       visibilityidx = (prefs.getInt('vis'));
-       if (visibilityidx == null) {
-         visibilityidx = 1;
-       }
-     });
-   }
+  _load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      visibilityidx = (prefs.getInt('vis'));
+      if (visibilityidx == null) {
+        visibilityidx = 1;
+      }
 
-   _saveString() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-     setState(() {
-       if (visibilityidx == null) {
-          visibilityidx = 1;
+      idxColorButton = (prefs.getInt('idx_color_button_value'));
+       if (idxColorButton == null) {
+         idxColorButton = 0;
        }
-       prefs.setInt('vis', visibilityidx);
-     });
-   }
+    });
+  }
+
+  _saveString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (visibilityidx == null) {
+        visibilityidx = 1;
+      }
+      prefs.setInt('vis', visibilityidx);
+    });
+  }
 }
-
 
 class FavoriteWidget extends StatefulWidget {
   FavoriteWidget({Key key, this.isMaj: false, this.visibility})
       : super(key: key);
-      
-      final bool isMaj;
-      final int visibility;
+
+  final bool isMaj;
+  final int visibility;
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
 
-
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   AudioCache audioCache = AudioCache();
-   void initState() {
-     _loadString();
-     super.initState();
-   }
+  void initState() {
+    _loadString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -268,87 +270,87 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         children: [
           for (int i = 0; i < widget.visibility; i++)
             new SwipeGestureRecognizer(
-
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: size.height *0.38,
-                width: size.width *0.25,
+                height: size.height * 0.38,
+                width: size.width * 0.25,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  border: Border.all(),
+                  shape: BoxShape.circle,
+                  color: caseColor,
+                  border: Border.all(color: Colors.white, width: 2),
                   // boxShadow: [
                   //   BoxShadow(color: Colors.white, spreadRadius: 1),
                   // ],
                 ),
                 child: Center(
-                  child: (i == 0)
-                  ? ((_letter_1 == 'a' )
-                    || (_letter_1 == 'e')
-                    || (_letter_1 == 'i')
-                    || (_letter_1 == 'o')
-                    || (_letter_1 == 'u')
-                    || (_letter_1 == 'y')
-                    || (_letter_1 == 'A')
-                    || (_letter_1 == 'E')
-                    || (_letter_1 == 'I')
-                    || (_letter_1 == 'O')
-                    || (_letter_1 == 'U')
-                    || (_letter_1 == 'Y') )
-                    ? Text(
-                      '$_letter_1',
-                    style: TextStyle(fontSize: 90, color: Colors.blue),
-                    )
-                    : Text(
-                      '$_letter_1',
-                    style: TextStyle(fontSize: 90, color: Colors.red),
-                    )
-
-                  : (i == 1)
-                  ? ((_letter_2 == 'a')
-                    || (_letter_2 == 'e')
-                    || (_letter_2 == 'i')
-                    || (_letter_2 == 'o')
-                    || (_letter_2 == 'u')
-                    || (_letter_2 == 'y') 
-                    || (_letter_2 == 'A')
-                    || (_letter_2 == 'E')
-                    || (_letter_2 == 'I')
-                    || (_letter_2 == 'O')
-                    || (_letter_2 == 'U')
-                    || (_letter_2 == 'Y'))
-                    ? Text(
-                      '$_letter_2',
-                    style: TextStyle(fontSize: 90, color: Colors.blue),
-                    )
-                    : Text(
-                      '$_letter_2',
-                    style: TextStyle(fontSize: 90, color: Colors.red),
-                    )
-
-
-                  : ((_letter_3 == 'a')
-                    || (_letter_3 == 'e')
-                    || (_letter_3 == 'i')
-                    || (_letter_3 == 'o')
-                    || (_letter_3 == 'u')
-                    || (_letter_3 == 'y') 
-                    || (_letter_3 == 'A')
-                    || (_letter_3 == 'E')
-                    || (_letter_3 == 'I')
-                    || (_letter_3 == 'O')
-                    || (_letter_3 == 'U')
-                    || (_letter_3 == 'Y'))
-                    ? Text(
-                      '$_letter_3',
-                    style: TextStyle(fontSize: 90, color: Colors.blue),
-                    )
-                    : Text(
-                      '$_letter_3',
-                    style: TextStyle(fontSize: 90, color: Colors.red),
-                    )
-
-                ),
+                    child: (i == 0)
+                        ? ((_letter_1 == 'a') ||
+                                (_letter_1 == 'e') ||
+                                (_letter_1 == 'i') ||
+                                (_letter_1 == 'o') ||
+                                (_letter_1 == 'u') ||
+                                (_letter_1 == 'y') ||
+                                (_letter_1 == 'A') ||
+                                (_letter_1 == 'E') ||
+                                (_letter_1 == 'I') ||
+                                (_letter_1 == 'O') ||
+                                (_letter_1 == 'U') ||
+                                (_letter_1 == 'Y'))
+                            ? Text(
+                                '$_letter_1',
+                                style:
+                                    TextStyle(fontSize: 90, color: Colors.blue),
+                              )
+                            : Text(
+                                '$_letter_1',
+                                style:
+                                    TextStyle(fontSize: 90, color: Colors.red),
+                              )
+                        : (i == 1)
+                            ? ((_letter_2 == 'a') ||
+                                    (_letter_2 == 'e') ||
+                                    (_letter_2 == 'i') ||
+                                    (_letter_2 == 'o') ||
+                                    (_letter_2 == 'u') ||
+                                    (_letter_2 == 'y') ||
+                                    (_letter_2 == 'A') ||
+                                    (_letter_2 == 'E') ||
+                                    (_letter_2 == 'I') ||
+                                    (_letter_2 == 'O') ||
+                                    (_letter_2 == 'U') ||
+                                    (_letter_2 == 'Y'))
+                                ? Text(
+                                    '$_letter_2',
+                                    style: TextStyle(
+                                        fontSize: 90, color: Colors.blue),
+                                  )
+                                : Text(
+                                    '$_letter_2',
+                                    style: TextStyle(
+                                        fontSize: 90, color: Colors.red),
+                                  )
+                            : ((_letter_3 == 'a') ||
+                                    (_letter_3 == 'e') ||
+                                    (_letter_3 == 'i') ||
+                                    (_letter_3 == 'o') ||
+                                    (_letter_3 == 'u') ||
+                                    (_letter_3 == 'y') ||
+                                    (_letter_3 == 'A') ||
+                                    (_letter_3 == 'E') ||
+                                    (_letter_3 == 'I') ||
+                                    (_letter_3 == 'O') ||
+                                    (_letter_3 == 'U') ||
+                                    (_letter_3 == 'Y'))
+                                ? Text(
+                                    '$_letter_3',
+                                    style: TextStyle(
+                                        fontSize: 90, color: Colors.blue),
+                                  )
+                                : Text(
+                                    '$_letter_3',
+                                    style: TextStyle(
+                                        fontSize: 90, color: Colors.red),
+                                  )),
               ),
               onSwipeDown: () {
                 setState(() {
@@ -374,27 +376,26 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               },
             ),
           Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                  ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50)),
-              child: IconButton(
-                  icon: Icon(
-                    Icons.volume_up,
-                    color: Colors.black,
-                  ),
-                  tooltip: 'Ecouter',
-                  onPressed: () {
-                    sound();
-                  })),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 1),
+                color: caseColor,
+                borderRadius: BorderRadius.circular(50)),
+            child: IconButton(
+                icon: Icon(
+                  Icons.volume_up,
+                  color: Colors.black,
+                ),
+                tooltip: 'Ecouter',
+                onPressed: () {
+                  sound();
+                }),
+          ),
         ],
       ),
     );
   }
 
-_loadString() async {
+  _loadString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       indiceletter_1 = (prefs.getInt('indice'));
@@ -423,19 +424,19 @@ _loadString() async {
     });
   }
 
-   _saveString() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-     setState(() {
-       if (indiceletter_1 == null) {
-         indiceletter_1 = 0;
-         indiceletter_2 = 0;
-         indiceletter_3 = 0;
-       }
-       prefs.setInt('indice', indiceletter_1);
-       prefs.setInt('indice2', indiceletter_2);
-       prefs.setInt('indice3', indiceletter_3);
-     });
-   }
+  _saveString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (indiceletter_1 == null) {
+        indiceletter_1 = 0;
+        indiceletter_2 = 0;
+        indiceletter_3 = 0;
+      }
+      prefs.setInt('indice', indiceletter_1);
+      prefs.setInt('indice2', indiceletter_2);
+      prefs.setInt('indice3', indiceletter_3);
+    });
+  }
 
   void changedownletter_1() {
     setState(() {
@@ -454,13 +455,13 @@ _loadString() async {
           if (widget.visibility > 1) {
             if (indiceletter_1 <= 0) {
               indiceletter_1 = 25;
-            }else {
+            } else {
               indiceletter_1 -= 1;
             }
           } else {
             if (indiceletter_2 <= 0) {
               indiceletter_2 = 25;
-            }else {
+            } else {
               indiceletter_2 -= 1;
             }
           }
@@ -493,14 +494,14 @@ _loadString() async {
           if (widget.visibility > 1) {
             if (indiceletter_1 >= 25) {
               indiceletter_1 = 0;
-            }else {
-            indiceletter_1 += 1;
+            } else {
+              indiceletter_1 += 1;
             }
           } else {
             if (indiceletter_2 >= 25) {
               indiceletter_2 = 0;
-            }else {
-            indiceletter_2 += 1;
+            } else {
+              indiceletter_2 += 1;
             }
           }
         }
@@ -517,22 +518,23 @@ _loadString() async {
 
   void changedownletter_2() {
     setState(() {
-
       if (indiceletter_2 <= 0) {
-        indiceletter_2 = 25;         //De base 
+        indiceletter_2 = 25; //De base
       } else {
         indiceletter_2 -= 1;
       }
 
-      if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 == indiceletter_3)) {
-          if (indiceletter_2 <= 0) {
-            indiceletter_2 = 25;                  // si 1 = 2 et 2 = 3
-          } else {
-            indiceletter_2 -= 1;
-          }
-      } else if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 != indiceletter_3)) {
+      if ((indiceletter_2 == indiceletter_1) &&
+          (indiceletter_2 == indiceletter_3)) {
         if (indiceletter_2 <= 0) {
-          indiceletter_2 = 25;                  //si 1 = 2 mais 2 != 3
+          indiceletter_2 = 25; // si 1 = 2 et 2 = 3
+        } else {
+          indiceletter_2 -= 1;
+        }
+      } else if ((indiceletter_2 == indiceletter_1) &&
+          (indiceletter_2 != indiceletter_3)) {
+        if (indiceletter_2 <= 0) {
+          indiceletter_2 = 25; //si 1 = 2 mais 2 != 3
         } else {
           indiceletter_2 -= 1;
         }
@@ -550,29 +552,30 @@ _loadString() async {
               indiceletter_2 -= 1;
             }
           }
-        }                                        
-      } else if ((indiceletter_2 != indiceletter_1) && (indiceletter_2 == indiceletter_3)){
+        }
+      } else if ((indiceletter_2 != indiceletter_1) &&
+          (indiceletter_2 == indiceletter_3)) {
         if (widget.visibility <= 2) {
           if (indiceletter_3 <= 0) {
-            indiceletter_3 = 25;                  //si 1 != 2 mais 2 == 3
+            indiceletter_3 = 25; //si 1 != 2 mais 2 == 3
           } else {
             indiceletter_3 -= 1;
           }
         } else {
           if (indiceletter_2 <= 0) {
-            indiceletter_2 = 25;                  //si 1 != 2 mais 2 == 3
+            indiceletter_2 = 25; //si 1 != 2 mais 2 == 3
           } else {
             indiceletter_2 -= 1;
           }
         }
         if (indiceletter_2 == indiceletter_1) {
           if (indiceletter_2 <= 0) {
-          indiceletter_2 = 25;                  //si 1 = 2 mais 2 != 3
-        } else {
-          indiceletter_2 -= 1;
+            indiceletter_2 = 25; //si 1 = 2 mais 2 != 3
+          } else {
+            indiceletter_2 -= 1;
+          }
         }
       }
-    }
 
       if (widget.isMaj) {
         _letter_2 = _alphabet[indiceletter_2].toUpperCase();
@@ -591,34 +594,21 @@ _loadString() async {
       } else {
         indiceletter_2 += 1;
       }
-      if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 == indiceletter_3)) {
+      if ((indiceletter_2 == indiceletter_1) &&
+          (indiceletter_2 == indiceletter_3)) {
         if (indiceletter_2 >= 25) {
           indiceletter_2 = 0;
         } else {
           indiceletter_2 += 1;
         }
-      } else if ((indiceletter_2 == indiceletter_1) && (indiceletter_2 != indiceletter_3)) {
-          if (indiceletter_2 >= 25) {
-            indiceletter_2 = 0;
-          } else {
-            indiceletter_2 += 1;
-          }
-          if (indiceletter_2 == indiceletter_3) {
-            if (widget.visibility <= 2) {
-              if (indiceletter_3 >= 25) {
-                indiceletter_3 = 0;
-              } else {
-                indiceletter_3 += 1;
-              }
-            } else {
-              if (indiceletter_2 >= 25) {
-                indiceletter_2 = 0;
-              } else {
-                indiceletter_2 += 1;
-              }
-            }
-          }
-        } else if ( (indiceletter_2 == indiceletter_3) && (indiceletter_2 != indiceletter_1) ){
+      } else if ((indiceletter_2 == indiceletter_1) &&
+          (indiceletter_2 != indiceletter_3)) {
+        if (indiceletter_2 >= 25) {
+          indiceletter_2 = 0;
+        } else {
+          indiceletter_2 += 1;
+        }
+        if (indiceletter_2 == indiceletter_3) {
           if (widget.visibility <= 2) {
             if (indiceletter_3 >= 25) {
               indiceletter_3 = 0;
@@ -626,6 +616,22 @@ _loadString() async {
               indiceletter_3 += 1;
             }
           } else {
+            if (indiceletter_2 >= 25) {
+              indiceletter_2 = 0;
+            } else {
+              indiceletter_2 += 1;
+            }
+          }
+        }
+      } else if ((indiceletter_2 == indiceletter_3) &&
+          (indiceletter_2 != indiceletter_1)) {
+        if (widget.visibility <= 2) {
+          if (indiceletter_3 >= 25) {
+            indiceletter_3 = 0;
+          } else {
+            indiceletter_3 += 1;
+          }
+        } else {
           if (indiceletter_2 >= 25) {
             indiceletter_2 = 0;
           } else {
@@ -664,7 +670,7 @@ _loadString() async {
           if (indiceletter_3 <= 0) {
             indiceletter_3 = 25;
           } else {
-          indiceletter_3 -= 1;
+            indiceletter_3 -= 1;
           }
         }
       }
@@ -688,8 +694,8 @@ _loadString() async {
         if (indiceletter_3 == indiceletter_2) {
           if (indiceletter_3 >= 25) {
             indiceletter_3 = 0;
-          }else {
-          indiceletter_3 += 1;
+          } else {
+            indiceletter_3 += 1;
           }
         }
       }
@@ -705,9 +711,7 @@ _loadString() async {
 
   void sound() {
     if (widget.visibility == 3) {
-      _lettertot = _letter_1 +
-          _letter_2 +
-          _letter_3;
+      _lettertot = _letter_1 + _letter_2 + _letter_3;
     } else if (widget.visibility == 2) {
       _lettertot = _letter_1 + _letter_2;
     } else {
@@ -719,5 +723,91 @@ _loadString() async {
     if (audio.contains(_lettertot + "_file.mp3")) {
       audioCache.play(_lettertot + "_file.mp3");
     }
+  }
+}
+
+class BottomBar extends StatefulWidget {
+  //const BottomBar({ Key? key }) : super(key: key);
+
+  @override
+  _BottomBarState createState() => _BottomBarState();
+}
+
+class _BottomBarState extends State<BottomBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Button3D(
+                  height: 50,
+                  width: 85,
+                  style: StyleOf3dButton(
+                    backColor: buttonColor[idxColorButton],
+                    topColor: buttonColor[idxColorButton],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(0),
+                    ),
+                  ),
+                  onPressed: () {
+                    String lettre;
+                    lettre = _letter_1.toLowerCase();
+                    if ((lettre == 'a') ||
+                        (lettre == 'e') ||
+                        (lettre == 'i') ||
+                        (lettre == 'o') ||
+                        (lettre == 'u') ||
+                        (lettre == 'y')) {
+                      lettre = _alphabet[indiceletter_1 + 1];
+                    }
+
+                    //Navigator.pushNamed(context, '/reliable',
+                    //arguments: lettre);
+                    Navigator.pushNamed(context, '/slide', arguments: lettre);
+                  },
+                  child: Text(
+                    "RELIABLE",
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Button3D(
+                  width: 85,
+                  height: 50,
+                  style: StyleOf3dButton(
+                    backColor: buttonColor[idxColorButton],
+                    topColor: buttonColor[idxColorButton],
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(0),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/accent',
+                    );
+                  },
+                  child: Text(
+                    "ACCENT",
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

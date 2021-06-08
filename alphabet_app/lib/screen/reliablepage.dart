@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
-
+import '../constants.dart';
+import '../color_list.dart';
 
 class ReliablePage extends StatefulWidget {
   @override
@@ -9,12 +10,8 @@ class ReliablePage extends StatefulWidget {
 }
 
 String lettre;
-int idx = 2;
-List<Color> colors = [
-  Colors.pink[100],
-  Colors.blue[100],
-  Colors.blueGrey,
-];
+
+int idxColorBackground = 0;
 
 class _ReliablePageState extends State<ReliablePage> {
   String waitdrag = "";
@@ -35,12 +32,10 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
        Future _load() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
        setState(() {
-       int oe = (prefs.getInt('idx_color_value'));
-       idx = oe;
-       if (idx == null) {
-         idx = 0;
+       idxColorBackground = (prefs.getInt('idx_color_background_value'));
+       if (idxColorBackground == null) {
+         idxColorBackground = 0;
        }
-       print(idx);
        });
    }
 
@@ -48,7 +43,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
   Widget build(BuildContext context) {
     lettre = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      backgroundColor: colors[idx],
+      backgroundColor: backgroundColor[idxColorBackground],
       appBar: AppBar(
         title: const Text('Reliable'),
       ),
@@ -332,7 +327,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                                   ),
                                   child: Center(
                                     child: Text(
-                                      '$waitdrag5',
+                                      'oe',
                                       style: TextStyle(
                                         fontSize: 30, color: Colors.red
                                       ),
