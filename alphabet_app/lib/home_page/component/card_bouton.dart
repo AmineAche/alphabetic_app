@@ -7,45 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 import '../../color_list.dart';
+import '../../list/letter_list.dart';
 
-var _lettertot;
-int indiceletter_1 = 0;
-int indiceletter_2 = 1;
-int indiceletter_3 = 2;
-var _letter_1 = _alphabet[indiceletter_1];
-var _letter_2 = _alphabet[indiceletter_2];
-var _letter_3 = _alphabet[indiceletter_3];
-int visibilityidx = 1;
-int idxColorButton = 0;
 
-var _alphabet = [
-  'a',
-  'b',
-  'c',
-  'd',
-  'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
-  'p',
-  'q',
-  'r',
-  's',
-  't',
-  'u',
-  'v',
-  'w',
-  'x',
-  'y',
-  'z',
-];
 
 class BoutonWidget extends StatefulWidget {
   @override
@@ -76,8 +40,8 @@ class _BoutonWidget extends State<BoutonWidget> {
                     children: [
                       Button3D(
                         style: StyleOf3dButton(
-                          backColor: buttonColor[idxColorButton],
-                          topColor: buttonColor[idxColorButton],
+                          backColor: idxColorButton,
+                          topColor: idxColorButton,
                           borderRadius: BorderRadius.only(),
                         ),
                         height: 50,
@@ -98,8 +62,8 @@ class _BoutonWidget extends State<BoutonWidget> {
                       ),
                       Button3D(
                         style: StyleOf3dButton(
-                          backColor: buttonColor[idxColorButton],
-                          topColor: buttonColor[idxColorButton],
+                          backColor: idxColorButton,
+                          topColor: idxColorButton,
                           borderRadius: BorderRadius.circular(0),
                         ),
                         height: 50,
@@ -119,8 +83,8 @@ class _BoutonWidget extends State<BoutonWidget> {
                       ),
                       Button3D(
                         style: StyleOf3dButton(
-                          backColor: buttonColor[idxColorButton],
-                          topColor: buttonColor[idxColorButton],
+                          backColor: idxColorButton,
+                          topColor: idxColorButton,
                           borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(30),
                             topRight: Radius.circular(5),
@@ -148,7 +112,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                   height: 40,
                   width: 100,
                   decoration: BoxDecoration(
-                    color: buttonColor[idxColorButton],
+                    color: idxColorButton,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
@@ -174,13 +138,13 @@ class _BoutonWidget extends State<BoutonWidget> {
                             activeMaj = value;
                             setState(() {
                               if (activeMaj) {
-                                _letter_1 = _letter_1.toUpperCase();
-                                _letter_2 = _letter_2.toUpperCase();
-                                _letter_3 = _letter_3.toUpperCase();
+                                letter_1 = letter_1.toUpperCase();
+                                letter_2 = letter_2.toUpperCase();
+                                letter_3 = letter_3.toUpperCase();
                               } else {
-                                _letter_1 = _letter_1.toLowerCase();
-                                _letter_2 = _letter_2.toLowerCase();
-                                _letter_3 = _letter_3.toLowerCase();
+                                letter_1 = letter_1.toLowerCase();
+                                letter_2 = letter_2.toLowerCase();
+                                letter_3 = letter_3.toLowerCase();
                               }
                             });
                           },
@@ -196,7 +160,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                       topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(30),
                     ),
-                    color: buttonColor[idxColorButton],
+                    color: idxColorButton,
                   ),
                   child: IconButton(
                     icon: Icon(
@@ -226,10 +190,15 @@ class _BoutonWidget extends State<BoutonWidget> {
         visibilityidx = 1;
       }
 
-      idxColorButton = (prefs.getInt('idx_color_button_value'));
-       if (idxColorButton == null) {
-         idxColorButton = 0;
+      idxColorButtonsave = (prefs.getString('idx_color_button_values'));
+       if (idxColorButtonsave == null) {
+         print('t es nul');
+         idxColorButtonsave = 'FF8333e8';
        }
+       print(idxColorButtonsave);
+        value = int.parse(idxColorButtonsave, radix: 16);
+        idxColorButton = new Color(value);
+        print(idxColorButton);
     });
   }
 
@@ -284,70 +253,70 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                 ),
                 child: Center(
                     child: (i == 0)
-                        ? ((_letter_1 == 'a') ||
-                                (_letter_1 == 'e') ||
-                                (_letter_1 == 'i') ||
-                                (_letter_1 == 'o') ||
-                                (_letter_1 == 'u') ||
-                                (_letter_1 == 'y') ||
-                                (_letter_1 == 'A') ||
-                                (_letter_1 == 'E') ||
-                                (_letter_1 == 'I') ||
-                                (_letter_1 == 'O') ||
-                                (_letter_1 == 'U') ||
-                                (_letter_1 == 'Y'))
+                        ? ((letter_1 == 'a') ||
+                                (letter_1 == 'e') ||
+                                (letter_1 == 'i') ||
+                                (letter_1 == 'o') ||
+                                (letter_1 == 'u') ||
+                                (letter_1 == 'y') ||
+                                (letter_1 == 'A') ||
+                                (letter_1 == 'E') ||
+                                (letter_1 == 'I') ||
+                                (letter_1 == 'O') ||
+                                (letter_1 == 'U') ||
+                                (letter_1 == 'Y'))
                             ? Text(
-                                '$_letter_1',
+                                '$letter_1',
                                 style:
                                     TextStyle(fontSize: 90, color: Colors.blue),
                               )
                             : Text(
-                                '$_letter_1',
+                                '$letter_1',
                                 style:
                                     TextStyle(fontSize: 90, color: Colors.red),
                               )
                         : (i == 1)
-                            ? ((_letter_2 == 'a') ||
-                                    (_letter_2 == 'e') ||
-                                    (_letter_2 == 'i') ||
-                                    (_letter_2 == 'o') ||
-                                    (_letter_2 == 'u') ||
-                                    (_letter_2 == 'y') ||
-                                    (_letter_2 == 'A') ||
-                                    (_letter_2 == 'E') ||
-                                    (_letter_2 == 'I') ||
-                                    (_letter_2 == 'O') ||
-                                    (_letter_2 == 'U') ||
-                                    (_letter_2 == 'Y'))
+                            ? ((letter_2 == 'a') ||
+                                    (letter_2 == 'e') ||
+                                    (letter_2 == 'i') ||
+                                    (letter_2 == 'o') ||
+                                    (letter_2 == 'u') ||
+                                    (letter_2 == 'y') ||
+                                    (letter_2 == 'A') ||
+                                    (letter_2 == 'E') ||
+                                    (letter_2 == 'I') ||
+                                    (letter_2 == 'O') ||
+                                    (letter_2 == 'U') ||
+                                    (letter_2 == 'Y'))
                                 ? Text(
-                                    '$_letter_2',
+                                    '$letter_2',
                                     style: TextStyle(
                                         fontSize: 90, color: Colors.blue),
                                   )
                                 : Text(
-                                    '$_letter_2',
+                                    '$letter_2',
                                     style: TextStyle(
                                         fontSize: 90, color: Colors.red),
                                   )
-                            : ((_letter_3 == 'a') ||
-                                    (_letter_3 == 'e') ||
-                                    (_letter_3 == 'i') ||
-                                    (_letter_3 == 'o') ||
-                                    (_letter_3 == 'u') ||
-                                    (_letter_3 == 'y') ||
-                                    (_letter_3 == 'A') ||
-                                    (_letter_3 == 'E') ||
-                                    (_letter_3 == 'I') ||
-                                    (_letter_3 == 'O') ||
-                                    (_letter_3 == 'U') ||
-                                    (_letter_3 == 'Y'))
+                            : ((letter_3 == 'a') ||
+                                    (letter_3 == 'e') ||
+                                    (letter_3 == 'i') ||
+                                    (letter_3 == 'o') ||
+                                    (letter_3 == 'u') ||
+                                    (letter_3 == 'y') ||
+                                    (letter_3 == 'A') ||
+                                    (letter_3 == 'E') ||
+                                    (letter_3 == 'I') ||
+                                    (letter_3 == 'O') ||
+                                    (letter_3 == 'U') ||
+                                    (letter_3 == 'Y'))
                                 ? Text(
-                                    '$_letter_3',
+                                    '$letter_3',
                                     style: TextStyle(
                                         fontSize: 90, color: Colors.blue),
                                   )
                                 : Text(
-                                    '$_letter_3',
+                                    '$letter_3',
                                     style: TextStyle(
                                         fontSize: 90, color: Colors.red),
                                   )),
@@ -401,25 +370,25 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       indiceletter_1 = (prefs.getInt('indice'));
       if (indiceletter_1 == null) {
         indiceletter_1 = 0;
-        _letter_1 = _alphabet[indiceletter_1];
+        letter_1 = alphabet[indiceletter_1];
       } else {
-        _letter_1 = _alphabet[indiceletter_1];
+        letter_1 = alphabet[indiceletter_1];
       }
 
       indiceletter_2 = (prefs.getInt('indice2'));
       if (indiceletter_2 == null) {
         indiceletter_2 = 1;
-        _letter_2 = _alphabet[indiceletter_2];
+        letter_2 = alphabet[indiceletter_2];
       } else {
-        _letter_2 = _alphabet[indiceletter_2];
+        letter_2 = alphabet[indiceletter_2];
       }
 
       indiceletter_3 = (prefs.getInt('indice3'));
       if (indiceletter_3 == null) {
         indiceletter_3 = 2;
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_3 = alphabet[indiceletter_3];
       } else {
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_3 = alphabet[indiceletter_3];
       }
     });
   }
@@ -468,11 +437,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         }
       }
       if (widget.isMaj) {
-        _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+        letter_1 = alphabet[indiceletter_1].toUpperCase();
+        letter_2 = alphabet[indiceletter_2].toUpperCase();
       } else {
-        _letter_1 = _alphabet[indiceletter_1];
-        _letter_2 = _alphabet[indiceletter_2];
+        letter_1 = alphabet[indiceletter_1];
+        letter_2 = alphabet[indiceletter_2];
       }
     });
   }
@@ -507,11 +476,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         }
       }
       if (widget.isMaj) {
-        _letter_1 = _alphabet[indiceletter_1].toUpperCase();
-        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
+        letter_1 = alphabet[indiceletter_1].toUpperCase();
+        letter_2 = alphabet[indiceletter_2].toUpperCase();
       } else {
-        _letter_1 = _alphabet[indiceletter_1];
-        _letter_2 = _alphabet[indiceletter_2];
+        letter_1 = alphabet[indiceletter_1];
+        letter_2 = alphabet[indiceletter_2];
       }
     });
   }
@@ -578,11 +547,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       }
 
       if (widget.isMaj) {
-        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
-        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+        letter_2 = alphabet[indiceletter_2].toUpperCase();
+        letter_3 = alphabet[indiceletter_3].toUpperCase();
       } else {
-        _letter_2 = _alphabet[indiceletter_2];
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_2 = alphabet[indiceletter_2];
+        letter_3 = alphabet[indiceletter_3];
       }
     });
   }
@@ -648,11 +617,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       }
 
       if (widget.isMaj) {
-        _letter_2 = _alphabet[indiceletter_2].toUpperCase();
-        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+        letter_2 = alphabet[indiceletter_2].toUpperCase();
+        letter_3 = alphabet[indiceletter_3].toUpperCase();
       } else {
-        _letter_2 = _alphabet[indiceletter_2];
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_2 = alphabet[indiceletter_2];
+        letter_3 = alphabet[indiceletter_3];
       }
     });
   }
@@ -675,9 +644,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         }
       }
       if (widget.isMaj) {
-        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+        letter_3 = alphabet[indiceletter_3].toUpperCase();
       } else {
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_3 = alphabet[indiceletter_3];
       }
     });
   }
@@ -700,9 +669,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         }
       }
       if (widget.isMaj) {
-        _letter_3 = _alphabet[indiceletter_3].toUpperCase();
+        letter_3 = alphabet[indiceletter_3].toUpperCase();
       } else {
-        _letter_3 = _alphabet[indiceletter_3];
+        letter_3 = alphabet[indiceletter_3];
       }
     });
   }
@@ -711,17 +680,17 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   void sound() {
     if (widget.visibility == 3) {
-      _lettertot = _letter_1 + _letter_2 + _letter_3;
+      lettertot = letter_1 + letter_2 + letter_3;
     } else if (widget.visibility == 2) {
-      _lettertot = _letter_1 + _letter_2;
+      lettertot = letter_1 + letter_2;
     } else {
-      _lettertot = _letter_1;
+      lettertot = letter_1;
     }
 
-    _lettertot = _lettertot.toLowerCase();
+    lettertot = lettertot.toLowerCase();
 
-    if (audio.contains(_lettertot + "_file.mp3")) {
-      audioCache.play(_lettertot + "_file.mp3");
+    if (audio.contains(lettertot + "_file.mp3")) {
+      audioCache.play(lettertot + "_file.mp3");
     }
   }
 }
@@ -747,8 +716,8 @@ class _BottomBarState extends State<BottomBar> {
                   height: 50,
                   width: 85,
                   style: StyleOf3dButton(
-                    backColor: buttonColor[idxColorButton],
-                    topColor: buttonColor[idxColorButton],
+                    backColor: idxColorButton,
+                    topColor:idxColorButton,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(0),
@@ -756,14 +725,14 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                   onPressed: () {
                     String lettre;
-                    lettre = _letter_1.toLowerCase();
+                    lettre = letter_1.toLowerCase();
                     if ((lettre == 'a') ||
                         (lettre == 'e') ||
                         (lettre == 'i') ||
                         (lettre == 'o') ||
                         (lettre == 'u') ||
                         (lettre == 'y')) {
-                      lettre = _alphabet[indiceletter_1 + 1];
+                      lettre = alphabet[indiceletter_1 + 1];
                     }
 
                     //Navigator.pushNamed(context, '/reliable',
@@ -782,8 +751,8 @@ class _BottomBarState extends State<BottomBar> {
                   width: 85,
                   height: 50,
                   style: StyleOf3dButton(
-                    backColor: buttonColor[idxColorButton],
-                    topColor: buttonColor[idxColorButton],
+                    backColor: idxColorButton,
+                    topColor: idxColorButton,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(10),
                       bottomRight: Radius.circular(0),

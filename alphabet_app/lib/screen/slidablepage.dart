@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
-import '../color_list.dart';
+//import '../color_list.dart';
 import '../constants.dart';
-
-int idxColorBackground = 0;
-int idxColorButton = 0;
+import '../list/letter_list.dart';
+import '../list/list_audio.dart';
 
 class SlidePage extends StatefulWidget {
   @override
@@ -17,18 +16,6 @@ String lettre;
 class _SlidePageState extends State<SlidePage> {
 
   AudioCache audioCache = AudioCache();
-  List<String> audio = [
-    "a_file.mp3",
-    "e_file.mp3",
-    "i_file.mp3",
-    "o_file.mp3",
-    "v_file.mp3",
-    "va_file.mp3",
-    "ve_file.mp3",
-    "vi_file.mp3",
-    "vo_file.mp3",
-    "error.mp3"
-  ];
 
   @override
   void initState() {
@@ -38,16 +25,23 @@ class _SlidePageState extends State<SlidePage> {
 
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      idxColorButton = (prefs.getInt('idx_color_button_value'));
-       if (idxColorButton == null) {
-         idxColorButton = 0;
+      setState(() {
+        
+        idxColorButtonsave = (prefs.getString('idx_color_button_values'));
+       if (idxColorButtonsave == null) {
+         print('null');
+         idxColorButtonsave = 'FF8333e8';
        }
-      idxColorBackground = (prefs.getInt('idx_color_background_value'));
-       if (idxColorBackground == null) {
-         idxColorBackground = 0;
+        value = int.parse(idxColorButtonsave, radix: 16);
+        idxColorButton = new Color(value);
+
+       idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+       if (idxColorBackgroundsave == null) {
+         idxColorBackgroundsave = 'F5F5F5';
        }
-    });
+       valueback = int.parse(idxColorBackgroundsave, radix: 16);
+       idxColorBackground = new Color(valueback);
+       });
   }
 
   var initialx;
@@ -60,14 +54,14 @@ class _SlidePageState extends State<SlidePage> {
   Widget build(BuildContext context) {
     lettre = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      backgroundColor: backgroundColor[idxColorBackground],
+      backgroundColor: idxColorBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 40,
         //title: const Text('Slide'),
         leading: Container(
           decoration: BoxDecoration(
-            color: buttonColor[idxColorButton],
+            color: idxColorButton,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(0),
               bottomRight: Radius.circular(20),
@@ -82,7 +76,7 @@ class _SlidePageState extends State<SlidePage> {
         actions: [
           Container(
             decoration: BoxDecoration(
-              color: buttonColor[idxColorButton],
+              color: idxColorButton,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(0),
                 bottomLeft: Radius.circular(20),
@@ -95,7 +89,7 @@ class _SlidePageState extends State<SlidePage> {
             ),
           ),
         ],
-        backgroundColor: backgroundColor[idxColorBackground],
+        backgroundColor: idxColorButton,
         elevation: 0,
       ),
       body: Center(
@@ -141,10 +135,10 @@ class _SlidePageState extends State<SlidePage> {
                 },
                 child: Container(
                   margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                  height: 75,
-                  width: 75,
+                  height: 95,
+                  width: 95,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(35),
+                    borderRadius: BorderRadius.circular(55),
                     color: backLetterCase,
                     border: Border.all(color: Colors.white, width: 2),
                   ),
@@ -242,17 +236,53 @@ class _SlidePageState extends State<SlidePage> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                      height: 65,
+                      width: 65,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: backLetterCase,
+                        border: Border.all(color: Colors.white, width: 2),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'u',
+                          style: TextStyle(fontSize: 30, color: Colors.blue),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               Container(
-                //color: Colors.lightGreenAccent,
+
                 child: Row(
+
+                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      padding: new EdgeInsets.symmetric(horizontal: 0.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Container(
+                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                            height: 65,
+                            width: 65,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: backLetterCase,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                            child: Center(
+                              child: Text(
+                                lettre,
+                                style:
+                                    TextStyle(fontSize: 30, color: Colors.red),
+                              ),
+                            ),
+                          ),
                           Container(
                             margin: new EdgeInsets.symmetric(horizontal: 5.0),
                             height: 65,
@@ -324,7 +354,9 @@ class _SlidePageState extends State<SlidePage> {
                         ],
                       ),
                     ),
+                    
                     Container(
+                      margin: new EdgeInsets.symmetric(horizontal: 0.0),
                       //color: Colors.red,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -392,6 +424,23 @@ class _SlidePageState extends State<SlidePage> {
                             child: Center(
                               child: Text(
                                 'o',
+                                style:
+                                    TextStyle(fontSize: 30, color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                            height: 65,
+                            width: 65,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: backLetterCase,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'u',
                                 style:
                                     TextStyle(fontSize: 30, color: Colors.blue),
                               ),

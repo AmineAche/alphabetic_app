@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_button/flutter_button.dart';
+//import 'package:flutter_button/flutter_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../constants.dart';
-import '../color_list.dart';
+//import '../constants.dart';
+//import '../color_list.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 //import 'home_page.dart';
+import '../list/letter_list.dart';
 
-int idxBtn = 0;
-int idxBackground = 0;
+String idxBtnSave;
+String idxBackSave;
+
 
 class SettingPage extends StatefulWidget {
   @override
@@ -14,26 +17,47 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  @override
-  void initState() {
-    _load();
-    super.initState();
+   @override
+   void initState() {
+     _load();
+     super.initState();
+   }
+bool lightTheme = true;
+  Color currentColor = Colors.limeAccent;
+
+  void changeColorButton(Color color){
+    setState(() {
+      currentColor = color;
+      String colorString = currentColor.toString();
+      idxBtnSave = colorString.split('(0x')[1].split(')')[0];
+      value = int.parse(idxBtnSave, radix: 16);
+        idxColorButton = new Color(value);
+    });
+  }
+  void changeColorBackground(Color color) {
+    setState(() {
+      currentColor = color;
+      String colorString = currentColor.toString();
+      idxBackSave = colorString.split('(0x')[1].split(')')[0];
+      valueback = int.parse(idxBackSave, radix: 16);
+        idxColorBackground = new Color(valueback);
+    });
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
+    _saveString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      
-        appBar: AppBar(
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 40,
-        //title: const Text('Slide'),
         leading: Container(
-          width : width/5,
           decoration: BoxDecoration(
-            color: buttonColor[idxBtn],
+            color: idxColorButton,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(0),
               bottomRight: Radius.circular(20),
@@ -48,292 +72,119 @@ class _SettingPageState extends State<SettingPage> {
                     ),
           ),
         ),
-        backgroundColor: backgroundColor[idxBackground],
-        elevation: 0,
-      ),
-        body: Container (
-           margin: new EdgeInsets.symmetric(horizontal: width/8, vertical: height/8),
-           color: Colors.white,
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container (
-              //color: Colors.grey,
-              width: width,
-              height: height/5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container (
-                    child: Text(
-                      "Couleur des boutons: ",
-                    ),
-                  ),
-                  Container (
-                    //color: Colors.blue,
-                    height: height/3,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                        //color: Colors.grey,
-                        width: 100,
-                        decoration: (idxBtn == 0) 
-                        ? BoxDecoration(
-                          border: Border.all(color: Colors.black)
-                        )
-                        : BoxDecoration(
-                          //border: Border.all(color: Colors.black)
-                        ),
-                        child: Row(
-                          children: [
-                            Container( 
-                              width: 30,
-                              height: 30,
-                              decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(4.0),
-                                color: my_Cyan,
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              "Bleu",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {    
-                        setState(() {
-                         idxBtn = 0;
-                        _saveString();
-                        });                      
-                      }, 
-                      ),
-                      InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                        //color: Colors.grey,
-                        width: 100,
-                        decoration: (idxBtn == 1) 
-                        ? BoxDecoration(
-                          border: Border.all(color: Colors.black)
-                        )
-                        : BoxDecoration(
-                          //border: Border.all(color: Colors.black)
-                        ),
-                      child: Row(
-                        children: [
-                          Container( 
-                            width: 30,
-                            height: 30,
-                            decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.circular(4.0),
-                              color: my_Violet,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Violet",
-                          ),
-                        ],
-                      ),
-                      ),
-                      onTap: () {                          
-                        setState(() {
-                         idxBtn = 1;
-                        _saveString();
-                        });
-                      }, 
-                      ),
-                    ],
-                    ),
-                  ),
-
-                  Container (
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                        width: 100,
-                        decoration: (idxBtn == 2) 
-                        ? BoxDecoration(
-                          border: Border.all(color: Colors.black)
-                        )
-                        : BoxDecoration(
-                          //border: Border.all(color: Colors.black)
-                        ),
-                        child: Row(
-                        children: [
-                          Container( 
-                            width: 30,
-                            height: 30,
-                            decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.circular(4.0),
-                              color: my_Rose,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Rose",
-                          ),
-                        ],
-                      ),
-                      ),
-                      onTap: () {                          
-                        setState(() {
-                         idxBtn = 2;
-                        _saveString();
-                        });
-                      }, 
-                      ),
-                      InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                        width: 100,
-                        decoration: (idxBtn == 3) 
-                        ? BoxDecoration(
-                          border: Border.all(color: Colors.black)
-                        )
-                        : BoxDecoration(
-                          //border: Border.all(color: Colors.black)
-                        ),
-                        child: Row(
-                        children: [
-                          Container( 
-                            width: 30,
-                            height: 30,
-                            decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.circular(4.0),
-                              color: my_Rouge,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Rouge",
-                          ),
-                        ],
-                      ),
-                      ),
-                      onTap: () {                          
-                        setState(() {
-                         idxBtn = 3;
-                        _saveString();
-                        });
-                      }, 
-                      ),
-                    ],
-                    ),
-                  ),
-                ],
-              ),
-              ),
-            Container(
-             child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container (
-                    child: Text(
-                      "Fond: ",
-                    ),
-                  ),
-                 InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                    //color: Colors.grey,
-                    width: 100,
-                    child: Row(
-                      children: [
-                        Container( 
-                          width: 30,
-                            height: 30,
-                          decoration: new BoxDecoration(
-                            borderRadius: new BorderRadius.circular(4.0),
-                            color: my_Cyan,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Basique",
-                        ),
-                      ],
-                    ),
-                  ),
-                   onTap: () {                          
-                        setState(() {
-                         idxBackground = 0;
-                        _saveString();
-                        });
-                      }, 
-                 ),
-                 InkWell( 
-                      child: Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 3, vertical: 3), 
-                    //color: Colors.grey,
-                    width: 100,
-                    height: 80,
-                    child: Column(
-                      children: [
-                        Container( 
-                          
-                          child: Image(
-                            //color: Colors.white,
-                            image: AssetImage('assets/icons/background_custom.jpg'),
-                            //width: 100,
-                            height: height/9,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Custom",
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {                          
-                        setState(() {
-                         idxBackground = 1;
-                        _saveString();
-                        });
-                      },
-                 ),  
-                ],
-             ),
+        backgroundColor: idxColorBackground,
+            bottom: TabBar(
+              labelColor: Colors.black,
+              tabs: <Widget>[
+                const Tab(text: 'Couleur boutons'),
+                const Tab(text: 'Couleur du fond'),
+              ],
             ),
-          ],
-    ),
+          ),
+        body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: <Widget>[
+              Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        elevation: 3.0,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Select a color'),
+                                content: SingleChildScrollView(
+                                  child: BlockPicker(
+                                    pickerColor: currentColor,
+                                    onColorChanged: changeColorButton,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: const Text('Change me'),
+                        color: idxColorButton,
+                        textColor: useWhiteForeground(currentColor)
+                            ? const Color(0xffffffff)
+                            : const Color(0xff000000),
+                      ),
+                      
+                    ]
+                ),
+              ),
+              Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        elevation: 3.0,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Select a color'),
+                                content: SingleChildScrollView(
+                                  child: BlockPicker(
+                                    pickerColor: currentColor,
+                                    onColorChanged: changeColorBackground,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: const Text('Change me'),
+                        color: idxColorBackground,
+                        textColor: useWhiteForeground(currentColor)
+                            ? const Color(0xffffffff)
+                            : const Color(0xff000000),
+                      ),
+                      
+                    ]
+                ),
+              ),
+            ],
+          ),
         ),
     );
   }
-
-  _saveString() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (idxBtn == null) {
-      idxBtn = 0;
-    }
-    prefs.setInt('idx_color_button_value', idxBtn);
-
-    if (idxBackground == null) {
-      idxBackground = 0;
-    }
-    prefs.setInt('idx_color_background_value', idxBackground);
-   }
-
-   Future _load() async {
+Future _load() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
        setState(() {
-         idxBtn = (prefs.getInt('idx_color_button_value'));
-       if (idxBtn == null) {
-         idxBtn = 0;
-       }
-
-        idxBackground = (prefs.getInt('idx_color_background_value'));
-        if (idxBackground == null) {
-          idxBackground = 0;
+         if (idxBtnSave == null) {
+           print('null');
+          idxBtnSave = 'FF8333e8';
         }
+
+        idxBtnSave = (prefs.getString('idx_color_button_values'));
+        value = int.parse(idxBtnSave, radix: 16);
+        idxColorButton = new Color(value);
+        
+        if (idxBackSave == null) {
+          idxBackSave = 'F5F5F5';
+        }
+        idxBackSave = (prefs.getString('idx_color_background_values'));
+        valueback = int.parse(idxBtnSave, radix: 16);
+        idxColorButton = new Color(valueback);
        });
+    }
+
+   _saveString() async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (idxBtnSave == null) {
+        print("null");
+       idxBtnSave = 'FF8333e8';
+     }
+     prefs.setString('idx_color_button_values', idxBtnSave);
+
+     if (idxBackSave == null) {
+          idxBackSave = 'F5F5F5';
+        }
+     prefs.setString('idx_color_background_values', idxBackSave);
     }
 }

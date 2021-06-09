@@ -4,8 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../color_list.dart';
 
-int idxColorBackground = 0;
-
+String idxColorBackgroundsave = 'F5F5F5';
+int valueback = int.parse(idxColorBackgroundsave, radix: 16);
+Color idxColorBackground = new Color(valueback);
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _MyHomePage extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
         return Scaffold(
-          backgroundColor: backgroundColor[idxColorBackground],
+          backgroundColor: idxColorBackground,
         body: Center(
           //color: Colors.red,
           child: BoutonWidget(),
@@ -32,10 +33,12 @@ class _MyHomePage extends State<MyHomePage> {
      Future _load() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
        setState(() {
-       idxColorBackground = (prefs.getInt('idx_color_background_value'));
-       if (idxColorBackground == null) {
-         idxColorBackground = 0;
+       idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+       if (idxColorBackgroundsave == null) {
+         idxColorBackgroundsave = 'F5F5F5';
        }
+       valueback = int.parse(idxColorBackgroundsave, radix: 16);
+       idxColorBackground = new Color(valueback);
        });
     }  
 }

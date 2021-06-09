@@ -1,37 +1,20 @@
+import 'package:alphabet_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:alphabet_app/list/letter_list.dart';
 
 class AccentPage extends StatefulWidget {
   @override
   _AccentPageState createState() => _AccentPageState();
 }
 
-int lettreidx = 0;
-int accentidx = 0;
-const cyanColor = const Color(0xFF1FE0EC);
 
-int idx = 2;
-List<Color> colors = [
-  Colors.pink[100],
-  Colors.blue[100],
-  Colors.blueGrey,
-];
+
+
 
 class _AccentPageState extends State<AccentPage> {
-  var voyelleaccent = [
-    'a',
-    'e',
-    'I',
-    'o',
-    'u',
-  ];
-  var accent = [
-    '^',
-    '´',
-    '`',
-    '¨',
-  ];
+
 
   @override
   void initState() {
@@ -42,14 +25,14 @@ class _AccentPageState extends State<AccentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colors[idx],
+      backgroundColor: idxColorBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 40,
         //title: const Text('Slide'),
         leading: Container(
           decoration: BoxDecoration(
-            color: cyanColor,
+            color: my_Cyan,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(0),
               bottomRight: Radius.circular(20),
@@ -64,7 +47,7 @@ class _AccentPageState extends State<AccentPage> {
         actions: [
           Container(
             decoration: BoxDecoration(
-              color: cyanColor,
+              color: my_Cyan,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(0),
                 bottomLeft: Radius.circular(20),
@@ -78,7 +61,7 @@ class _AccentPageState extends State<AccentPage> {
           ),
         ],
 
-        backgroundColor: colors[idx],
+        backgroundColor: idxColorBackground,
         elevation: 0,
       ),
       body: Center(
@@ -152,10 +135,12 @@ class _AccentPageState extends State<AccentPage> {
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      idx = (prefs.getInt('idx_color_value'));
-      if (idx == null) {
-        idx = 0;
-      }
+      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+       if (idxColorBackgroundsave == null) {
+         idxColorBackgroundsave = 'F5F5F5';
+       }
+       valueback = int.parse(idxColorBackgroundsave, radix: 16);
+       idxColorBackground = new Color(valueback);
     });
   }
 
