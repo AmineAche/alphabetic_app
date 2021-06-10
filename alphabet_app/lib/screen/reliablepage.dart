@@ -20,24 +20,27 @@ class _ReliablePageState extends State<ReliablePage> {
   String waitdrag4 = "";
   String waitdrag5 = "";
 
-AudioCache audioCache = AudioCache();
-List<String> audio = ["dab_file.mp3", "do_file.mp3",];
+  AudioCache audioCache = AudioCache();
+  List<String> audio = [
+    "dab_file.mp3",
+    "do_file.mp3",
+  ];
 
-    @override
-  void initState() { 
-     _load();
-     super.initState();
-   }
+  @override
+  void initState() {
+    _load();
+    super.initState();
+  }
 
-       Future _load() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-       setState(() {
-       idxColorBackground = (prefs.getInt('idx_color_background_value'));
-       if (idxColorBackground == null) {
-         idxColorBackground = 0;
-       }
-       });
-   }
+  Future _load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      idxColorBackground = (prefs.getInt('idx_color_background_value'));
+      if (idxColorBackground == null) {
+        idxColorBackground = 0;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,7 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
       backgroundColor: backgroundColor[idxColorBackground],
       appBar: AppBar(
         title: const Text('Reliable'),
+        backgroundColor: backgroundColor[idxColorBackground],
       ),
       body: Center(
         child: Row(
@@ -98,266 +102,264 @@ List<String> audio = ["dab_file.mp3", "do_file.mp3",];
                   Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            DragTarget<String>(
-                              builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waitdrag = "";
-                                    });
-                                  },
-                                  child: Container(
-                                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '$waitdrag',
-                                      style: TextStyle(
-                                        fontSize: 30, color: Colors.red
-                                      ),
-                                    ),
-                                  ),
-                                  ),
-                                );
+                      children: [
+                        DragTarget<String>(
+                          builder: (
+                            BuildContext context,
+                            List<dynamic> accepted,
+                            List<dynamic> rejected,
+                          ) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  waitdrag = "";
+                                });
                               },
-                            onAccept: (String lettre) {
-                              //print(lettre);
-                              // print(waitdrag);
-                              setState(() {
-                                print('waitdrag avant l operation');
-                                print(waitdrag);
-                                if (waitdrag == null) {
-                                  print('waitdrag est null');
-                                } else {
-                                  waitdrag = lettre;
-                                }
-                              });
-                              print('waitdrag apres l operation');
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 5.0),
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '$waitdrag',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onAccept: (String lettre) {
+                            //print(lettre);
+                            // print(waitdrag);
+                            setState(() {
+                              print('waitdrag avant l operation');
                               print(waitdrag);
-                              if (audio.contains(lettre + 'a' + "_file.mp3")) {
+                              if (waitdrag == null) {
+                                print('waitdrag est null');
+                              } else {
+                                waitdrag = lettre;
+                              }
+                            });
+                            print('waitdrag apres l operation');
+                            print(waitdrag);
+                            if (audio.contains(lettre + 'a' + "_file.mp3")) {
                               audioCache.play(lettre + 'a' + "_file.mp3");
                             }
-                            },
-                            ),
-                            DragTarget<String>(
-                              builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waitdrag2 = "";
-                                    });
-                                  },
-                                  child: Container(
-                                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '$waitdrag2',
-                                      style: TextStyle(
-                                        fontSize: 30, color: Colors.red
-                                      ),
-                                    ),
-                                  ),
-                                  ),
-                                );
+                          },
+                        ),
+                        DragTarget<String>(
+                          builder: (
+                            BuildContext context,
+                            List<dynamic> accepted,
+                            List<dynamic> rejected,
+                          ) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  waitdrag2 = "";
+                                });
                               },
-                            onAccept: (String lettre) {
-                              //print(lettre);
-                              // print(waitdrag);
-                              setState(() {
-                                print('waitdrag2 avant l operation');
-                                print(waitdrag2);
-                                if (waitdrag2 == null) {
-                                  print('waitdrag2 est null');
-                                } else {
-                                  waitdrag2 = lettre;
-                                }
-                              });
-                              print('waitdrag2 apres l operation');
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 5.0),
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '$waitdrag2',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onAccept: (String lettre) {
+                            //print(lettre);
+                            // print(waitdrag);
+                            setState(() {
+                              print('waitdrag2 avant l operation');
                               print(waitdrag2);
-                              if (audio.contains(lettre + 'e' + "_file.mp3")) {
-                                audioCache.play(lettre + 'e' + "_file.mp3");
+                              if (waitdrag2 == null) {
+                                print('waitdrag2 est null');
+                              } else {
+                                waitdrag2 = lettre;
                               }
-                            },
-                            ),
-                            DragTarget<String>(
-                              builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waitdrag3 = "";
-                                    });
-                                  },
-                                  child: Container(
-                                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '$waitdrag3',
-                                      style: TextStyle(
-                                        fontSize: 30, color: Colors.red
-                                      ),
-                                    ),
-                                  ),
-                                  ),
-                                );
+                            });
+                            print('waitdrag2 apres l operation');
+                            print(waitdrag2);
+                            if (audio.contains(lettre + 'e' + "_file.mp3")) {
+                              audioCache.play(lettre + 'e' + "_file.mp3");
+                            }
+                          },
+                        ),
+                        DragTarget<String>(
+                          builder: (
+                            BuildContext context,
+                            List<dynamic> accepted,
+                            List<dynamic> rejected,
+                          ) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  waitdrag3 = "";
+                                });
                               },
-                            onAccept: (String lettre) {
-                              //print(lettre);
-                              // print(waitdrag);
-                              setState(() {
-                                print('waitdrag3 avant l operation');
-                                print(waitdrag3);
-                                if (waitdrag3 == null) {
-                                  print('waitdrag3 est null');
-                                } else {
-                                  waitdrag3 = lettre;
-                                }
-                              });
-                              print('waitdrag3 apres l operation');
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 5.0),
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '$waitdrag3',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onAccept: (String lettre) {
+                            //print(lettre);
+                            // print(waitdrag);
+                            setState(() {
+                              print('waitdrag3 avant l operation');
                               print(waitdrag3);
+                              if (waitdrag3 == null) {
+                                print('waitdrag3 est null');
+                              } else {
+                                waitdrag3 = lettre;
+                              }
+                            });
+                            print('waitdrag3 apres l operation');
+                            print(waitdrag3);
                             if (audio.contains(lettre + 'i' + "_file.mp3")) {
                               audioCache.play(lettre + 'i' + "_file.mp3");
                             }
-                            },
-                            ),
-                            DragTarget<String>(
-                              builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waitdrag4 = "";
-                                    });
-                                  },
-                                  child: Container(
-                                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '$waitdrag4',
-                                      style: TextStyle(
-                                        fontSize: 30, color: Colors.red
-                                      ),
-                                    ),
-                                  ),
-                                  ),
-                                );
+                          },
+                        ),
+                        DragTarget<String>(
+                          builder: (
+                            BuildContext context,
+                            List<dynamic> accepted,
+                            List<dynamic> rejected,
+                          ) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  waitdrag4 = "";
+                                });
                               },
-                            onAccept: (String lettre) {
-                              //print(lettre);
-                              // print(waitdrag);
-                              setState(() {
-                                print('waitdrag4 avant l operation');
-                                print(waitdrag4);
-                                if (waitdrag4 == null) {
-                                  print('waitdrag4 est null');
-                                } else {
-                                  waitdrag4 = lettre;
-                                 
-                                }
-                              });
-                              print('waitdrag4 apres l operation');
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 5.0),
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '$waitdrag4',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onAccept: (String lettre) {
+                            //print(lettre);
+                            // print(waitdrag);
+                            setState(() {
+                              print('waitdrag4 avant l operation');
                               print(waitdrag4);
-                              if (audio.contains(lettre + 'o' + "_file.mp3")) {
-                                audioCache.play(lettre + 'o' + "_file.mp3");
+                              if (waitdrag4 == null) {
+                                print('waitdrag4 est null');
+                              } else {
+                                waitdrag4 = lettre;
                               }
-                            },
-                            ),
-                            DragTarget<String>(
-                              builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      waitdrag5 = "";
-                                    });
-                                  },
-                                  child: Container(
-                                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'oe',
-                                      style: TextStyle(
-                                        fontSize: 30, color: Colors.red
-                                      ),
-                                    ),
-                                  ),
-                                  ),
-                                );
+                            });
+                            print('waitdrag4 apres l operation');
+                            print(waitdrag4);
+                            if (audio.contains(lettre + 'o' + "_file.mp3")) {
+                              audioCache.play(lettre + 'o' + "_file.mp3");
+                            }
+                          },
+                        ),
+                        DragTarget<String>(
+                          builder: (
+                            BuildContext context,
+                            List<dynamic> accepted,
+                            List<dynamic> rejected,
+                          ) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  waitdrag5 = "";
+                                });
                               },
-                            onAccept: (String lettre) {
-                              //print(lettre);
-                              // print(waitdrag);
-                              setState(() {
-                                print('waitdrag5 avant l operation');
-                                print(waitdrag5);
-                                if (waitdrag5 == null) {
-                                  print('waitdrag5 est null');
-                                } else {
-                                  waitdrag5 = lettre;
-
-                                }
-                              });
-                              print('waitdrag5 apres l operation');
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 5.0),
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'oe',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onAccept: (String lettre) {
+                            //print(lettre);
+                            // print(waitdrag);
+                            setState(() {
+                              print('waitdrag5 avant l operation');
                               print(waitdrag5);
-                              if (audio.contains(lettre + 'u' + "_file.mp3")) {
-                                audioCache.play(lettre + 'u' + "_file.mp3");
+                              if (waitdrag5 == null) {
+                                print('waitdrag5 est null');
+                              } else {
+                                waitdrag5 = lettre;
                               }
-                            },
-                            ),
-                          ],
-                  ),
+                            });
+                            print('waitdrag5 apres l operation');
+                            print(waitdrag5);
+                            if (audio.contains(lettre + 'u' + "_file.mp3")) {
+                              audioCache.play(lettre + 'u' + "_file.mp3");
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     //color: Colors.red,

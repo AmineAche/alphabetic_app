@@ -9,8 +9,6 @@ import '../../constants.dart';
 import '../../color_list.dart';
 import '../../list/letter_list.dart';
 
-
-
 class BoutonWidget extends StatefulWidget {
   @override
   _BoutonWidget createState() => _BoutonWidget();
@@ -36,6 +34,14 @@ class _BoutonWidget extends State<BoutonWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: idxColorButton,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      topRight: Radius.circular(0),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       Button3D(
@@ -45,7 +51,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                           borderRadius: BorderRadius.only(),
                         ),
                         height: 50,
-                        width: 80,
+                        width: 70,
                         onPressed: () {
                           setState(() {
                             print('Maj : $activeMaj');
@@ -67,7 +73,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                           borderRadius: BorderRadius.circular(0),
                         ),
                         height: 50,
-                        width: 80,
+                        width: 70,
                         onPressed: () {
                           setState(() {
                             visibilityidx = 2;
@@ -86,12 +92,12 @@ class _BoutonWidget extends State<BoutonWidget> {
                           backColor: idxColorButton,
                           topColor: idxColorButton,
                           borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(30),
-                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(20),
+                            topRight: Radius.circular(0),
                           ),
                         ),
                         height: 50,
-                        width: 80,
+                        width: 70,
                         onPressed: () {
                           setState(() {
                             visibilityidx = 3;
@@ -109,7 +115,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                   ),
                 ),
                 Container(
-                  height: 40,
+                  height: 50,
                   width: 100,
                   decoration: BoxDecoration(
                     color: idxColorButton,
@@ -155,10 +161,11 @@ class _BoutonWidget extends State<BoutonWidget> {
                 ),
                 Container(
                   width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(30),
+                      bottomLeft: Radius.circular(20),
                     ),
                     color: idxColorButton,
                   ),
@@ -191,14 +198,14 @@ class _BoutonWidget extends State<BoutonWidget> {
       }
 
       idxColorButtonsave = (prefs.getString('idx_color_button_values'));
-       if (idxColorButtonsave == null) {
-         print('t es nul');
-         idxColorButtonsave = 'FF8333e8';
-       }
-       print(idxColorButtonsave);
-        value = int.parse(idxColorButtonsave, radix: 16);
-        idxColorButton = new Color(value);
-        print(idxColorButton);
+      if (idxColorButtonsave == null) {
+        print('t es nul');
+        idxColorButtonsave = 'FF8333e8';
+      }
+      print(idxColorButtonsave);
+      value = int.parse(idxColorButtonsave, radix: 16);
+      idxColorButton = new Color(value);
+      print(idxColorButton);
     });
   }
 
@@ -346,9 +353,10 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             ),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1),
-                color: caseColor,
-                borderRadius: BorderRadius.circular(50)),
+              border: Border.all(color: Colors.white, width: 1),
+              color: caseColor,
+              borderRadius: BorderRadius.circular(50),
+            ),
             child: IconButton(
                 icon: Icon(
                   Icons.volume_up,
@@ -717,7 +725,7 @@ class _BottomBarState extends State<BottomBar> {
                   width: 85,
                   style: StyleOf3dButton(
                     backColor: idxColorButton,
-                    topColor:idxColorButton,
+                    topColor: idxColorButton,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(0),

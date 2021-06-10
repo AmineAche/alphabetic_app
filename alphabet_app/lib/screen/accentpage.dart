@@ -9,13 +9,7 @@ class AccentPage extends StatefulWidget {
   _AccentPageState createState() => _AccentPageState();
 }
 
-
-
-
-
 class _AccentPageState extends State<AccentPage> {
-
-
   @override
   void initState() {
     _load();
@@ -28,34 +22,35 @@ class _AccentPageState extends State<AccentPage> {
       backgroundColor: idxColorBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 40,
+        toolbarHeight: 50,
         //title: const Text('Slide'),
         leading: Container(
           decoration: BoxDecoration(
-            color: my_Cyan,
+            color: idxColorButton,
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(0),
+              topRight: Radius.circular(10),
               bottomRight: Radius.circular(20),
             ),
           ),
           child: new IconButton(
             icon: new Icon(Icons.home),
-            color: Colors.black,
+            color: Colors.white,
             onPressed: () => Navigator.of(context).pop(null),
           ),
         ),
         actions: [
           Container(
+            //height: 50,
             decoration: BoxDecoration(
-              color: my_Cyan,
+              color: idxColorButton,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(0),
+                topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(20),
               ),
             ),
             child: new IconButton(
               icon: new Icon(Icons.settings),
-              color: Colors.black,
+              color: Colors.white,
               onPressed: () => Navigator.pushNamed(context, '/settingPage'),
             ),
           ),
@@ -136,11 +131,11 @@ class _AccentPageState extends State<AccentPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-       if (idxColorBackgroundsave == null) {
-         idxColorBackgroundsave = 'F5F5F5';
-       }
-       valueback = int.parse(idxColorBackgroundsave, radix: 16);
-       idxColorBackground = new Color(valueback);
+      if (idxColorBackgroundsave == null) {
+        idxColorBackgroundsave = 'F5F5F5';
+      }
+      valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      idxColorBackground = new Color(valueback);
     });
   }
 

@@ -15,31 +15,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePage extends State<MyHomePage> {
   @override
-  void initState() { 
-     _load();
-     super.initState();
-   }
-  @override
-  Widget build(BuildContext context) {
-        return Scaffold(
-          backgroundColor: idxColorBackground,
-        body: Center(
-          //color: Colors.red,
-          child: BoutonWidget(),
-        ),
-      );
+  void initState() {
+    _load();
+    super.initState();
   }
 
-     Future _load() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-       setState(() {
-       idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-       if (idxColorBackgroundsave == null) {
-         idxColorBackgroundsave = 'F5F5F5';
-       }
-       valueback = int.parse(idxColorBackgroundsave, radix: 16);
-       idxColorBackground = new Color(valueback);
-       });
-    }  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: idxColorBackground,
+      body: Center(
+        //color: Colors.red,
+        child: BoutonWidget(),
+      ),
+    );
+  }
+
+  Future _load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+      if (idxColorBackgroundsave == null) {
+        idxColorBackgroundsave = 'F5F5F5';
+      }
+      valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      idxColorBackground = new Color(valueback);
+    });
+  }
 }
-  

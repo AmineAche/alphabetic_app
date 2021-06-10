@@ -14,7 +14,6 @@ class SlidePage extends StatefulWidget {
 String lettre;
 
 class _SlidePageState extends State<SlidePage> {
-
   AudioCache audioCache = AudioCache();
 
   @override
@@ -25,23 +24,22 @@ class _SlidePageState extends State<SlidePage> {
 
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        
-        idxColorButtonsave = (prefs.getString('idx_color_button_values'));
-       if (idxColorButtonsave == null) {
-         print('null');
-         idxColorButtonsave = 'FF8333e8';
-       }
-        value = int.parse(idxColorButtonsave, radix: 16);
-        idxColorButton = new Color(value);
+    setState(() {
+      idxColorButtonsave = (prefs.getString('idx_color_button_values'));
+      if (idxColorButtonsave == null) {
+        print('null');
+        idxColorButtonsave = 'FF8333e8';
+      }
+      value = int.parse(idxColorButtonsave, radix: 16);
+      idxColorButton = new Color(value);
 
-       idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-       if (idxColorBackgroundsave == null) {
-         idxColorBackgroundsave = 'F5F5F5';
-       }
-       valueback = int.parse(idxColorBackgroundsave, radix: 16);
-       idxColorBackground = new Color(valueback);
-       });
+      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+      if (idxColorBackgroundsave == null) {
+        idxColorBackgroundsave = 'F5F5F5';
+      }
+      valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      idxColorBackground = new Color(valueback);
+    });
   }
 
   var initialx;
@@ -57,19 +55,19 @@ class _SlidePageState extends State<SlidePage> {
       backgroundColor: idxColorBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 40,
+        toolbarHeight: 50,
         //title: const Text('Slide'),
         leading: Container(
           decoration: BoxDecoration(
             color: idxColorButton,
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(0),
+              topRight: Radius.circular(10),
               bottomRight: Radius.circular(20),
             ),
           ),
           child: new IconButton(
             icon: new Icon(Icons.home),
-            color: Colors.black,
+            color: Colors.white,
             onPressed: () => Navigator.of(context).pop(null),
           ),
         ),
@@ -78,18 +76,18 @@ class _SlidePageState extends State<SlidePage> {
             decoration: BoxDecoration(
               color: idxColorButton,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(0),
+                topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(20),
               ),
             ),
             child: new IconButton(
               icon: new Icon(Icons.settings),
-              color: Colors.black,
+              color: Colors.white,
               onPressed: () => Navigator.pushNamed(context, '/settingPage'),
             ),
           ),
         ],
-        backgroundColor: idxColorButton,
+        backgroundColor: idxColorBackground,
         elevation: 0,
       ),
       body: Center(
@@ -256,10 +254,8 @@ class _SlidePageState extends State<SlidePage> {
                 ),
               ),
               Container(
-
                 child: Row(
-
-                   //mainAxisAlignment: MainAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       padding: new EdgeInsets.symmetric(horizontal: 0.0),
@@ -354,7 +350,6 @@ class _SlidePageState extends State<SlidePage> {
                         ],
                       ),
                     ),
-                    
                     Container(
                       margin: new EdgeInsets.symmetric(horizontal: 0.0),
                       //color: Colors.red,
