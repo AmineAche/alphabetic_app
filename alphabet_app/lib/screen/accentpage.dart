@@ -25,9 +25,10 @@ class _AccentPageState extends State<AccentPage> {
       backgroundColor: idxColorBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: height / 6,
-        leadingWidth: width / 10,
+        // toolbarHeight: height / 6,
+        // leadingWidth: width / 10,
         //title: const Text('Slide'),
+
         leading: Container(
           decoration: BoxDecoration(
             color: idxColorButton,
@@ -43,25 +44,48 @@ class _AccentPageState extends State<AccentPage> {
           ),
         ),
         actions: [
+          // Container(
+          //   width: width / 10,
+          //   //height: 50,
+          //   decoration: BoxDecoration(
+          //     color: idxColorButton,
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(10),
+          //       bottomLeft: Radius.circular(20),
+          //     ),
+          //   ),
+          //   child: new IconButton(
+          //     icon: new Icon(Icons.settings),
+          //     color: Colors.white,
+          //     onPressed: () => Navigator.pushNamed(context, '/settingPage'),
+          //   ),
+          // ),
           Container(
             width: width / 10,
-            //height: 50,
+            height: height / 10,
             decoration: BoxDecoration(
-              color: idxColorButton,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(20),
               ),
+              color: idxColorButton,
             ),
-            child: new IconButton(
-              icon: new Icon(Icons.settings),
-              color: Colors.white,
-              onPressed: () => Navigator.pushNamed(context, '/settingPage'),
+            child: SizedBox(
+              child: IconButton(
+                //iconSize: 30,
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/settingPage');
+                },
+              ),
             ),
-          ),
+          )
         ],
 
-        backgroundColor: idxColorBackground,
+        backgroundColor: Colors.green,
         elevation: 0,
       ),
       body: Center(
@@ -71,7 +95,7 @@ class _AccentPageState extends State<AccentPage> {
             new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 14,
+                height: height / 11,
                 width: width / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -101,7 +125,7 @@ class _AccentPageState extends State<AccentPage> {
             new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 5,
+                height: height / 3,
                 width: width / 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -111,7 +135,7 @@ class _AccentPageState extends State<AccentPage> {
                 child: Center(
                   child: Text(
                     voyelleaccent[lettreidx],
-                    style: TextStyle(fontSize: 90, color: Colors.blue),
+                    style: TextStyle(fontSize: width / 10, color: Colors.blue),
                   ),
                 ),
               ),

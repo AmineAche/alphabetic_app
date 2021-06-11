@@ -55,8 +55,8 @@ class _SettingPageState extends State<SettingPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: height / 6,
-          leadingWidth: width / 10,
+          //toolbarHeight: height / 6,
+          //leadingWidth: width / 10,
 
           elevation: 1,
           automaticallyImplyLeading: false,
