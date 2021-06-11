@@ -50,406 +50,461 @@ class _SlidePageState extends State<SlidePage> {
   var etape = 0;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     lettre = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: idxColorBackground,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 50,
-        //title: const Text('Slide'),
-        leading: Container(
-          decoration: BoxDecoration(
-            color: idxColorButton,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-          child: new IconButton(
-            icon: new Icon(Icons.home),
-            color: Colors.white,
-            onPressed: () => Navigator.of(context).pop(null),
-          ),
-        ),
-        actions: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           Container(
-            decoration: BoxDecoration(
-              color: idxColorButton,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                bottomLeft: Radius.circular(20),
-              ),
+            height: height / 10,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: width / 8,
+                  height: height / 5,
+                  decoration: BoxDecoration(
+                    color: idxColorButton,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: new IconButton(
+                    icon: new Icon(Icons.home),
+                    color: Colors.white,
+                    onPressed: () => Navigator.of(context).pop(null),
+                  ),
+                ),
+                Container(
+                  width: width / 8,
+                  decoration: BoxDecoration(
+                    color: idxColorButton,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                  ),
+                  child: new IconButton(
+                    icon: new Icon(Icons.settings),
+                    color: Colors.white,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/settingPage'),
+                  ),
+                ),
+              ],
             ),
-            child: new IconButton(
-              icon: new Icon(Icons.settings),
-              color: Colors.white,
-              onPressed: () => Navigator.pushNamed(context, '/settingPage'),
+          ),
+          Container(
+            height: (8 * height) / 10,
+            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  // onPanCancel: () {
+                  //   print('pan cancel');
+                  // },
+                  // onPanDown: (_) {
+                  //   print('pan down');
+                  // },
+                  onPanUpdate: (DragUpdateDetails details) {
+                    //print('pan update'); // won't trigger
+                    distancex = details.globalPosition.dx - initialx;
+                    //print("Distance x : $distancex");
+                    distancey = details.globalPosition.dy - initialy;
+                    //print("Distance y : $distancey");
+                    if (etape == 0) {
+                      case1lettre();
+                      print(onetimesound);
+                    } else if (etape == 1) {
+                      duosound();
+                      print(onetimesound);
+                    }
+                  },
+                  onPanStart: (DragStartDetails details) {
+                    print('pan start');
+                    initialx = details.globalPosition.dx;
+                    setState(() {
+                      onetimesound = 1;
+                      firstsound();
+                    });
+                  },
+                  onPanEnd: (DragEndDetails details) {
+                    print('pan end'); // won't trigger
+
+                    setState(() {
+                      initialx = 0.0;
+                      initialy = 0.0;
+                      etape = 0;
+                      onetimesound = 0;
+                    });
+                    print("Distance final x : $distancex");
+                    print("Distance final y : $distancey");
+                  },
+                  child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                    height: height / 4,
+                    width: width / 8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(55),
+                      color: backLetterCase,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: Center(
+                      child: Text(
+                        lettre,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 35, color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  //   onPointerDown: (PointerDownEvent event) =>
+                  //     setState(() =>
+                  //      print("OnPointerDown  ==  $event"),
+                  //      ),
+                  // onPointerMove: (PointerMoveEvent event) =>
+                  //     setState((){
+                  //     print("PointerMoveEvent  ==  $event");
+                  //     }
+                  //      ),
+                  // onPointerUp: (PointerUpEvent event) =>
+                  //     setState(() =>
+                  //      print("PointerUpEvent  ==  $event"),
+                  //      ),
+                  // behavior: HitTestBehavior.translucent,
+                ),
+                Container(
+                  //height: double.infinity,
+                  height: (8 * height) / 10,
+
+                  alignment: Alignment.center, // This is needed
+                  child: Image.asset(
+                    (onetimesound == 1)
+                        ? "assets/fleches/Fleches_1_A.png"
+                        : "assets/fleches/Fleches_1.png",
+                    fit: BoxFit.contain,
+                    height: (7 * height) / 10,
+
+                    //width: 300,
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 8,
+                        width: width / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: backLetterCase,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'a',
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 8,
+                        width: width / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: backLetterCase,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'e',
+                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 8,
+                        width: width / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: backLetterCase,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'i',
+                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 8,
+                        width: width / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: backLetterCase,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'o',
+                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 8,
+                        width: width / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: backLetterCase,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'u',
+                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  //height: double.infinity,
+                  height: (8 * height) / 10,
+
+                  alignment: Alignment.center, // This is needed
+                  child: Image.asset(
+                    (onetimesound == 1)
+                        ? "assets/fleches/Fleches_2_A.png"
+                        : "assets/fleches/Fleches_2.png",
+                    fit: BoxFit.contain,
+                    height: (7 * height) / 10,
+
+                    //width: 300,
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 0.0),
+                        //color: Colors.red,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'a',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'e',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'i',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'o',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'u',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
-        backgroundColor: idxColorBackground,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                // onPanCancel: () {
-                //   print('pan cancel');
-                // },
-                // onPanDown: (_) {
-                //   print('pan down');
-                // },
-                onPanUpdate: (DragUpdateDetails details) {
-                  //print('pan update'); // won't trigger
-                  distancex = details.globalPosition.dx - initialx;
-                  //print("Distance x : $distancex");
-                  distancey = details.globalPosition.dy - initialy;
-                  //print("Distance y : $distancey");
-                  if (etape == 0) {
-                    case1lettre();
-                    print(onetimesound);
-                  } else if (etape == 1) {
-                    duosound();
-                    print(onetimesound);
-                  }
-                },
-                onPanStart: (DragStartDetails details) {
-                  print('pan start');
-                  initialx = details.globalPosition.dx;
-                  initialy = details.globalPosition.dy;
-                  firstsound();
-                },
-                onPanEnd: (DragEndDetails details) {
-                  print('pan end'); // won't trigger
-                  initialx = 0.0;
-                  initialy = 0.0;
-                  etape = 0;
-                  print("Distance final x : $distancex");
-                  print("Distance final y : $distancey");
-                },
-                child: Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                  height: 95,
-                  width: 95,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(55),
-                    color: backLetterCase,
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Center(
-                    child: Text(
-                      lettre,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 35, color: Colors.red),
-                    ),
-                  ),
-                ),
-                //   onPointerDown: (PointerDownEvent event) =>
-                //     setState(() =>
-                //      print("OnPointerDown  ==  $event"),
-                //      ),
-                // onPointerMove: (PointerMoveEvent event) =>
-                //     setState((){
-                //     print("PointerMoveEvent  ==  $event");
-                //     }
-                //      ),
-                // onPointerUp: (PointerUpEvent event) =>
-                //     setState(() =>
-                //      print("PointerUpEvent  ==  $event"),
-                //      ),
-                // behavior: HitTestBehavior.translucent,
-              ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: backLetterCase,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'a',
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: backLetterCase,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'e',
-                          style: TextStyle(fontSize: 30, color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: backLetterCase,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'i',
-                          style: TextStyle(fontSize: 30, color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: backLetterCase,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'o',
-                          style: TextStyle(fontSize: 30, color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: backLetterCase,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'u',
-                          style: TextStyle(fontSize: 30, color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                lettre,
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.red),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                lettre,
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.red),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                lettre,
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.red),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                lettre,
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.red),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                lettre,
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.red),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: new EdgeInsets.symmetric(horizontal: 0.0),
-                      //color: Colors.red,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'a',
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.blue),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'e',
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.blue),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'i',
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.blue),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'o',
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.blue),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                            height: 65,
-                            width: 65,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: backLetterCase,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'u',
-                                style:
-                                    TextStyle(fontSize: 30, color: Colors.blue),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

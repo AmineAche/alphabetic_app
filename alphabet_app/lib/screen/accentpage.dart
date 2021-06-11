@@ -95,7 +95,7 @@ class _AccentPageState extends State<AccentPage> {
             new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 11,
+                height: height / 10,
                 width: width / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -125,7 +125,7 @@ class _AccentPageState extends State<AccentPage> {
             new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 3,
+                height: height / 4,
                 width: width / 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
