@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
     "e_file.mp3",
     "i_file.mp3",
     "o_file.mp3",
+    "u_file.mp3",
+    "vu_file.mp3",
     "v_file.mp3",
     "va_file.mp3",
     "ve_file.mp3",

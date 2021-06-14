@@ -123,7 +123,7 @@ class _SlidePageState extends State<SlidePage> {
                     print("tangente : $tangente");
                     setState(() {
                     if (etape == 0) {
-                      case1lettre();
+                      case1lettre(width);
                       //print(onetimesound);
                     } else if (etape == 1) {
                       duosound();
@@ -133,11 +133,12 @@ class _SlidePageState extends State<SlidePage> {
                   },
                   onPanStart: (DragStartDetails details) {
                     print('pan start');
+                    print("width: $width");
                     initialx = details.globalPosition.dx;
                     initialy = details.globalPosition.dy;
                     setState(() {
                       //onetimesound = 1;
-                      firstsound();
+                      firstsound(lettre);
                     });
                   },
                   onPanEnd: (DragEndDetails details) {
@@ -214,7 +215,8 @@ class _SlidePageState extends State<SlidePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      new GestureDetector(
+                      child: Container(
                         margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         height: height / 8,
                         width: width / 10,
@@ -233,7 +235,12 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                       ),
-                      Container(
+                      onTap: () {
+                        firstsound("a");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
                         margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         height: height / 8,
                         width: width / 10,
@@ -249,7 +256,12 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                       ),
-                      Container(
+                      onTap: () {
+                        firstsound("e");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
                         margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         height: height / 8,
                         width: width / 10,
@@ -265,7 +277,12 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                       ),
-                      Container(
+                      onTap: () {
+                        firstsound("i");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
                         margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         height: height / 8,
                         width: width / 10,
@@ -281,7 +298,12 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                       ),
-                      Container(
+                      onTap: () {
+                        firstsound("o");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
                         margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         height: height / 8,
                         width: width / 10,
@@ -296,6 +318,10 @@ class _SlidePageState extends State<SlidePage> {
                             style: TextStyle(fontSize: 30, color: Colors.blue),
                           ),
                         ),
+                      ),
+                      onTap: () {
+                        firstsound("u");
+                      },
                       ),
                     ],
                   ),
@@ -326,13 +352,14 @@ class _SlidePageState extends State<SlidePage> {
                   ),
                 ),
                 Container(
-                  child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      new GestureDetector(
+                      child: Container(
+                        color: Colors.red,
                         padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Row(
                           children: [
                             Container(
                               margin: new EdgeInsets.symmetric(horizontal: 5.0),
@@ -352,87 +379,6 @@ class _SlidePageState extends State<SlidePage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 0.0),
-                        //color: Colors.red,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
                             Container(
                               margin: new EdgeInsets.symmetric(horizontal: 5.0),
                               height: height / 8,
@@ -448,6 +394,37 @@ class _SlidePageState extends State<SlidePage> {
                                   'a',
                                   style: TextStyle(
                                       fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        firstsound("va");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
+                        color: Colors.red,
+                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
                                 ),
                               ),
                             ),
@@ -469,6 +446,37 @@ class _SlidePageState extends State<SlidePage> {
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        firstsound("ve");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
+                        color: Colors.red,
+                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
                             Container(
                               margin: new EdgeInsets.symmetric(horizontal: 5.0),
                               height: height / 8,
@@ -487,6 +495,37 @@ class _SlidePageState extends State<SlidePage> {
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        firstsound("vi");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
+                        color: Colors.red,
+                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
+                                ),
+                              ),
+                            ),
                             Container(
                               margin: new EdgeInsets.symmetric(horizontal: 5.0),
                               height: height / 8,
@@ -502,6 +541,37 @@ class _SlidePageState extends State<SlidePage> {
                                   'o',
                                   style: TextStyle(
                                       fontSize: 30, color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        firstsound("vo");
+                      },
+                      ),
+                      new GestureDetector(
+                      child: Container(
+                        color: Colors.red,
+                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                              height: height / 8,
+                              width: width / 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: backLetterCase,
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  lettre,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.red),
                                 ),
                               ),
                             ),
@@ -526,6 +596,10 @@ class _SlidePageState extends State<SlidePage> {
                           ],
                         ),
                       ),
+                      onTap: () {
+                        firstsound("vu");
+                      },
+                      ),
                     ],
                   ),
                 ),
@@ -537,21 +611,22 @@ class _SlidePageState extends State<SlidePage> {
     );
   }
 
-  void firstsound() {
+  void firstsound(String letter) {
     print("Akhi t es dans le premier son");
-    if (audio.contains(lettre + "_file.mp3")) {
+    if (audio.contains(letter + "_file.mp3")) {
       print('Akhi t es rentré dans le if');
-      audioCache.play(lettre + "_file.mp3");
+      print(letter + "_file.mp3");
+      audioCache.play(letter + "_file.mp3");
     } else {
       print('Akhi t es pas rentré dans le if');
     }
   }
 
-  void case1lettre() {
+  void case1lettre(double width) {
     // if (onetimesound == null) {
     //   onetimesound = 0;
     // }
-    if ((distancex >= 200) && (distancex <= 400)) {
+    if ((distancex >= ( (width * 24.27) / 100 ) ) && (distancex <= ( (width * 48.54) / 100 ))) {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
