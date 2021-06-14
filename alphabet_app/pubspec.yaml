@@ -64,6 +64,8 @@ flutter:
   - assets/e_file.mp3
   - assets/i_file.mp3
   - assets/o_file.mp3
+  - assets/u_file.mp3
+  - assets/vu_file.mp3
   - assets/f_file.mp3
   - assets/la_file.mp3
   - assets/error.mp3

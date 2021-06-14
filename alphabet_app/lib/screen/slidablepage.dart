@@ -46,8 +46,9 @@ class _SlidePageState extends State<SlidePage> {
   var initialy;
   var distancex;
   var distancey;
-  var onetimesound;
+  int onetimesound;
   var etape = 0;
+  double tangente;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -116,20 +117,26 @@ class _SlidePageState extends State<SlidePage> {
                     distancex = details.globalPosition.dx - initialx;
                     //print("Distance x : $distancex");
                     distancey = details.globalPosition.dy - initialy;
-                    //print("Distance y : $distancey");
+                    print("Distance y : $distancey");
+                    print("Etape : $etape");
+                    print("onetimesound : $onetimesound");
+                    print("tangente : $tangente");
+                    setState(() {
                     if (etape == 0) {
                       case1lettre();
-                      print(onetimesound);
+                      //print(onetimesound);
                     } else if (etape == 1) {
                       duosound();
-                      print(onetimesound);
+                      //print(onetimesound);
                     }
+                    });
                   },
                   onPanStart: (DragStartDetails details) {
                     print('pan start');
                     initialx = details.globalPosition.dx;
+                    initialy = details.globalPosition.dy;
                     setState(() {
-                      onetimesound = 1;
+                      //onetimesound = 1;
                       firstsound();
                     });
                   },
@@ -183,9 +190,20 @@ class _SlidePageState extends State<SlidePage> {
 
                   alignment: Alignment.center, // This is needed
                   child: Image.asset(
+
                     (onetimesound == 1)
                         ? "assets/fleches/Fleches_1_A.png"
+                        : (onetimesound == 2)
+                        ? "assets/fleches/Fleches_1_E.png"
+                        : (onetimesound == 3)
+                        ? "assets/fleches/Fleches_1_I.png"
+                        :(onetimesound == 4)
+                        ? "assets/fleches/Fleches_1_O.png"
+                        : (onetimesound == 5)
+                        ? "assets/fleches/Fleches_1_U.png"
+
                         : "assets/fleches/Fleches_1.png",
+
                     fit: BoxFit.contain,
                     height: (7 * height) / 10,
 
@@ -290,7 +308,17 @@ class _SlidePageState extends State<SlidePage> {
                   child: Image.asset(
                     (onetimesound == 1)
                         ? "assets/fleches/Fleches_2_A.png"
+                        : (onetimesound == 2)
+                        ? "assets/fleches/Fleches_2_E.png"
+                        : (onetimesound == 3)
+                        ? "assets/fleches/Fleches_2_I.png"
+                        :(onetimesound == 4)
+                        ? "assets/fleches/Fleches_2_O.png"
+                        : (onetimesound == 5)
+                        ? "assets/fleches/Fleches_2_U.png"
+
                         : "assets/fleches/Fleches_2.png",
+                        
                     fit: BoxFit.contain,
                     height: (7 * height) / 10,
 
@@ -520,45 +548,59 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   void case1lettre() {
-    var tangente;
-
-    if (onetimesound == null) {
-      onetimesound = 0;
-    }
-    if ((distancex >= 100) && (distancex <= 235)) {
-      //Premieres cases sont au minimum a une distance de 100 et max a 235
+    // if (onetimesound == null) {
+    //   onetimesound = 0;
+    // }
+    if ((distancex >= 200) && (distancex <= 400)) {
+      print("omg t es dans les premiers bails.");
+      //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
-      //print("Tangente = $tangente");
-      if (distancey < 0) {
-        //   Les 2 cases au dessus ont un y négatif.
-        if ((0.53 <= tangente) && (tangente <= 0.94) && (onetimesound != 1)) {
-          onetimesound = 1;
-          if (audio.contains("a_file.mp3")) {
-            audioCache.play("a_file.mp3");
-          }
-        }
-        if ((0.01 <= tangente) && (tangente <= 0.52) && (onetimesound != 2)) {
-          onetimesound = 2;
-          if (audio.contains("e_file.mp3")) {
-            audioCache.play("e_file.mp3");
-          }
-        }
-        etape = 1;
-      } else {
-        if ((0 <= tangente) && (tangente <= 0.42) && (onetimesound != 3)) {
+      if (distancey < 30 && distancey > -(30)) {
+        if ((0.00 <= tangente) && (tangente <= 0.11) && (onetimesound != 3)) {
           onetimesound = 3;
           if (audio.contains("i_file.mp3")) {
             audioCache.play("i_file.mp3");
           }
         }
-        if ((0.43 <= tangente) && (tangente <= 0.94) && (onetimesound != 4)) {
+      } else if (distancey < -(30)) {
+        print("t es dans y < -30");
+        //   Les 2 cases au dessus ont un y négatif.
+        if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 1)) {
+          print("t es dans a");
+          onetimesound = 1;
+          if (audio.contains("a_file.mp3")) {
+            audioCache.play("a_file.mp3");
+          }
+        }
+        if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 2)) {
+          print("t es dans e");
+          onetimesound = 2;
+          if (audio.contains("e_file.mp3")) {
+            audioCache.play("e_file.mp3");
+          }
+        }
+        print("t es a la fin de y < 0 et onetime sound = " + onetimesound.toString());
+        etape = 1;
+      } else if (distancey > 30) {
+        print("t es dans y > 30");
+      print("Tangentes = $tangente");
+      print("onetimesound = " + onetimesound.toString());
+        if  ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 4)){
+          print("Tangentes = $tangente");
           onetimesound = 4;
           if (audio.contains("o_file.mp3")) {
             audioCache.play("o_file.mp3");
           }
         }
-        etape =
-            1; // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
+        if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 5)) {
+print("Tangentes = $tangente");
+          onetimesound = 5;
+          if (audio.contains("u_file.mp3")) {
+            audioCache.play("u_file.mp3");
+          }
+        }
+        print("t es a la fin de y > 0 et onetime sound = " + onetimesound.toString());
+        etape = 1; // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
       }
     } else {
       //print('La personne doit aller jusqu aux 1ere cases.');
@@ -566,14 +608,9 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   void duosound() {
-    var tangente;
 
-    if (onetimesound == null) {
-      print("PK TU PASSES PAR LA  ?");
-      onetimesound = 0;
-    }
 
-    if (distancex >= 310) {
+    if (distancex >= 420) {
       //Premieres cases sont au minimum a une distance de 100 et max a 235
       tangente = (distancey.abs() / distancex);
       //print("Tangente = $tangente");

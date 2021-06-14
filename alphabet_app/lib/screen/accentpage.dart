@@ -23,133 +23,127 @@ class _AccentPageState extends State<AccentPage> {
 
     return Scaffold(
       backgroundColor: idxColorBackground,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        // toolbarHeight: height / 6,
-        // leadingWidth: width / 10,
-        //title: const Text('Slide'),
-
-        leading: Container(
-          decoration: BoxDecoration(
-            color: idxColorButton,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-          child: new IconButton(
-            icon: new Icon(Icons.home),
-            color: Colors.white,
-            onPressed: () => Navigator.of(context).pop(null),
-          ),
-        ),
-        actions: [
-          // Container(
-          //   width: width / 10,
-          //   //height: 50,
-          //   decoration: BoxDecoration(
-          //     color: idxColorButton,
-          //     borderRadius: BorderRadius.only(
-          //       topLeft: Radius.circular(10),
-          //       bottomLeft: Radius.circular(20),
-          //     ),
-          //   ),
-          //   child: new IconButton(
-          //     icon: new Icon(Icons.settings),
-          //     color: Colors.white,
-          //     onPressed: () => Navigator.pushNamed(context, '/settingPage'),
-          //   ),
-          // ),
-          Container(
-            width: width / 10,
-            height: height / 10,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                bottomLeft: Radius.circular(20),
-              ),
-              color: idxColorButton,
-            ),
-            child: SizedBox(
-              child: IconButton(
-                //iconSize: 30,
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/settingPage');
-                },
-              ),
-            ),
-          )
-        ],
-
-        backgroundColor: Colors.green,
-        elevation: 0,
-      ),
-      body: Center(
+      body: Container(
+        //color: Colors.green,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            new SwipeGestureRecognizer(
-              child: Container(
-                margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 10,
-                width: width / 15,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  border: Border.all(width: 1),
-                ),
-                child: Center(
-                    child: Text(
-                  accent[accentidx],
-                  style: TextStyle(fontSize: 60, color: Colors.blue),
-                )),
-              ),
-              onSwipeRight: () {
-                setState(() {
-                  accentright();
-                });
-              },
-              onSwipeLeft: () {
-                setState(() {
-                  accentleft();
-                });
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            new SwipeGestureRecognizer(
-              child: Container(
-                margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                height: height / 4,
-                width: width / 5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  border: Border.all(width: 2),
-                ),
-                child: Center(
-                  child: Text(
-                    voyelleaccent[lettreidx],
-                    style: TextStyle(fontSize: width / 10, color: Colors.blue),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: width / 10,
+                    height: height / 10,
+                    decoration: BoxDecoration(
+                      color: idxColorButton,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: new IconButton(
+                      icon: new Icon(Icons.home),
+                      color: Colors.white,
+                      onPressed: () => Navigator.of(context).pop(null),
+                    ),
                   ),
+                  Container(
+                    width: width / 10,
+                    height: height / 10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(20),
+                      ),
+                      color: idxColorButton,
+                    ),
+                    child: SizedBox(
+                      child: IconButton(
+                        //iconSize: 30,
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/settingPage');
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Center(
+              child: Container(
+                child: Column(
+                  children: [
+                    new SwipeGestureRecognizer(
+                      child: Center(
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 3.0),
+                          height: height / 10,
+                          width: width / 15,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            border: Border.all(width: 1),
+                          ),
+                          child: Center(
+                              child: Text(
+                            accent[accentidx],
+                            style: TextStyle(fontSize: 60, color: Colors.blue),
+                          )),
+                        ),
+                      ),
+                      onSwipeRight: () {
+                        setState(() {
+                          accentright();
+                        });
+                      },
+                      onSwipeLeft: () {
+                        setState(() {
+                          accentleft();
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    new SwipeGestureRecognizer(
+                      child: Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 3.0),
+                        height: height / 3,
+                        width: width / 5,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          border: Border.all(width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            voyelleaccent[lettreidx],
+                            style: TextStyle(
+                                fontSize: width / 10, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      onSwipeRight: () {
+                        setState(() {
+                          lettreright();
+                        });
+                      },
+                      onSwipeLeft: () {
+                        setState(() {
+                          lettreleft();
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
-              onSwipeRight: () {
-                setState(() {
-                  lettreright();
-                });
-              },
-              onSwipeLeft: () {
-                setState(() {
-                  lettreleft();
-                });
-              },
             ),
+            Container(),
           ],
         ),
       ),
