@@ -103,7 +103,7 @@ class _SlidePageState extends State<SlidePage> {
             height: (8 * height) / 10,
             margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   // onPanCancel: () {
@@ -122,13 +122,13 @@ class _SlidePageState extends State<SlidePage> {
                     print("onetimesound : $onetimesound");
                     print("tangente : $tangente");
                     setState(() {
-                    if (etape == 0) {
-                      case1lettre(width);
-                      //print(onetimesound);
-                    } else if (etape == 1) {
-                      duosound();
-                      //print(onetimesound);
-                    }
+                      if (etape == 0) {
+                        case1lettre(width);
+                        //print(onetimesound);
+                      } else if (etape == 1) {
+                        duosound();
+                        //print(onetimesound);
+                      }
                     });
                   },
                   onPanStart: (DragStartDetails details) {
@@ -186,24 +186,23 @@ class _SlidePageState extends State<SlidePage> {
                   // behavior: HitTestBehavior.translucent,
                 ),
                 Container(
+                  //color: Colors.red,
                   //height: double.infinity,
                   height: (8 * height) / 10,
 
                   alignment: Alignment.center, // This is needed
                   child: Image.asset(
-
                     (onetimesound == 1)
                         ? "assets/fleches/Fleches_1_A.png"
                         : (onetimesound == 2)
-                        ? "assets/fleches/Fleches_1_E.png"
-                        : (onetimesound == 3)
-                        ? "assets/fleches/Fleches_1_I.png"
-                        :(onetimesound == 4)
-                        ? "assets/fleches/Fleches_1_O.png"
-                        : (onetimesound == 5)
-                        ? "assets/fleches/Fleches_1_U.png"
-
-                        : "assets/fleches/Fleches_1.png",
+                            ? "assets/fleches/Fleches_1_E.png"
+                            : (onetimesound == 3)
+                                ? "assets/fleches/Fleches_1_I.png"
+                                : (onetimesound == 4)
+                                    ? "assets/fleches/Fleches_1_O.png"
+                                    : (onetimesound == 5)
+                                        ? "assets/fleches/Fleches_1_U.png"
+                                        : "assets/fleches/Fleches_1.png",
 
                     fit: BoxFit.contain,
                     height: (7 * height) / 10,
@@ -216,112 +215,116 @@ class _SlidePageState extends State<SlidePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       new GestureDetector(
-                      child: Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                        height: height / 8,
-                        width: width / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: backLetterCase,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'a',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.blue,
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          height: height / 8,
+                          width: width / 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: backLetterCase,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'a',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.blue,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("a");
-                      },
-                      ),
-                      new GestureDetector(
-                      child: Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                        height: height / 8,
-                        width: width / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: backLetterCase,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'e',
-                            style: TextStyle(fontSize: 30, color: Colors.blue),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        firstsound("e");
-                      },
+                        onTap: () {
+                          firstsound("a");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                        height: height / 8,
-                        width: width / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: backLetterCase,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'i',
-                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          height: height / 8,
+                          width: width / 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: backLetterCase,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'e',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.blue),
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("i");
-                      },
+                        onTap: () {
+                          firstsound("e");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                        height: height / 8,
-                        width: width / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: backLetterCase,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'o',
-                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          height: height / 8,
+                          width: width / 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: backLetterCase,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'i',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.blue),
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("o");
-                      },
+                        onTap: () {
+                          firstsound("i");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                        height: height / 8,
-                        width: width / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: backLetterCase,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'u',
-                            style: TextStyle(fontSize: 30, color: Colors.blue),
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          height: height / 8,
+                          width: width / 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: backLetterCase,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'o',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.blue),
+                            ),
                           ),
                         ),
+                        onTap: () {
+                          firstsound("o");
+                        },
                       ),
-                      onTap: () {
-                        firstsound("u");
-                      },
+                      new GestureDetector(
+                        child: Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          height: height / 8,
+                          width: width / 10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: backLetterCase,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'u',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          firstsound("u");
+                        },
                       ),
                     ],
                   ),
@@ -332,19 +335,18 @@ class _SlidePageState extends State<SlidePage> {
 
                   alignment: Alignment.center, // This is needed
                   child: Image.asset(
-                    (onetimesound == 1)
+                    (onetimesound == 1 && etape == 2)
                         ? "assets/fleches/Fleches_2_A.png"
-                        : (onetimesound == 2)
-                        ? "assets/fleches/Fleches_2_E.png"
-                        : (onetimesound == 3)
-                        ? "assets/fleches/Fleches_2_I.png"
-                        :(onetimesound == 4)
-                        ? "assets/fleches/Fleches_2_O.png"
-                        : (onetimesound == 5)
-                        ? "assets/fleches/Fleches_2_U.png"
+                        : (onetimesound == 2 && etape == 2)
+                            ? "assets/fleches/Fleches_2_E.png"
+                            : (onetimesound == 3 && etape == 2)
+                                ? "assets/fleches/Fleches_2_I.png"
+                                : (onetimesound == 4 && etape == 2)
+                                    ? "assets/fleches/Fleches_2_O.png"
+                                    : (onetimesound == 5 && etape == 2)
+                                        ? "assets/fleches/Fleches_2_U.png"
+                                        : "assets/fleches/Fleches_2.png",
 
-                        : "assets/fleches/Fleches_2.png",
-                        
                     fit: BoxFit.contain,
                     height: (7 * height) / 10,
 
@@ -356,249 +358,255 @@ class _SlidePageState extends State<SlidePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       new GestureDetector(
-                      child: Container(
-                        color: Colors.red,
-                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
+                        child: Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    lettre,
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'a',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.blue),
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'a',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.blue),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("va");
-                      },
+                        onTap: () {
+                          firstsound("va");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        color: Colors.red,
-                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
+                        child: Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    lettre,
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'e',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.blue),
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'e',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.blue),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("ve");
-                      },
+                        onTap: () {
+                          firstsound("ve");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        color: Colors.red,
-                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
+                        child: Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    lettre,
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'i',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.blue),
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'i',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.blue),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("vi");
-                      },
+                        onTap: () {
+                          firstsound("vi");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        color: Colors.red,
-                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
+                        child: Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    lettre,
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'o',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.blue),
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'o',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.blue),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("vo");
-                      },
+                        onTap: () {
+                          firstsound("vo");
+                        },
                       ),
                       new GestureDetector(
-                      child: Container(
-                        color: Colors.red,
-                        padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  lettre,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.red),
+                        child: Container(
+                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    lettre,
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.red),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                              height: height / 8,
-                              width: width / 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: backLetterCase,
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'u',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.blue),
+                              Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 2.0),
+                                height: height / 8,
+                                width: width / 10,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: backLetterCase,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'u',
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.blue),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        firstsound("vu");
-                      },
+                        onTap: () {
+                          firstsound("vu");
+                        },
                       ),
                     ],
                   ),
@@ -626,7 +634,8 @@ class _SlidePageState extends State<SlidePage> {
     // if (onetimesound == null) {
     //   onetimesound = 0;
     // }
-    if ((distancex >= ( (width * 24.27) / 100 ) ) && (distancex <= ( (width * 48.54) / 100 ))) {
+    if ((distancex >= ((width * 24.27) / 100)) &&
+        (distancex <= ((width * 48.54) / 100))) {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
@@ -654,13 +663,14 @@ class _SlidePageState extends State<SlidePage> {
             audioCache.play("e_file.mp3");
           }
         }
-        print("t es a la fin de y < 0 et onetime sound = " + onetimesound.toString());
+        print("t es a la fin de y < 0 et onetime sound = " +
+            onetimesound.toString());
         etape = 1;
       } else if (distancey > 30) {
         print("t es dans y > 30");
-      print("Tangentes = $tangente");
-      print("onetimesound = " + onetimesound.toString());
-        if  ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 4)){
+        print("Tangentes = $tangente");
+        print("onetimesound = " + onetimesound.toString());
+        if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 4)) {
           print("Tangentes = $tangente");
           onetimesound = 4;
           if (audio.contains("o_file.mp3")) {
@@ -668,14 +678,16 @@ class _SlidePageState extends State<SlidePage> {
           }
         }
         if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 5)) {
-print("Tangentes = $tangente");
+          print("Tangentes = $tangente");
           onetimesound = 5;
           if (audio.contains("u_file.mp3")) {
             audioCache.play("u_file.mp3");
           }
         }
-        print("t es a la fin de y > 0 et onetime sound = " + onetimesound.toString());
-        etape = 1; // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
+        print("t es a la fin de y > 0 et onetime sound = " +
+            onetimesound.toString());
+        etape =
+            1; // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
       }
     } else {
       //print('La personne doit aller jusqu aux 1ere cases.');
@@ -683,8 +695,6 @@ print("Tangentes = $tangente");
   }
 
   void duosound() {
-
-
     if (distancex >= 420) {
       //Premieres cases sont au minimum a une distance de 100 et max a 235
       tangente = (distancey.abs() / distancex);
@@ -753,6 +763,7 @@ print("Tangentes = $tangente");
         etape =
             0; // L'etape a bien été réaliser, il faut maintenant repasser par les cases d avant.
       }
+      etape = 2;
       //print("t es a la fin de duo sound et Onetimesound est maintenant egale a : ");
       //print(onetimesound);
     } else {

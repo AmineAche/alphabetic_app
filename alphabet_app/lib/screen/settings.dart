@@ -54,6 +54,7 @@ class _SettingPageState extends State<SettingPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: idxColorBackground,
         appBar: AppBar(
           //toolbarHeight: height / 6,
           //leadingWidth: width / 10,
@@ -96,7 +97,9 @@ class _SettingPageState extends State<SettingPage> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    RaisedButton(
+                    Container(
+                    //color: idxColorBackground,
+                    child: RaisedButton(
                       elevation: 3.0,
                       onPressed: () {
                         showDialog(
@@ -104,6 +107,7 @@ class _SettingPageState extends State<SettingPage> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text('Select a color'),
+                              backgroundColor: Color(0xffdddddd),
                               content: SingleChildScrollView(
                                 child: BlockPicker(
                                   pickerColor: currentColor,
@@ -120,6 +124,7 @@ class _SettingPageState extends State<SettingPage> {
                           ? const Color(0xffffffff)
                           : const Color(0xff000000),
                     ),
+                    ),
                   ]),
             ),
             Center(
@@ -134,8 +139,9 @@ class _SettingPageState extends State<SettingPage> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text('Select a color'),
+                              backgroundColor: Color(0xffdddddd),
                               content: SingleChildScrollView(
-                                child: BlockPicker(
+                                child: BlockPicker2(
                                   pickerColor: currentColor,
                                   onColorChanged: changeColorBackground,
                                 ),
@@ -145,7 +151,7 @@ class _SettingPageState extends State<SettingPage> {
                         );
                       },
                       child: const Text('Modifier la couleur du fond'),
-                      color: idxColorBackground,
+                      color: idxColorButton,
                       textColor: useWhiteForeground(currentColor)
                           ? const Color(0xffffffff)
                           : const Color(0xff000000),
