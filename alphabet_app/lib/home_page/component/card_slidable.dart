@@ -146,7 +146,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               },
             ),
           Padding(
-            padding: EdgeInsets.only(top: width / 7, left: height / 8),
+            padding: EdgeInsets.only(top: height / 2, ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: idxColorButton, width: 2),
