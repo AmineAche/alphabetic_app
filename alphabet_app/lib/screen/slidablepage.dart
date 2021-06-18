@@ -65,35 +65,68 @@ class _SlidePageState extends State<SlidePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: width / 8,
-                  height: height / 5,
+                  width: width / 9,
+                  height: height / 10,
                   decoration: BoxDecoration(
-                    color: idxColorButton,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 15,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(20),
+                      topRight: Radius.circular(0),
+                      bottomRight: Radius.circular(70),
                     ),
+                    color: idxColorButton,
                   ),
-                  child: new IconButton(
-                    icon: new Icon(Icons.home),
-                    color: Colors.white,
-                    onPressed: () => Navigator.of(context).pop(null),
+                  child: SizedBox(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: width / 70),
+                      child: IconButton(
+                        iconSize: height / 20,
+                        icon: Icon(
+                          Icons.home,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.of(context).pop(null),
+                      ),
+                    ),
                   ),
                 ),
                 Container(
-                  width: width / 8,
+                  width: width / 9,
+                  height: height / 10,
                   decoration: BoxDecoration(
-                    color: idxColorButton,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 15,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(20),
+                      topLeft: Radius.circular(0),
+                      bottomLeft: Radius.circular(70),
                     ),
+                    color: idxColorButton,
                   ),
-                  child: new IconButton(
-                    icon: new Icon(Icons.settings),
-                    color: Colors.white,
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/settingPage'),
+                  child: SizedBox(
+                    child: IconButton(
+                      iconSize: height / 20,
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/settingPage');
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -155,18 +188,27 @@ class _SlidePageState extends State<SlidePage> {
                   },
                   child: Container(
                     margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                    height: height / 4,
-                    width: width / 8,
+                    height: height / 7,
+                    width: height / 7,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(55),
+                      borderRadius: BorderRadius.circular(150),
                       color: backLetterCase,
-                      border: Border.all(color: Colors.white, width: 2),
+                      border: Border.all(color: Colors.white, width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
                     ),
                     child: Center(
                       child: Text(
                         lettre,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 35, color: Colors.red),
+                        style:
+                            TextStyle(fontSize: height / 12, color: Colors.red),
                       ),
                     ),
                   ),
@@ -220,15 +262,24 @@ class _SlidePageState extends State<SlidePage> {
                           height: height / 8,
                           width: width / 10,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                             color: backLetterCase,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
                             child: Text(
                               'a',
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: height / 11,
                                 color: Colors.blue,
                               ),
                             ),
@@ -244,15 +295,24 @@ class _SlidePageState extends State<SlidePage> {
                           height: height / 8,
                           width: width / 10,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                             color: backLetterCase,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
                             child: Text(
                               'e',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.blue),
+                              style: TextStyle(
+                                  fontSize: height / 11, color: Colors.blue),
                             ),
                           ),
                         ),
@@ -266,15 +326,24 @@ class _SlidePageState extends State<SlidePage> {
                           height: height / 8,
                           width: width / 10,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                             color: backLetterCase,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
                             child: Text(
                               'i',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.blue),
+                              style: TextStyle(
+                                  fontSize: height / 11, color: Colors.blue),
                             ),
                           ),
                         ),
@@ -288,15 +357,24 @@ class _SlidePageState extends State<SlidePage> {
                           height: height / 8,
                           width: width / 10,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                             color: backLetterCase,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
                             child: Text(
                               'o',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.blue),
+                              style: TextStyle(
+                                  fontSize: height / 11, color: Colors.blue),
                             ),
                           ),
                         ),
@@ -310,15 +388,24 @@ class _SlidePageState extends State<SlidePage> {
                           height: height / 8,
                           width: width / 10,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                             color: backLetterCase,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
                             child: Text(
                               'u',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.blue),
+                              style: TextStyle(
+                                  fontSize: height / 11, color: Colors.blue),
                             ),
                           ),
                         ),
@@ -369,16 +456,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     lettre,
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.red),
+                                        fontSize: height / 11,
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -388,16 +485,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'a',
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.blue),
+                                        fontSize: height / 11,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),
@@ -419,16 +526,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     lettre,
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.red),
+                                        fontSize: height / 11,
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -438,16 +555,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'e',
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.blue),
+                                        fontSize: height / 11,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),
@@ -469,16 +596,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     lettre,
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.red),
+                                        fontSize: height / 11,
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -488,16 +625,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'i',
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.blue),
+                                        fontSize: height / 11,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),
@@ -519,16 +666,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     lettre,
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.red),
+                                        fontSize: height / 11,
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -538,16 +695,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'o',
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.blue),
+                                        fontSize: height / 11,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),
@@ -569,16 +736,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     lettre,
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.red),
+                                        fontSize: height / 11,
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -588,16 +765,26 @@ class _SlidePageState extends State<SlidePage> {
                                 height: height / 8,
                                 width: width / 10,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: backLetterCase,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: Colors.white, width: 0.5),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'u',
                                     style: TextStyle(
-                                        fontSize: 30, color: Colors.blue),
+                                        fontSize: height / 11,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),

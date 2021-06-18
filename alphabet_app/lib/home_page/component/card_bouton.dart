@@ -43,155 +43,313 @@ class _BoutonWidget extends State<BoutonWidget> {
                 Container(
                   height: height / 10,
                   decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
                     color: idxColorButton,
                     borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(20),
+                      bottomRight: Radius.circular(150),
                       topRight: Radius.circular(0),
                     ),
                   ),
                   child: Row(
                     children: [
-                      Button3D(
-                        style: StyleOf3dButton(
-                          backColor: Colors.transparent,
-                          topColor: idxColorButton,
-                          borderRadius: BorderRadius.only(),
-                        ),
-                        height: height / 11,
+                      // Button3D(
+                      //   style: StyleOf3dButton(
+                      //     backColor: Colors.transparent,
+                      //     topColor: idxColorButton,
+                      //     borderRadius: BorderRadius.only(),
+                      //   ),
+                      //   height: height / 11,
+                      //   width: width / 10,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       print('Maj : $activeMaj');
+                      //       visibilityidx = 1;
+                      //     });
+                      //   },
+                      //   child: Text(
+                      //     "a",
+                      //     style: GoogleFonts.lato(
+                      //       color: Colors.white,
+                      //       fontWeight: FontWeight.w700,
+                      //       fontSize: height / 16,
+                      //     ),
+                      //   ),
+                      // ),
+                      // Button3D(
+                      //   style: StyleOf3dButton(
+                      //     backColor: Colors.transparent,
+                      //     topColor: idxColorButton,
+                      //     borderRadius: BorderRadius.circular(0),
+                      //   ),
+                      //   height: height / 11,
+                      //   width: width / 10,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       visibilityidx = 2;
+                      //     });
+                      //   },
+                      //   child: Text(
+                      //     "a a",
+                      //     style: GoogleFonts.lato(
+                      //       color: Colors.white,
+                      //       fontWeight: FontWeight.w700,
+                      //       fontSize: height / 16,
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
+                      // Button3D(
+                      //   style: StyleOf3dButton(
+                      //     backColor: Colors.transparent,
+                      //     topColor: idxColorButton,
+                      //     borderRadius: BorderRadius.only(
+                      //       bottomRight: Radius.circular(20),
+                      //       topRight: Radius.circular(0),
+                      //     ),
+                      //   ),
+                      //   height: height / 11,
+                      //   width: width / 10,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       visibilityidx = 3;
+                      //     });
+                      //   },
+                      //   child: Text(
+                      //     "a a a",
+                      //     style: GoogleFonts.lato(
+                      //       color: Colors.white,
+                      //       fontWeight: FontWeight.w600,
+                      //       fontSize: height / 16,
+                      //     ),
+                      //   ),
+                      // ),
+                      SizedBox(
                         width: width / 10,
-                        onPressed: () {
-                          setState(() {
-                            print('Maj : $activeMaj');
+                        height: height / 10,
+                        child: ElevatedButton(
+                          child: Text(
+                            'a',
+                            style: TextStyle(
+                              fontSize: height / 20,
+                            ),
+                          ),
+                          onPressed: () {
                             visibilityidx = 1;
-                          });
-                        },
-                        child: Text(
-                          "a",
-                          style: GoogleFonts.lato(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: height / 16,
+                          },
+                          style: ButtonStyle(
+                            // elevation: MaterialStateProperty.all(20),
+                            //shadowColor: MaterialStateProperty.all(
+                            //Colors.black.withOpacity(1),
+                            //),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(0),
+                                  bottomLeft: Radius.circular(0),
+                                ),
+                                side:
+                                    BorderSide(color: Colors.grey, width: 0.5),
+                              ),
+                            ),
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed))
+                                  return Colors.green;
+                                return idxColorButton;
+                              },
+                            ),
                           ),
                         ),
                       ),
-                      Button3D(
-                        style: StyleOf3dButton(
-                             backColor: Colors.transparent,
-                          topColor: idxColorButton,
-                          borderRadius: BorderRadius.circular(0),
-                        ),
-                        height: height / 11,
+                      // SizedBox(
+                      //   width: width / 250,
+                      // ),
+
+                      SizedBox(
                         width: width / 10,
-                        onPressed: () {
-                          setState(() {
+                        height: height / 10,
+                        child: ElevatedButton(
+                          child: Text(
+                            'a a',
+                            style: TextStyle(
+                              fontSize: height / 20,
+                            ),
+                          ),
+                          onPressed: () {
                             visibilityidx = 2;
-                          });
-                        },
-                        child: Text(
-                          "a a",
-                          style: GoogleFonts.lato(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: height / 16,
+                          },
+                          style: ButtonStyle(
+                            //elevation: MaterialStateProperty.all(20),
+                            //shadowColor: MaterialStateProperty.all(
+                            //Colors.black.withOpacity(1),
+                            //),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                //borderRadius: BorderRadius.circular(6.0),
+                                side:
+                                    BorderSide(color: Colors.grey, width: 0.5),
+                              ),
+                            ),
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed))
+                                  return Colors.green;
+                                return idxColorButton;
+                              },
+                            ),
                           ),
                         ),
                       ),
-                      Button3D(
-                        style: StyleOf3dButton(
-                          backColor: Colors.transparent,
-                          topColor: idxColorButton,
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(20),
-                            topRight: Radius.circular(0),
+                      // SizedBox(
+                      //   width: width / 250,
+                      // ),
+                      SizedBox(
+                        width: width / 6,
+                        height: height / 10,
+                        child: ElevatedButton(
+                          child: Text(
+                            'a a a',
+                            style: TextStyle(
+                              fontSize: height / 20,
+                            ),
                           ),
-                        ),
-                        height: height / 11,
-                        width: width / 10,
-                        onPressed: () {
-                          setState(() {
+                          onPressed: () {
                             visibilityidx = 3;
-                          });
-                        },
-                        child: Text(
-                          "a a a",
-                          style: GoogleFonts.lato(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: height / 16,
+                          },
+                          style: ButtonStyle(
+                            //elevation: MaterialStateProperty.all(20),
+                            //shadowColor: MaterialStateProperty.all(
+                            //Colors.black.withOpacity(1),
+                            //),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(0),
+                                  bottomRight: Radius.circular(150),
+                                ),
+                                side:
+                                    BorderSide(color: Colors.grey, width: 0.5),
+                              ),
+                            ),
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed))
+                                  return Colors.green;
+                                return idxColorButton;
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  height: height / 9,
-                  width: width / 6,
-                  decoration: BoxDecoration(
-                    color: idxColorButton,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
+                Padding(
+                  padding: EdgeInsets.only(right: width / 7),
+                  child: Container(
+                    height: height / 9,
+                    width: width / 6,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 0.5,
+                          blurRadius: 10,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                      border: Border.all(color: Colors.grey, width: 0.5),
+                      color: idxColorButton,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: Text(
+                            " a",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: height / 16,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: width / 20,
+                          height: height / 24,
+                          child: SwitcherButton(
+                            value: false,
+                            offColor: Colors.grey,
+                            onColor: my_Violet,
+                            onChange: (value) {
+                              activeMaj = value;
+                              setState(() {
+                                if (activeMaj) {
+                                  letter_1 = letter_1.toUpperCase();
+                                  letter_2 = letter_2.toUpperCase();
+                                  letter_3 = letter_3.toUpperCase();
+                                } else {
+                                  letter_1 = letter_1.toLowerCase();
+                                  letter_2 = letter_2.toLowerCase();
+                                  letter_3 = letter_3.toLowerCase();
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            "A ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: height / 16,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        child: Text(
-                          " a",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: height / 16,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: SwitcherButton(
-                          value: false,
-                          offColor: Colors.grey,
-                          onColor: my_Violet,
-                          onChange: (value) {
-                            activeMaj = value;
-                            setState(() {
-                              if (activeMaj) {
-                                letter_1 = letter_1.toUpperCase();
-                                letter_2 = letter_2.toUpperCase();
-                                letter_3 = letter_3.toUpperCase();
-                              } else {
-                                letter_1 = letter_1.toLowerCase();
-                                letter_2 = letter_2.toLowerCase();
-                                letter_3 = letter_3.toLowerCase();
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          "A",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: height / 16,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
                 ),
                 Container(
-                  width: width / 10,
-                  height: height / 10,
+                  width: width / 9,
+                  height: height / 1,
                   decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 15,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(20),
+                      topLeft: Radius.circular(0),
+                      bottomLeft: Radius.circular(150),
                     ),
                     color: idxColorButton,
                   ),
                   child: SizedBox(
                     child: IconButton(
-                      //iconSize: 30,
+                      iconSize: height / 20,
                       icon: Icon(
                         Icons.settings,
                         color: Colors.white,
@@ -242,7 +400,3 @@ class _BoutonWidget extends State<BoutonWidget> {
     });
   }
 }
-
-
-
-

@@ -1,3 +1,4 @@
+import 'package:alphabet_app/list/letter_list.dart';
 import 'package:flutter/material.dart';
 import 'component/card_bouton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,11 +35,11 @@ class _MyHomePage extends State<MyHomePage> {
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-      if (idxColorBackgroundsave == null) {
-        idxColorBackgroundsave = 'F5F5F5';
+      idxBackSave = (prefs.getString('idx_color_background_values'));
+      if (idxBackSave == null) {
+        idxBackSave = 'FFF5F5F5';
       }
-      valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      valueback = int.parse(idxBackSave, radix: 16);
       idxColorBackground = new Color(valueback);
     });
   }

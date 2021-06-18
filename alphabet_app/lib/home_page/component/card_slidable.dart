@@ -40,14 +40,22 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
           for (int i = 0; i < widget.visibility; i++)
             new SwipeGestureRecognizer(
               child: Container(
-                margin: new EdgeInsets.symmetric(horizontal: 3.0),
+                margin: new EdgeInsets.symmetric(horizontal: width / 200),
                 height: height / 3,
                 width: width / 4,
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
                   //shape: BoxShape.circle,
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
-                  border: Border.all(color: idxColorButton, width: 2),
+                  border: Border.all(color: Colors.white, width: 1.5),
                   // boxShadow: [
                   //   BoxShadow(color: Colors.white, spreadRadius: 1),
                   // ],
@@ -68,13 +76,15 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                 (letter_1 == 'Y'))
                             ? Text(
                                 '$letter_1',
-                                style:
-                                    TextStyle(fontSize: height / 4, color: Colors.blue),
+                                style: TextStyle(
+                                    fontSize: height / 4,
+                                    color: idxColorVoyelle),
                               )
                             : Text(
                                 '$letter_1',
-                                style:
-                                    TextStyle(fontSize: height / 4, color: Colors.red),
+                                style: TextStyle(
+                                    fontSize: height / 4,
+                                    color: idxColorConsonne),
                               )
                         : (i == 1)
                             ? ((letter_2 == 'a') ||
@@ -92,12 +102,14 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                 ? Text(
                                     '$letter_2',
                                     style: TextStyle(
-                                        fontSize: height / 4, color: Colors.blue),
+                                        fontSize: height / 4,
+                                        color: idxColorVoyelle),
                                   )
                                 : Text(
                                     '$letter_2',
                                     style: TextStyle(
-                                        fontSize: height / 4, color: Colors.red),
+                                        fontSize: height / 4,
+                                        color: idxColorConsonne),
                                   )
                             : ((letter_3 == 'a') ||
                                     (letter_3 == 'e') ||
@@ -114,12 +126,14 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                 ? Text(
                                     '$letter_3',
                                     style: TextStyle(
-                                        fontSize: height / 4, color: Colors.blue),
+                                        fontSize: height / 4,
+                                        color: idxColorVoyelle),
                                   )
                                 : Text(
                                     '$letter_3',
                                     style: TextStyle(
-                                        fontSize: height / 4, color: Colors.red),
+                                        fontSize: height / 4,
+                                        color: idxColorConsonne),
                                   )),
               ),
               onSwipeDown: () {
@@ -146,14 +160,25 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               },
             ),
           Padding(
-            padding: EdgeInsets.only(top: height / 2, ),
+            padding: EdgeInsets.only(top: width / 7, left: height / 20),
             child: Container(
+              height: height / 10,
+              width: height / 10,
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
                 border: Border.all(color: idxColorButton, width: 2),
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(50),
               ),
               child: IconButton(
+                  iconSize: height / 20,
                   icon: Icon(
                     Icons.volume_up,
                     color: Colors.black,
@@ -195,6 +220,23 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       } else {
         letter_3 = alphabet[indiceletter_3];
       }
+      idxVoySave = (prefs.getString('idx_color_voyelle_values'));
+      if (idxVoySave == null) {
+        idxVoySave = 'FF0b16e2';
+      }
+      valuevoy = int.parse(idxVoySave, radix: 16);
+      idxColorVoyelle = new Color(valuevoy);
+
+      idxConsSave = (prefs.getString('idx_color_consonne_values'));
+      if (idxConsSave == null) {
+        idxConsSave = 'FFff0000';
+      }
+      valuecons = int.parse(idxConsSave, radix: 16);
+      idxColorConsonne = new Color(valuecons);
+
+      print('amine');
+      print(idxColorVoyelle);
+      print(idxColorConsonne);
     });
   }
 
