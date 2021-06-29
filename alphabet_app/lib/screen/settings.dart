@@ -50,10 +50,8 @@ class _SettingPageState extends State<SettingPage> {
         currentColor = color;
         String colorString = currentColor.toString();
         idxConsSave = colorString.split('(0x')[1].split(')')[0];
-        print(idxConsSave);
         valueback = int.parse(idxConsSave, radix: 16);
         idxColorConsonne = new Color(valueback);
-        print(idxColorConsonne);
       }
     });
   }
@@ -359,7 +357,6 @@ class _SettingPageState extends State<SettingPage> {
     setState(() {
       idxBtnSave = (prefs.getString('idx_color_button_values'));
       if (idxBtnSave == null) {
-        print('null');
         idxBtnSave = 'FF8333e8';
       }
       value = int.parse(idxBtnSave, radix: 16);
@@ -370,7 +367,7 @@ class _SettingPageState extends State<SettingPage> {
         idxBackSave = 'ffF5F5F5';
       }
       valueback = int.parse(idxBackSave, radix: 16);
-      idxColorButton = new Color(valueback);
+      idxColorBackground = new Color(valueback);
 
       idxVoySave = (prefs.getString('idx_color_voyelle_values'));
       if (idxVoySave == null) {
@@ -391,7 +388,6 @@ class _SettingPageState extends State<SettingPage> {
   _saveString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (idxBtnSave == null) {
-      print("null");
       idxBtnSave = 'ff8333e8';
     }
     prefs.setString('idx_color_button_values', idxBtnSave);

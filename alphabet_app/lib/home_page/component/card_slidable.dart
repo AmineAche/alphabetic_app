@@ -7,8 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 import '../../color_list.dart';
+import '../../list/letter_list.dart';
+import '../../list/letter_list.dart';
+import '../../list/letter_list.dart';
+import '../../list/letter_list.dart';
 import '../../list/list_audio.dart';
 import '../../list/letter_list.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'bottom_bar.dart';
 
 class FavoriteWidget extends StatefulWidget {
@@ -21,12 +26,14 @@ class FavoriteWidget extends StatefulWidget {
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  AudioCache audioCache = AudioCache();
   void initState() {
     _loadString();
     _load();
     super.initState();
   }
+
+  AudioCache audioCache = AudioCache();
+  final FlutterTts flutterTts = FlutterTts();
 
   @override
   Widget build(BuildContext context) {
@@ -537,7 +544,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     });
   }
 
-  void sound() {
+  Future sound() async {
     if (widget.visibility == 3) {
       lettertot = letter_1 + letter_2 + letter_3;
     } else if (widget.visibility == 2) {
@@ -547,9 +554,15 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     }
 
     lettertot = lettertot.toLowerCase();
+    //print(lettertot);
+    //print(await flutterTts.getVoices);
+    await flutterTts.setVoice("fr-fr-x-frc-local");
+    await flutterTts.setLanguage("fr-FR");
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(lettertot);
 
-    if (audio.contains(lettertot + "_file.mp3")) {
-      audioCache.play(lettertot + "_file.mp3");
-    }
+    // if (audio.contains(lettertot + "_file.mp3")) {
+    //   audioCache.play(lettertot + "_file.mp3");
+    // }
   }
 }
