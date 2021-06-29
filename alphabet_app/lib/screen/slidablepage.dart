@@ -22,6 +22,22 @@ class _SlidePageState extends State<SlidePage> {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    precacheImage(image1A.image, context);
+    precacheImage(image1E.image, context);
+    precacheImage(image1I.image, context);
+    precacheImage(image1O.image, context);
+    precacheImage(image1U.image, context);
+
+    precacheImage(image2A.image, context);
+    precacheImage(image2E.image, context);
+    precacheImage(image2I.image, context);
+    precacheImage(image2O.image, context);
+    precacheImage(image2U.image, context);
+    super.didChangeDependencies();
+  }
+
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -54,6 +70,7 @@ class _SlidePageState extends State<SlidePage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     lettre = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       backgroundColor: idxColorBackground,
       body: Column(
@@ -233,24 +250,35 @@ class _SlidePageState extends State<SlidePage> {
                   height: (8 * height) / 10,
 
                   alignment: Alignment.center, // This is needed
-                  child: Image.asset(
-                    (onetimesound == 1)
-                        ? "assets/fleches/Fleches_1_A.png"
-                        : (onetimesound == 2)
-                            ? "assets/fleches/Fleches_1_E.png"
-                            : (onetimesound == 3)
-                                ? "assets/fleches/Fleches_1_I.png"
-                                : (onetimesound == 4)
-                                    ? "assets/fleches/Fleches_1_O.png"
-                                    : (onetimesound == 5)
-                                        ? "assets/fleches/Fleches_1_U.png"
-                                        : "assets/fleches/Fleches_1.png",
+                  child: (onetimesound == 1)
+                      ? image1A
+                      : (onetimesound == 2)
+                          ? image1E
+                          : (onetimesound == 3)
+                              ? image1I
+                              : (onetimesound == 4)
+                                  ? image1O
+                                  : (onetimesound == 5)
+                                      ? image1U
+                                      : image1,
+                  // child: Image.asset(
+                  //   (onetimesound == 1)
+                  //       ? "assets/fleches/Fleches_1_A.png"
+                  //       : (onetimesound == 2)
+                  //           ? "assets/fleches/Fleches_1_E.png"
+                  //           : (onetimesound == 3)
+                  //               ? "assets/fleches/Fleches_1_I.png"
+                  //               : (onetimesound == 4)
+                  //                   ? "assets/fleches/Fleches_1_O.png"
+                  //                   : (onetimesound == 5)
+                  //                       ? "assets/fleches/Fleches_1_U.png"
+                  //                       : "assets/fleches/Fleches_1.png",
 
-                    fit: BoxFit.contain,
-                    height: (7 * height) / 10,
+                  //   fit: BoxFit.contain,
+                  //   height: (7 * height) / 10,
 
-                    //width: 300,
-                  ),
+                  //   //width: 300,
+                  // ),
                 ),
                 Container(
                   child: Column(
@@ -421,24 +449,35 @@ class _SlidePageState extends State<SlidePage> {
                   height: (8 * height) / 10,
 
                   alignment: Alignment.center, // This is needed
-                  child: Image.asset(
-                    (onetimesound == 1 && etape == 2)
-                        ? "assets/fleches/Fleches_2_A.png"
-                        : (onetimesound == 2 && etape == 2)
-                            ? "assets/fleches/Fleches_2_E.png"
-                            : (onetimesound == 3 && etape == 2)
-                                ? "assets/fleches/Fleches_2_I.png"
-                                : (onetimesound == 4 && etape == 2)
-                                    ? "assets/fleches/Fleches_2_O.png"
-                                    : (onetimesound == 5 && etape == 2)
-                                        ? "assets/fleches/Fleches_2_U.png"
-                                        : "assets/fleches/Fleches_2.png",
+                  child: (onetimesound == 1 && etape == 2)
+                      ? image2A
+                      : (onetimesound == 2 && etape == 2)
+                          ? image2E
+                          : (onetimesound == 3 && etape == 2)
+                              ? image2I
+                              : (onetimesound == 4 && etape == 2)
+                                  ? image2O
+                                  : (onetimesound == 5 && etape == 2)
+                                      ? image2U
+                                      : image2,
+                  // child: Image.asset(
+                  //   (onetimesound == 1 && etape == 2)
+                  //       ? "assets/fleches/Fleches_2_A.png"
+                  //       : (onetimesound == 2 && etape == 2)
+                  //           ? "assets/fleches/Fleches_2_E.png"
+                  //           : (onetimesound == 3 && etape == 2)
+                  //               ? "assets/fleches/Fleches_2_I.png"
+                  //               : (onetimesound == 4 && etape == 2)
+                  //                   ? "assets/fleches/Fleches_2_O.png"
+                  //                   : (onetimesound == 5 && etape == 2)
+                  //                       ? "assets/fleches/Fleches_2_U.png"
+                  //                       : "assets/fleches/Fleches_2.png",
 
-                    fit: BoxFit.contain,
-                    height: (7 * height) / 10,
+                  //   fit: BoxFit.contain,
+                  //   height: (7 * height) / 10,
 
-                    //width: 300,
-                  ),
+                  //   //width: 300,
+                  // ),
                 ),
                 Container(
                   child: Column(
