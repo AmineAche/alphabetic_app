@@ -1,13 +1,9 @@
-import 'package:alphabet_app/list/letter_list.dart';
 import 'package:flutter/material.dart';
 import 'component/card_bouton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../color_list.dart';
-
-String idxColorBackgroundsave = 'F5F5F5';
-int valueback = int.parse(idxColorBackgroundsave, radix: 16);
-Color idxColorBackground = new Color(valueback);
+import '../list/letter_list.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -37,10 +33,12 @@ class _MyHomePage extends State<MyHomePage> {
     setState(() {
       idxBackSave = (prefs.getString('idx_color_background_values'));
       if (idxBackSave == null) {
-        idxBackSave = 'FFF5F5F5';
+        idxBackSave = 'ffF5F5F5';
       }
       valueback = int.parse(idxBackSave, radix: 16);
+      idxColorButton = new Color(valueback);
       idxColorBackground = new Color(valueback);
+      print("Color du background: " + idxColorBackground.toString());
     });
   }
 }

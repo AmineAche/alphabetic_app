@@ -24,6 +24,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   AudioCache audioCache = AudioCache();
   void initState() {
     _loadString();
+    _load();
     super.initState();
   }
 
@@ -32,6 +33,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     //Size size = MediaQuery.of(context).size;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    _load();
     _saveString();
     return Container(
       child: Row(
@@ -251,6 +253,18 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       prefs.setInt('indice', indiceletter_1);
       prefs.setInt('indice2', indiceletter_2);
       prefs.setInt('indice3', indiceletter_3);
+    });
+  }
+
+  Future _load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+      if (idxColorBackgroundsave == null) {
+        idxColorBackgroundsave = 'F5F5F5';
+      }
+      valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      idxColorBackground = new Color(valueback);
     });
   }
 
