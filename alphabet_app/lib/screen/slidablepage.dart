@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
 //import '../color_list.dart';
@@ -14,6 +15,7 @@ class SlidePage extends StatefulWidget {
 String lettre;
 
 class _SlidePageState extends State<SlidePage> {
+  final FlutterTts flutterTts = FlutterTts();
   AudioCache audioCache = AudioCache();
 
   @override
@@ -551,7 +553,7 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                         onTap: () {
-                          firstsound("va");
+                          firstsound(lettre + "a");
                         },
                       ),
                       new GestureDetector(
@@ -621,7 +623,7 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                         onTap: () {
-                          firstsound("ve");
+                          firstsound(lettre + "e");
                         },
                       ),
                       new GestureDetector(
@@ -691,7 +693,7 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                         onTap: () {
-                          firstsound("vi");
+                          firstsound(lettre + "i");
                         },
                       ),
                       new GestureDetector(
@@ -761,7 +763,7 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                         onTap: () {
-                          firstsound("vo");
+                          firstsound(lettre + "o");
                         },
                       ),
                       new GestureDetector(
@@ -831,7 +833,7 @@ class _SlidePageState extends State<SlidePage> {
                           ),
                         ),
                         onTap: () {
-                          firstsound("vu");
+                          firstsound(lettre + "u");
                         },
                       ),
                     ],
@@ -845,18 +847,24 @@ class _SlidePageState extends State<SlidePage> {
     );
   }
 
-  void firstsound(String letter) {
+  Future firstsound(String letter) async {
     print("Akhi t es dans le premier son");
-    if (audio.contains(letter + "_file.mp3")) {
-      print('Akhi t es rentré dans le if');
-      print(letter + "_file.mp3");
-      audioCache.play(letter + "_file.mp3");
-    } else {
-      print('Akhi t es pas rentré dans le if');
-    }
+    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    await flutterTts.setLanguage("fr-FR");
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(letter);
+
+    // if (audio.contains(letter + "_file.mp3")) {
+    //   print('Akhi t es rentré dans le if');
+    //   print(letter + "_file.mp3");
+    //   audioCache.play(letter + "_file.mp3");
+    //}
+    //   else {
+    //   print('Akhi t es pas rentré dans le if');
+    // }
   }
 
-  void case1lettre(double width) {
+  Future case1lettre(double width) async {
     // if (onetimesound == null) {
     //   onetimesound = 0;
     // }
@@ -868,9 +876,7 @@ class _SlidePageState extends State<SlidePage> {
       if (distancey < 30 && distancey > -(30)) {
         if ((0.00 <= tangente) && (tangente <= 0.11) && (onetimesound != 3)) {
           onetimesound = 3;
-          if (audio.contains("i_file.mp3")) {
-            audioCache.play("i_file.mp3");
-          }
+          await flutterTts.speak("i");
         }
       } else if (distancey < -(30)) {
         print("t es dans y < -30");
@@ -878,16 +884,12 @@ class _SlidePageState extends State<SlidePage> {
         if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 1)) {
           print("t es dans a");
           onetimesound = 1;
-          if (audio.contains("a_file.mp3")) {
-            audioCache.play("a_file.mp3");
-          }
+          await flutterTts.speak('a');
         }
         if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 2)) {
           print("t es dans e");
           onetimesound = 2;
-          if (audio.contains("e_file.mp3")) {
-            audioCache.play("e_file.mp3");
-          }
+          await flutterTts.speak("e");
         }
         print("t es a la fin de y < 0 et onetime sound = " +
             onetimesound.toString());
@@ -899,16 +901,12 @@ class _SlidePageState extends State<SlidePage> {
         if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 4)) {
           print("Tangentes = $tangente");
           onetimesound = 4;
-          if (audio.contains("o_file.mp3")) {
-            audioCache.play("o_file.mp3");
-          }
+          await flutterTts.speak('o');
         }
         if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 5)) {
           print("Tangentes = $tangente");
           onetimesound = 5;
-          if (audio.contains("u_file.mp3")) {
-            audioCache.play("u_file.mp3");
-          }
+          await flutterTts.speak("u");
         }
         print("t es a la fin de y > 0 et onetime sound = " +
             onetimesound.toString());
@@ -920,7 +918,7 @@ class _SlidePageState extends State<SlidePage> {
     }
   }
 
-  void duosound() {
+  Future duosound() async {
     if (distancex >= 420) {
       //Premieres cases sont au minimum a une distance de 100 et max a 235
       tangente = (distancey.abs() / distancex);
@@ -931,9 +929,7 @@ class _SlidePageState extends State<SlidePage> {
           if (onetimesound == 1) {
             onetimesound = 0;
             print("tu as emprunté le bon chemin 1");
-            if (audio.contains(lettre + "a_file.mp3")) {
-              audioCache.play(lettre + "a_file.mp3");
-            }
+            await flutterTts.speak(lettre + "a");
           } else {
             print("tu t es trompé de chemin 1");
             if (audio.contains("error.mp3")) {
@@ -945,9 +941,7 @@ class _SlidePageState extends State<SlidePage> {
           if (onetimesound == 2) {
             onetimesound = 0;
             print("tu as emprunté le bon chemin");
-            if (audio.contains(lettre + "e_file.mp3")) {
-              audioCache.play(lettre + "e_file.mp3");
-            }
+            await flutterTts.speak(lettre + "e");
           } else {
             print("tu t es trompé de chemin 2");
             if (audio.contains("error.mp3")) {
@@ -962,9 +956,7 @@ class _SlidePageState extends State<SlidePage> {
           if (onetimesound == 3) {
             onetimesound = 0;
             print("tu as emprunté le bon chemin");
-            if (audio.contains(lettre + "i_file.mp3")) {
-              audioCache.play(lettre + "i_file.mp3");
-            }
+            await flutterTts.speak(lettre + "i");
           } else {
             print("tu t es trompé de chemin 3");
             if (audio.contains("error.mp3")) {
@@ -976,9 +968,7 @@ class _SlidePageState extends State<SlidePage> {
           if (onetimesound == 4) {
             onetimesound = 0;
             print("tu as emprunté le bon chemin");
-            if (audio.contains(lettre + "o_file.mp3")) {
-              audioCache.play(lettre + "o_file.mp3");
-            }
+            await flutterTts.speak(lettre + "o");
           } else {
             print("tu t es trompé de chemin 4");
             if (audio.contains("error.mp3")) {

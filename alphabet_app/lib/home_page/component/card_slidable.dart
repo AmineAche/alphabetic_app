@@ -554,12 +554,62 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     }
 
     lettertot = lettertot.toLowerCase();
-    //print(lettertot);
+    print(lettertot);
     //print(await flutterTts.getVoices);
-    await flutterTts.setVoice("fr-fr-x-frc-local");
+    //await flutterTts.setVoice("fr-fr-x-frc-local");
+    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
     await flutterTts.setLanguage("fr-FR");
     await flutterTts.setPitch(1);
-    await flutterTts.speak(lettertot);
+
+    if (lettertot == "be") {
+      await flutterTts.speak("beu");
+    } else if (lettertot == "fe") {
+      await flutterTts.speak("feu");
+    } else if (lettertot == "ge") {
+      await flutterTts.speak("geu");
+    } else if (lettertot == "gue") {
+      await flutterTts.speak("gueu");
+    } else if (lettertot == "to") {
+      await flutterTts.speak("tau");
+    } else if (lettertot == "fo") {
+      await flutterTts.speak("fau");
+    } else if (lettertot == "ye") {
+      await flutterTts.speak("yeu");
+    } else if (lettertot == "ve") {
+      await flutterTts.speak("veut");
+    } else if (lettertot == "pe") {
+      await flutterTts.speak("peut");
+    } else if (lettertot == "ke") {
+      await flutterTts.speak("que");
+    } else if (lettertot == "sov") {
+      await flutterTts.speak("sove");
+    } else if (lettertot == "y") {
+      await flutterTts.speak("igrec");
+    } else if (lettertot == "aj") {
+      await flutterTts.speak("a je");
+    } else if (lettertot == "ap") {
+      await flutterTts.speak("apeux");
+    } else if (lettertot == "aq") {
+      await flutterTts.speak("hack");
+    } else if (lettertot == "av") {
+      await flutterTts.speak("have");
+    } else if (lettertot == "ave") {
+      await flutterTts.speak("have");
+    } else if (lettertot == "aw") {
+      await flutterTts.speak("a ou");
+    } else if (lettertot == "az") {
+      await flutterTts.speak("hazeu");
+    } else if (lettertot == "eb") {
+      await flutterTts.speak("aibeu");
+    } else if (lettertot == "ef") {
+      await flutterTts.speak("f");
+    } else if (lettertot == "eg") {
+      await flutterTts.speak("egg");
+    } else if (lettertot == "ei") {
+      await flutterTts.speak("ai");
+    } else {
+      await flutterTts.speak(lettertot);
+    }
 
     // if (audio.contains(lettertot + "_file.mp3")) {
     //   audioCache.play(lettertot + "_file.mp3");
