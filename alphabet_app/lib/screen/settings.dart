@@ -77,47 +77,53 @@ class _SettingPageState extends State<SettingPage> {
     _saveString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return DefaultTabController(
-      length: 1,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          //toolbarHeight: height / 6,
-          //leadingWidth: width / 10,
+    return Scaffold(
+      //length: 1,
+      //child: Scaffold(
+      //backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: width / 9,
+                  height: height / 10,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 15,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: Colors.grey[600], width: 0.5),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(0),
+                      bottomRight: Radius.circular(70),
+                    ),
+                    color: idxColorButton,
+                  ),
+                  child: SizedBox(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: width / 70),
+                      child: IconButton(
+                        iconSize: height / 20,
+                        icon: Icon(
+                          Icons.home,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.pushNamed(context, '/'),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            //backgroundColor: idxColorBackground,
 
-          elevation: 1,
-          automaticallyImplyLeading: false,
-          leading: Container(
-            //height: 5,
-            decoration: BoxDecoration(
-              color: idxColorButton,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            child: new IconButton(
-              icon: new Icon(Icons.home),
-              color: Colors.white,
-              onPressed: () => Navigator.pushNamed(
-                context,
-                '/',
-              ),
-            ),
-          ),
-          //backgroundColor: idxColorBackground,
-          bottom: TabBar(
-            labelColor: Colors.white,
-            tabs: <Widget>[
-              const Tab(
-                text: 'Couleurs',
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: <Widget>[
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -144,7 +150,7 @@ class _SettingPageState extends State<SettingPage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Select a color'),
+                                    title: Text('Choisir une couleur'),
                                     backgroundColor: Color(0xffdddddd),
                                     content: SingleChildScrollView(
                                       child: BlockPicker(
@@ -187,7 +193,7 @@ class _SettingPageState extends State<SettingPage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Select a color'),
+                                    title: Text('Choisir une couleur'),
                                     backgroundColor: Color(0xffdddddd),
                                     content: SingleChildScrollView(
                                       child: BlockPicker2(
@@ -247,7 +253,8 @@ class _SettingPageState extends State<SettingPage> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: Text('Select a color'),
+                                                title:
+                                                    Text('Choisir une couleur'),
                                                 backgroundColor:
                                                     Color(0xffdddddd),
                                                 content: SingleChildScrollView(
@@ -294,7 +301,8 @@ class _SettingPageState extends State<SettingPage> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: Text('Select a color'),
+                                                title:
+                                                    Text('Choisir une couleur'),
                                                 backgroundColor:
                                                     Color(0xffdddddd),
                                                 content: SingleChildScrollView(
@@ -334,7 +342,7 @@ class _SettingPageState extends State<SettingPage> {
                         resetColor();
                       },
                       child: const Text(
-                        'RESET',
+                        'REINITIALISER',
                       ),
                       color: Color(0xFFd5e5e4),
                       textColor: Colors.black,
@@ -346,8 +354,14 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
             ),
+            Container(),
           ],
         ),
+        //toolbarHeight: height / 6,
+        //leadingWidth: width / 10,
+
+        //elevation: 1,
+        //automaticallyImplyLeading: false,
       ),
     );
   }

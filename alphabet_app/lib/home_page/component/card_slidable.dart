@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_button/flutter_button.dart';
+//import 'package:flutter_sound_lite/flutter_sound.dart';
+//import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
@@ -7,11 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 import '../../color_list.dart';
-import '../../list/letter_list.dart';
-import '../../list/letter_list.dart';
-import '../../list/letter_list.dart';
-import '../../list/letter_list.dart';
-import '../../list/list_audio.dart';
 import '../../list/letter_list.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'bottom_bar.dart';
@@ -22,18 +19,28 @@ class FavoriteWidget extends StatefulWidget {
 
   final bool isMaj;
   final int visibility;
+
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
+  //AudioCache audioCache = AudioCache();
+  final FlutterTts flutterTts = FlutterTts();
+  //final recorder = SoundRecorder();
+
   void initState() {
     _loadString();
     _load();
+
     super.initState();
+    //  recorder.init();
   }
 
-  AudioCache audioCache = AudioCache();
-  final FlutterTts flutterTts = FlutterTts();
+  @override
+  void dispose() {
+    //  recorder.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,40 +175,79 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                 });
               },
             ),
-          Padding(
-            padding: EdgeInsets.only(top: width / 7, left: height / 20),
-            child: Container(
-              height: height / 10,
-              width: height / 10,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: width / 7, left: height / 20),
+                child: Container(
+                  height: height / 10,
+                  width: height / 10,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: idxColorButton, width: 2),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
                   ),
-                ],
-                border: Border.all(color: idxColorButton, width: 2),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
+                  child: IconButton(
+                      iconSize: height / 20,
+                      icon: Icon(
+                        Icons.volume_up,
+                        color: Colors.black,
+                      ),
+                      tooltip: 'Ecouter',
+                      onPressed: () {
+                        sound();
+                        // _getLanguages();
+                        // _getEngines();
+                        // _getDefaultEngine();
+                      }),
+                ),
               ),
-              child: IconButton(
-                  iconSize: height / 20,
-                  icon: Icon(
-                    Icons.volume_up,
-                    color: Colors.black,
-                  ),
-                  tooltip: 'Ecouter',
-                  onPressed: () {
-                    sound();
-                  }),
-            ),
+              // Padding(
+              //   padding: EdgeInsets.only(top: width / 7, left: height / 20),
+              //   child: Container(
+              //     height: height / 10,
+              //     width: height / 15,
+              //     child: buildStart(),
+              //   ),
+              // ),
+            ],
           ),
+          Container(
+              // child: buildStart(),
+              )
         ],
       ),
     );
   }
+
+  // Widget buildStart() {
+  //   final isRecording = recorder.isRecording;
+  //   final icon = isRecording ? Icons.stop : Icons.mic;
+  //   final text = isRecording ? Colors.red : Colors.white;
+  //   final onPrimary = isRecording ? Colors.white : Colors.black;
+
+  //   return ElevatedButton.icon(
+  //     style: ElevatedButton.styleFrom(
+  //         minimumSize: Size(175, 50),
+  //         primary: Colors.white,
+  //         onPrimary: Colors.black),
+  //     icon: Icon(Icons.mic),
+  //     label: Text(
+  //       "Start",
+  //     ),
+  //     onPressed: () async {
+  //       final isRecording = await recorder.toggleRecording();
+  //     },
+  //   );
+  // }
 
   _loadString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -262,6 +308,17 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       prefs.setInt('indice3', indiceletter_3);
     });
   }
+
+  // Future<dynamic> _getLanguages() => flutterTts.getLanguages;
+
+  // Future<dynamic> _getEngines() => flutterTts.getEngines;
+
+  // Future _getDefaultEngine() async {
+  //   var engine = await flutterTts.getDefaultEngine;
+  //   if (engine != null) {
+  //     print(engine);
+  //   }
+  // }
 
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -558,61 +615,61 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     //print(await flutterTts.getVoices);
     //await flutterTts.setVoice("fr-fr-x-frc-local");
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    // await flutterTts.synthesizeToFile(
+    //     "Hello World", Platform.isAndroid ? "tts.wav" : "tts.caf");
     await flutterTts.setLanguage("fr-FR");
     await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(1);
 
-    if (lettertot == "be") {
-      await flutterTts.speak("beu");
-    } else if (lettertot == "fe") {
-      await flutterTts.speak("feu");
-    } else if (lettertot == "ge") {
-      await flutterTts.speak("geu");
-    } else if (lettertot == "gue") {
-      await flutterTts.speak("gueu");
-    } else if (lettertot == "to") {
-      await flutterTts.speak("tau");
-    } else if (lettertot == "fo") {
-      await flutterTts.speak("fau");
-    } else if (lettertot == "ye") {
-      await flutterTts.speak("yeu");
-    } else if (lettertot == "ve") {
-      await flutterTts.speak("veut");
-    } else if (lettertot == "pe") {
-      await flutterTts.speak("peut");
-    } else if (lettertot == "ke") {
-      await flutterTts.speak("que");
-    } else if (lettertot == "sov") {
-      await flutterTts.speak("sove");
-    } else if (lettertot == "y") {
-      await flutterTts.speak("igrec");
-    } else if (lettertot == "aj") {
-      await flutterTts.speak("a je");
-    } else if (lettertot == "ap") {
-      await flutterTts.speak("apeux");
-    } else if (lettertot == "aq") {
-      await flutterTts.speak("hack");
-    } else if (lettertot == "av") {
-      await flutterTts.speak("have");
-    } else if (lettertot == "ave") {
-      await flutterTts.speak("have");
-    } else if (lettertot == "aw") {
-      await flutterTts.speak("a ou");
-    } else if (lettertot == "az") {
-      await flutterTts.speak("hazeu");
-    } else if (lettertot == "eb") {
-      await flutterTts.speak("aibeu");
-    } else if (lettertot == "ef") {
-      await flutterTts.speak("f");
-    } else if (lettertot == "eg") {
-      await flutterTts.speak("egg");
-    } else if (lettertot == "ei") {
-      await flutterTts.speak("ai");
+    Map phonetiques = {
+      "be": "beu",
+      "fe": "feu",
+      "ge": "geu",
+      "gue": "gueu",
+      "to": "tau",
+      "fo": "fau",
+      "ye": "yeu",
+      "ve": "veut",
+      "pe": "peut",
+      "ke": "que",
+      "sov": "sove",
+      "y": "ygrec",
+      "aj": "a je",
+      "ap": "apeux",
+      "aq": "hack",
+      "av": "have",
+      "aw": "a ou",
+      "az": "hazeu",
+      "eb": "aibeu",
+      "ef": "f",
+      "eg": "egg",
+      "ei": "ai"
+    };
+    MapEntry entry = phonetiques.entries.firstWhere(
+        (element) => element.key == '$lettertot',
+        orElse: () => null);
+
+    if (entry != null) {
+      await flutterTts.speak(entry.value);
+      print('key = ${entry.key}');
+      print('value = ${entry.value}');
     } else {
       await flutterTts.speak(lettertot);
+      print("pas dans la map");
     }
-
-    // if (audio.contains(lettertot + "_file.mp3")) {
-    //   audioCache.play(lettertot + "_file.mp3");
-    // }
   }
+
+  // Future<void> start({
+  //   String path = 'assets/',
+  //   AudioEncoder encoder = AudioEncoder.AAC,
+  //   int bitRate = 128000,
+  //   double samplingRate = 44100.0,
+  // }) {
+  //   return RecordPlatform.instance.start(
+  //     path: path,
+  //     encoder: encoder,
+  //     bitRate: bitRate,
+  //     samplingRate: samplingRate,
+  //   );
+  // }
 }

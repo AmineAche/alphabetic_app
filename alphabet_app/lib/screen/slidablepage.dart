@@ -76,7 +76,7 @@ class _SlidePageState extends State<SlidePage> {
     return Scaffold(
       backgroundColor: idxColorBackground,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: height / 10,
@@ -178,7 +178,7 @@ class _SlidePageState extends State<SlidePage> {
                         case1lettre(width);
                         //print(onetimesound);
                       } else if (etape == 1) {
-                        duosound();
+                        duosound(width);
                         //print(onetimesound);
                       }
                     });
@@ -211,7 +211,7 @@ class _SlidePageState extends State<SlidePage> {
                     width: height / 7,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(150),
-                      color: backLetterCase,
+                      color: Colors.white,
                       border: Border.all(color: Colors.white, width: 1),
                       boxShadow: [
                         BoxShadow(
@@ -302,7 +302,7 @@ class _SlidePageState extends State<SlidePage> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10),
-                            color: backLetterCase,
+                            color: Colors.white,
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
@@ -335,7 +335,7 @@ class _SlidePageState extends State<SlidePage> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10),
-                            color: backLetterCase,
+                            color: Colors.white,
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
@@ -366,7 +366,7 @@ class _SlidePageState extends State<SlidePage> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10),
-                            color: backLetterCase,
+                            color: Colors.white,
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
@@ -397,7 +397,7 @@ class _SlidePageState extends State<SlidePage> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10),
-                            color: backLetterCase,
+                            color: Colors.white,
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
@@ -428,7 +428,7 @@ class _SlidePageState extends State<SlidePage> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(10),
-                            color: backLetterCase,
+                            color: Colors.white,
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: Center(
@@ -507,7 +507,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -536,7 +536,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -577,7 +577,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -606,7 +606,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -647,7 +647,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -676,7 +676,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -717,7 +717,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -746,7 +746,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -787,7 +787,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -816,7 +816,7 @@ class _SlidePageState extends State<SlidePage> {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
-                                  color: backLetterCase,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white, width: 0.5),
                                 ),
@@ -865,9 +865,6 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future case1lettre(double width) async {
-    // if (onetimesound == null) {
-    //   onetimesound = 0;
-    // }
     if ((distancex >= ((width * 24.27) / 100)) &&
         (distancex <= ((width * 48.54) / 100))) {
       print("omg t es dans les premiers bails.");
@@ -918,72 +915,31 @@ class _SlidePageState extends State<SlidePage> {
     }
   }
 
-  Future duosound() async {
-    if (distancex >= 420) {
+  Future duosound(double width) async {
+    if (distancex >= ((width * 57.3) / 100)) {
       //Premieres cases sont au minimum a une distance de 100 et max a 235
-      tangente = (distancey.abs() / distancex);
-      //print("Tangente = $tangente");
-      if (distancey < 0) {
-        if ((0.33 <= tangente) && (tangente <= 0.58)) {
-          print(onetimesound);
-          if (onetimesound == 1) {
-            onetimesound = 0;
-            print("tu as emprunté le bon chemin 1");
-            await flutterTts.speak(lettre + "a");
-          } else {
-            print("tu t es trompé de chemin 1");
-            if (audio.contains("error.mp3")) {
-              audioCache.play("error.mp3");
-            }
-          }
-        }
-        if ((0.01 <= tangente) && (tangente <= 0.29)) {
-          if (onetimesound == 2) {
-            onetimesound = 0;
-            print("tu as emprunté le bon chemin");
-            await flutterTts.speak(lettre + "e");
-          } else {
-            print("tu t es trompé de chemin 2");
-            if (audio.contains("error.mp3")) {
-              print("tu t es trompé de chemin 2 ET T ES DANS KE IF");
-              audioCache.play("error.mp3");
-            }
-          }
-        }
-        etape = 0;
-      } else {
-        if ((0.01 <= tangente) && (tangente <= 0.21)) {
-          if (onetimesound == 3) {
-            onetimesound = 0;
-            print("tu as emprunté le bon chemin");
-            await flutterTts.speak(lettre + "i");
-          } else {
-            print("tu t es trompé de chemin 3");
-            if (audio.contains("error.mp3")) {
-              audioCache.play("error.mp3");
-            }
-          }
-        }
-        if ((0.26 <= tangente) && (tangente <= 0.49)) {
-          if (onetimesound == 4) {
-            onetimesound = 0;
-            print("tu as emprunté le bon chemin");
-            await flutterTts.speak(lettre + "o");
-          } else {
-            print("tu t es trompé de chemin 4");
-            if (audio.contains("error.mp3")) {
-              audioCache.play("error.mp3");
-            }
-          }
-        }
-        etape =
-            0; // L'etape a bien été réaliser, il faut maintenant repasser par les cases d avant.
+      if (onetimesound == 1) {
+        print("tu as emprunté le bon chemin 1");
+        await flutterTts.speak(lettre + "a");
+      } else if (onetimesound == 2) {
+        print("tu as emprunté le bon chemin");
+        await flutterTts.speak(lettre + "e");
+      } else if (onetimesound == 3) {
+        print("tu as emprunté le bon chemin");
+        await flutterTts.speak(lettre + "i");
+      } else if (onetimesound == 4) {
+        print("tu as emprunté le bon chemin");
+        await flutterTts.speak(lettre + "o");
+      } else if (onetimesound == 5) {
+        print("tu as emprunté le bon chemin");
+        await flutterTts.speak(lettre + "u");
       }
       etape = 2;
       //print("t es a la fin de duo sound et Onetimesound est maintenant egale a : ");
       //print(onetimesound);
-    } else {
       //print("Tu n est pas aller assez loin pour activer les 2 dernieres cases.");
+    } else {
+      //rien
     }
   }
 }

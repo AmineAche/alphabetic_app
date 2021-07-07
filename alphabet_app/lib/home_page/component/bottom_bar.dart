@@ -91,7 +91,7 @@ class _BottomBarState extends State<BottomBar> {
                 Navigator.pushNamed(context, '/slide', arguments: lettre);
               },
               child: Text(
-                "RELIABLE",
+                "SYLLABE",
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
