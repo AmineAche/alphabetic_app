@@ -3,6 +3,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
 //import '../color_list.dart';
+import '../home_page/component/card_slidable.dart';
 import '../constants.dart';
 import '../list/letter_list.dart';
 import '../list/list_audio.dart';
@@ -890,7 +891,6 @@ class _SlidePageState extends State<SlidePage> {
         }
         print("t es a la fin de y < 0 et onetime sound = " +
             onetimesound.toString());
-        etape = 1;
       } else if (distancey > 30) {
         print("t es dans y > 30");
         print("Tangentes = $tangente");
@@ -907,32 +907,99 @@ class _SlidePageState extends State<SlidePage> {
         }
         print("t es a la fin de y > 0 et onetime sound = " +
             onetimesound.toString());
-        etape =
-            1; // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
+        // Pour dire que l etape 1 est bien passé et que mtn on peut passer aux cases apres
       }
+      etape = 1;
     } else {
       //print('La personne doit aller jusqu aux 1ere cases.');
     }
   }
 
   Future duosound(double width) async {
+    Map phonetiques = {
+      "be": "beu",
+      "fe": "feu",
+      "ge": "geu",
+      "gue": "gueu",
+      "to": "tau",
+      "fo": "fau",
+      "ye": "yeu",
+      "ve": "veut",
+      "pe": "peut",
+      "ke": "que",
+      "sov": "sove",
+      "y": "ygrec",
+      "aj": "a je",
+      "ap": "apeux",
+      "aq": "hack",
+      "av": "have",
+      "aw": "a ou",
+      "az": "hazeu",
+      "eb": "aibeu",
+      "ef": "f",
+      "eg": "egg",
+      "ei": "ai"
+    };
+
+    MapEntry entryA = phonetiques.entries.firstWhere(
+        (element) => element.key == lettre + 'a',
+        orElse: () => null);
+
+    MapEntry entryE = phonetiques.entries.firstWhere(
+        (element) => element.key == lettre + 'e',
+        orElse: () => null);
+
+    MapEntry entryI = phonetiques.entries.firstWhere(
+        (element) => element.key == lettre + 'i',
+        orElse: () => null);
+
+    MapEntry entryO = phonetiques.entries.firstWhere(
+        (element) => element.key == lettre + 'o',
+        orElse: () => null);
+
+    MapEntry entryU = phonetiques.entries.firstWhere(
+        (element) => element.key == lettre + 'u',
+        orElse: () => null);
+
     if (distancex >= ((width * 57.3) / 100)) {
       //Premieres cases sont au minimum a une distance de 100 et max a 235
       if (onetimesound == 1) {
+        if (entryA != null) {
+          await flutterTts.speak(entryA.value);
+        } else {
+          await flutterTts.speak(lettre + "a");
+        }
         print("tu as emprunté le bon chemin 1");
-        await flutterTts.speak(lettre + "a");
+        //await flutterTts.speak(lettre + "a");
       } else if (onetimesound == 2) {
         print("tu as emprunté le bon chemin");
-        await flutterTts.speak(lettre + "e");
+        if (entryE != null) {
+          await flutterTts.speak(entryE.value);
+        } else {
+          await flutterTts.speak(lettre + "e");
+        }
+        //await flutterTts.speak(lettre + "e");
       } else if (onetimesound == 3) {
         print("tu as emprunté le bon chemin");
-        await flutterTts.speak(lettre + "i");
+        if (entryI != null) {
+          await flutterTts.speak(entryI.value);
+        } else {
+          await flutterTts.speak(lettre + "i");
+        }
       } else if (onetimesound == 4) {
         print("tu as emprunté le bon chemin");
-        await flutterTts.speak(lettre + "o");
+        if (entryO != null) {
+          await flutterTts.speak(entryO.value);
+        } else {
+          await flutterTts.speak(lettre + "o");
+        }
       } else if (onetimesound == 5) {
         print("tu as emprunté le bon chemin");
-        await flutterTts.speak(lettre + "u");
+        if (entryU != null) {
+          await flutterTts.speak(entryU.value);
+        } else {
+          await flutterTts.speak(lettre + "u");
+        }
       }
       etape = 2;
       //print("t es a la fin de duo sound et Onetimesound est maintenant egale a : ");
