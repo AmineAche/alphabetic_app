@@ -59,79 +59,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                   ),
                   child: Row(
                     children: [
-                      // Button3D(
-                      //   style: StyleOf3dButton(
-                      //     backColor: Colors.transparent,
-                      //     topColor: idxColorButton,
-                      //     borderRadius: BorderRadius.only(),
-                      //   ),
-                      //   height: height / 11,
-                      //   width: width / 10,
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       print('Maj : $activeMaj');
-                      //       visibilityidx = 1;
-                      //     });
-                      //   },
-                      //   child: Text(
-                      //     "a",
-                      //     style: GoogleFonts.lato(
-                      //       color: Colors.white,
-                      //       fontWeight: FontWeight.w700,
-                      //       fontSize: height / 16,
-                      //     ),
-                      //   ),
-                      // ),
-                      // Button3D(
-                      //   style: StyleOf3dButton(
-                      //     backColor: Colors.transparent,
-                      //     topColor: idxColorButton,
-                      //     borderRadius: BorderRadius.circular(0),
-                      //   ),
-                      //   height: height / 11,
-                      //   width: width / 10,
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       visibilityidx = 2;
-                      //     });
-                      //   },
-                      //   child: Text(
-                      //     "a a",
-                      //     style: GoogleFonts.lato(
-                      //       color: Colors.white,
-                      //       fontWeight: FontWeight.w700,
-                      //       fontSize: height / 16,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // Button3D(
-                      //   style: StyleOf3dButton(
-                      //     backColor: Colors.transparent,
-                      //     topColor: idxColorButton,
-                      //     borderRadius: BorderRadius.only(
-                      //       bottomRight: Radius.circular(20),
-                      //       topRight: Radius.circular(0),
-                      //     ),
-                      //   ),
-                      //   height: height / 11,
-                      //   width: width / 10,
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       visibilityidx = 3;
-                      //     });
-                      //   },
-                      //   child: Text(
-                      //     "a a a",
-                      //     style: GoogleFonts.lato(
-                      //       color: Colors.white,
-                      //       fontWeight: FontWeight.w600,
-                      //       fontSize: height / 16,
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(
                         width: width / 10,
                         height: height / 10,
@@ -146,17 +73,9 @@ class _BoutonWidget extends State<BoutonWidget> {
                             visibilityidx = 1;
                           },
                           style: ButtonStyle(
-                            // elevation: MaterialStateProperty.all(20),
-                            //shadowColor: MaterialStateProperty.all(
-                            //Colors.black.withOpacity(1),
-                            //),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(0),
-                                  bottomLeft: Radius.circular(0),
-                                ),
                                 side:
                                     BorderSide(color: Colors.grey, width: 0.5),
                               ),
@@ -172,10 +91,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   width: width / 250,
-                      // ),
-
                       SizedBox(
                         width: width / 10,
                         height: height / 10,
@@ -190,10 +105,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                             visibilityidx = 2;
                           },
                           style: ButtonStyle(
-                            //elevation: MaterialStateProperty.all(20),
-                            //shadowColor: MaterialStateProperty.all(
-                            //Colors.black.withOpacity(1),
-                            //),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -213,9 +124,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   width: width / 250,
-                      // ),
                       SizedBox(
                         width: width / 6,
                         height: height / 10,
@@ -230,10 +138,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                             visibilityidx = 3;
                           },
                           style: ButtonStyle(
-                            //elevation: MaterialStateProperty.all(20),
-                            //shadowColor: MaterialStateProperty.all(
-                            //Colors.black.withOpacity(1),
-                            //),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
