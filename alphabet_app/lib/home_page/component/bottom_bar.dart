@@ -192,38 +192,63 @@ class _BottomBarState extends State<BottomBar> {
     final isRecording = recorder.isRecording;
     final icon = isRecording ? Icons.stop : Icons.mic;
     // final text = isRecording ? 'STOP' : 'Start';
-    return SizedBox(
-      height: height / 8,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(idxColorButton),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey, width: 0.5),
-            ),
+    return Listener(
+      onPointerDown: (details) async {
+        final isRecording = await recorder._record();
+        setState(() {});
+        showTopSnackBar(
+          context,
+          CustomSnackBar.info(
+            message: "Enregistrement de la voix ",
           ),
-        ),
-        child: Icon(icon),
-        onPressed: () async {
-          final isRecording = await recorder.toggleRecording();
-          setState(() {});
-
-          // recorder.isRecording
-          //     ? Timer(Duration(seconds: 3), () async {
-          //         final isRecording = await recorder.toggleRecording();
-
-          //         print("Yeah, this line is printed after 3 seconds");
-          //       })
-          //     : null;
-          showTopSnackBar(
-            context,
-            CustomSnackBar.info(
-              message: recorder.isRecording
-                  ? "Enregistrement de la voix "
-                  : "Fin de l'enregistrement",
+        );
+      },
+      onPointerUp: (details) async {
+        final isRecording = await recorder._stop();
+        setState(() {});
+        showTopSnackBar(
+          context,
+          CustomSnackBar.info(message: "Fin de l'enregistrement"),
+        );
+      },
+      child: SizedBox(
+        width: width / 15,
+        height: height / 8,
+        child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(idxColorButton),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.grey, width: 0.5),
+                ),
+              ),
             ),
-          );
-        },
+            child: Icon(
+              icon,
+              size: height / 20,
+            ),
+            onPressed: () async {}
+            // onPressed: () async {
+            //   final isRecording = await recorder.toggleRecording();
+            //   setState(() {});
+
+            //   // recorder.isRecording
+            //   //     ? Timer(Duration(seconds: 3), () async {
+            //   //         final isRecording = await recorder.toggleRecording();
+
+            //   //         print("Yeah, this line is printed after 3 seconds");
+            //   //       })
+            //   //     : null;
+            //   showTopSnackBar(
+            //     context,
+            //     CustomSnackBar.info(
+            //       message: recorder.isRecording
+            //           ? "Enregistrement de la voix "
+            //           : "Fin de l'enregistrement",
+            //     ),
+            //   );
+            // },
+            ),
       ),
     );
   }
@@ -237,6 +262,7 @@ class _BottomBarState extends State<BottomBar> {
 
     return SizedBox(
       height: height / 8,
+      width: width / 15,
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(idxColorButton),
@@ -250,7 +276,10 @@ class _BottomBarState extends State<BottomBar> {
             ),
           ),
         ),
-        child: Icon(icon),
+        child: Icon(
+          icon,
+          size: height / 20,
+        ),
         onPressed: () async {
           // final isPlaying = await recorder._play();
           recorder.isRecording

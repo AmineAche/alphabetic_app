@@ -170,10 +170,7 @@ class _SlidePageState extends State<SlidePage> {
                     distancex = details.globalPosition.dx - initialx;
                     //print("Distance x : $distancex");
                     distancey = details.globalPosition.dy - initialy;
-                    print("Distance y : $distancey");
-                    print("Etape : $etape");
-                    print("onetimesound : $onetimesound");
-                    print("tangente : $tangente");
+
                     setState(() {
                       if (etape == 0) {
                         case1lettre(width);
@@ -185,8 +182,6 @@ class _SlidePageState extends State<SlidePage> {
                     });
                   },
                   onPanStart: (DragStartDetails details) {
-                    print('pan start');
-                    print("width: $width");
                     initialx = details.globalPosition.dx;
                     initialy = details.globalPosition.dy;
                     setState(() {
@@ -195,16 +190,12 @@ class _SlidePageState extends State<SlidePage> {
                     });
                   },
                   onPanEnd: (DragEndDetails details) {
-                    print('pan end'); // won't trigger
-
                     setState(() {
                       initialx = 0.0;
                       initialy = 0.0;
                       etape = 0;
                       onetimesound = 0;
                     });
-                    print("Distance final x : $distancex");
-                    print("Distance final y : $distancey");
                   },
                   child: Container(
                     margin: new EdgeInsets.symmetric(horizontal: 5.0),
@@ -248,9 +239,9 @@ class _SlidePageState extends State<SlidePage> {
                   // behavior: HitTestBehavior.translucent,
                 ),
                 Container(
-                  //color: Colors.red,
+                  // color: Colors.red,
                   //height: double.infinity,
-                  height: (8 * height) / 10,
+                  height: (8 * height) / 5,
 
                   alignment: Alignment.center, // This is needed
                   child: (onetimesound == 1)
@@ -448,6 +439,7 @@ class _SlidePageState extends State<SlidePage> {
                   ),
                 ),
                 Container(
+                  color: Colors.blue,
                   //height: double.infinity,
                   height: (8 * height) / 10,
 
@@ -463,6 +455,37 @@ class _SlidePageState extends State<SlidePage> {
                                   : (onetimesound == 5 && etape == 2)
                                       ? image2U
                                       : image2,
+                  // child: Column(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Container(
+                  //         color: Colors.red,
+                  //         height: height / 8,
+                  //         width: width / 10,
+                  //         child: Center(child: Text("-->"))),
+                  //     Container(
+                  //         color: Colors.red,
+                  //         height: height / 8,
+                  //         width: width / 10,
+                  //         child: Center(child: Text("-->"))),
+                  //     Container(
+                  //         color: Colors.red,
+                  //         height: height / 8,
+                  //         width: width / 10,
+                  //         child: Center(child: Text("-->"))),
+                  //     Container(
+                  //         color: Colors.red,
+                  //         height: height / 8,
+                  //         width: width / 10,
+                  //         child: Center(child: Text("-->"))),
+                  //     Container(
+                  //         color: Colors.red,
+                  //         height: height / 8,
+                  //         width: width / 10,
+                  //         child: Center(child: Text("-->"))),
+                  //   ],
+                  // ),
+
                   // child: Image.asset(
                   //   (onetimesound == 1 && etape == 2)
                   //       ? "assets/fleches/Fleches_2_A.png"
@@ -871,36 +894,31 @@ class _SlidePageState extends State<SlidePage> {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
+      print("tangente:" + tangente.toString());
       if (distancey < 30 && distancey > -(30)) {
         if ((0.00 <= tangente) && (tangente <= 0.11) && (onetimesound != 3)) {
           onetimesound = 3;
           await flutterTts.speak("i");
         }
       } else if (distancey < -(30)) {
-        print("t es dans y < -30");
         //   Les 2 cases au dessus ont un y négatif.
-        if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 1)) {
+        if ((0.48 <= tangente) && (tangente <= 0.75) && (onetimesound != 1)) {
           print("t es dans a");
           onetimesound = 1;
           await flutterTts.speak('a');
         }
-        if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 2)) {
+        if ((0.18 <= tangente) && (tangente <= 0.45) && (onetimesound != 2)) {
           print("t es dans e");
           onetimesound = 2;
           await flutterTts.speak("e");
         }
-        print("t es a la fin de y < 0 et onetime sound = " +
-            onetimesound.toString());
       } else if (distancey > 30) {
-        print("t es dans y > 30");
-        print("Tangentes = $tangente");
-        print("onetimesound = " + onetimesound.toString());
-        if ((0.18 <= tangente) && (tangente <= 0.35) && (onetimesound != 4)) {
+        if ((0.18 <= tangente) && (tangente <= 0.45) && (onetimesound != 4)) {
           print("Tangentes = $tangente");
           onetimesound = 4;
           await flutterTts.speak('o');
         }
-        if ((0.40 <= tangente) && (tangente <= 0.55) && (onetimesound != 5)) {
+        if ((0.48 <= tangente) && (tangente <= 0.75) && (onetimesound != 5)) {
           print("Tangentes = $tangente");
           onetimesound = 5;
           await flutterTts.speak("u");
