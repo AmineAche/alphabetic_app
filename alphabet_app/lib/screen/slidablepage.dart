@@ -889,7 +889,7 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future case1lettre(double width) async {
-    if (distancex >= ((width * 20) / 100)) {
+    if ((distancex >= ((width * 20) / 100))) {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
@@ -901,23 +901,23 @@ class _SlidePageState extends State<SlidePage> {
         }
       } else if (distancey < -(30)) {
         //   Les 2 cases au dessus ont un y négatif.
-        if ((0.48 <= tangente) && (tangente <= 0.75) && (onetimesound != 1)) {
+        if ((0.52 <= tangente) && (tangente <= 0.90) && (onetimesound != 1)) {
           print("t es dans a");
           onetimesound = 1;
           await flutterTts.speak('a');
         }
-        if ((0.18 <= tangente) && (tangente <= 0.45) && (onetimesound != 2)) {
+        if ((0.18 <= tangente) && (tangente <= 0.48) && (onetimesound != 2)) {
           print("t es dans e");
           onetimesound = 2;
           await flutterTts.speak("e");
         }
       } else if (distancey > 30) {
-        if ((0.18 <= tangente) && (tangente <= 0.45) && (onetimesound != 4)) {
+        if ((0.18 <= tangente) && (tangente <= 0.48) && (onetimesound != 4)) {
           print("Tangentes = $tangente");
           onetimesound = 4;
           await flutterTts.speak('o');
         }
-        if ((0.48 <= tangente) && (tangente <= 0.75) && (onetimesound != 5)) {
+        if ((0.52 <= tangente) && (tangente <= 0.90) && (onetimesound != 5)) {
           print("Tangentes = $tangente");
           onetimesound = 5;
           await flutterTts.speak("u");
