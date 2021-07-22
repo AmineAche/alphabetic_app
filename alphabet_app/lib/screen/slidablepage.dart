@@ -889,8 +889,7 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future case1lettre(double width) async {
-    if ((distancex >= ((width * 24.27) / 100)) &&
-        (distancex <= ((width * 48.54) / 100))) {
+    if (distancex >= ((width * 20) / 100)) {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);
