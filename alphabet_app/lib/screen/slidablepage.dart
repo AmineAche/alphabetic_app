@@ -3,17 +3,13 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
 //import '../color_list.dart';
-import '../home_page/component/card_slidable.dart';
 import '../constants.dart';
 import '../list/letter_list.dart';
-import '../list/list_audio.dart';
 
 class SlidePage extends StatefulWidget {
   @override
   _SlidePageState createState() => _SlidePageState();
 }
-
-String lettre;
 
 class _SlidePageState extends State<SlidePage> {
   final FlutterTts flutterTts = FlutterTts();
@@ -61,6 +57,8 @@ class _SlidePageState extends State<SlidePage> {
     });
   }
 
+  String lettre;
+  int indiceletter;
   var initialx;
   var initialy;
   var distancex;
@@ -72,7 +70,8 @@ class _SlidePageState extends State<SlidePage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    lettre = ModalRoute.of(context).settings.arguments;
+    indiceletter = ModalRoute.of(context).settings.arguments;
+    lettre = alphabet[indiceletter];
 
     return Scaffold(
       backgroundColor: idxColorBackground,
@@ -159,12 +158,6 @@ class _SlidePageState extends State<SlidePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  // onPanCancel: () {
-                  //   print('pan cancel');
-                  // },
-                  // onPanDown: (_) {
-                  //   print('pan down');
-                  // },
                   onPanUpdate: (DragUpdateDetails details) {
                     //print('pan update'); // won't trigger
                     distancex = details.globalPosition.dx - initialx;
@@ -197,6 +190,7 @@ class _SlidePageState extends State<SlidePage> {
                       onetimesound = 0;
                     });
                   },
+                  // child: SwipeGestureRecognizer(
                   child: Container(
                     margin: new EdgeInsets.symmetric(horizontal: 5.0),
                     height: height / 7,
@@ -216,27 +210,13 @@ class _SlidePageState extends State<SlidePage> {
                     ),
                     child: Center(
                       child: Text(
-                        lettre,
+                        "$lettre",
                         textAlign: TextAlign.center,
                         style:
                             TextStyle(fontSize: height / 12, color: Colors.red),
                       ),
                     ),
                   ),
-                  //   onPointerDown: (PointerDownEvent event) =>
-                  //     setState(() =>
-                  //      print("OnPointerDown  ==  $event"),
-                  //      ),
-                  // onPointerMove: (PointerMoveEvent event) =>
-                  //     setState((){
-                  //     print("PointerMoveEvent  ==  $event");
-                  //     }
-                  //      ),
-                  // onPointerUp: (PointerUpEvent event) =>
-                  //     setState(() =>
-                  //      print("PointerUpEvent  ==  $event"),
-                  //      ),
-                  // behavior: HitTestBehavior.translucent,
                 ),
                 Container(
                   // color: Colors.red,
@@ -255,191 +235,20 @@ class _SlidePageState extends State<SlidePage> {
                                   : (onetimesound == 5)
                                       ? image1U
                                       : image1,
-                  // child: Image.asset(
-                  //   (onetimesound == 1)
-                  //       ? "assets/fleches/Fleches_1_A.png"
-                  //       : (onetimesound == 2)
-                  //           ? "assets/fleches/Fleches_1_E.png"
-                  //           : (onetimesound == 3)
-                  //               ? "assets/fleches/Fleches_1_I.png"
-                  //               : (onetimesound == 4)
-                  //                   ? "assets/fleches/Fleches_1_O.png"
-                  //                   : (onetimesound == 5)
-                  //                       ? "assets/fleches/Fleches_1_U.png"
-                  //                       : "assets/fleches/Fleches_1.png",
-
-                  //   fit: BoxFit.contain,
-                  //   height: (7 * height) / 10,
-
-                  //   //width: 300,
-                  // ),
                 ),
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      new GestureDetector(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: height / 8,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'a',
-                              style: TextStyle(
-                                fontSize: height / 11,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound("a");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: height / 8,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'e',
-                              style: TextStyle(
-                                  fontSize: height / 11, color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound("e");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: height / 8,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'i',
-                              style: TextStyle(
-                                  fontSize: height / 11, color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound("i");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: height / 8,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'o',
-                              style: TextStyle(
-                                  fontSize: height / 11, color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound("o");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          height: height / 8,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'u',
-                              style: TextStyle(
-                                  fontSize: height / 11, color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound("u");
-                        },
-                      ),
+                      Colonne_1("a", height, width),
+                      Colonne_1("e", height, width),
+                      Colonne_1("i", height, width),
+                      Colonne_1("o", height, width),
+                      Colonne_1("u", height, width),
                     ],
                   ),
                 ),
                 Container(
-                  color: Colors.blue,
                   //height: double.infinity,
                   height: (8 * height) / 10,
 
@@ -455,411 +264,16 @@ class _SlidePageState extends State<SlidePage> {
                                   : (onetimesound == 5 && etape == 2)
                                       ? image2U
                                       : image2,
-                  // child: Column(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Container(
-                  //         color: Colors.red,
-                  //         height: height / 8,
-                  //         width: width / 10,
-                  //         child: Center(child: Text("-->"))),
-                  //     Container(
-                  //         color: Colors.red,
-                  //         height: height / 8,
-                  //         width: width / 10,
-                  //         child: Center(child: Text("-->"))),
-                  //     Container(
-                  //         color: Colors.red,
-                  //         height: height / 8,
-                  //         width: width / 10,
-                  //         child: Center(child: Text("-->"))),
-                  //     Container(
-                  //         color: Colors.red,
-                  //         height: height / 8,
-                  //         width: width / 10,
-                  //         child: Center(child: Text("-->"))),
-                  //     Container(
-                  //         color: Colors.red,
-                  //         height: height / 8,
-                  //         width: width / 10,
-                  //         child: Center(child: Text("-->"))),
-                  //   ],
-                  // ),
-
-                  // child: Image.asset(
-                  //   (onetimesound == 1 && etape == 2)
-                  //       ? "assets/fleches/Fleches_2_A.png"
-                  //       : (onetimesound == 2 && etape == 2)
-                  //           ? "assets/fleches/Fleches_2_E.png"
-                  //           : (onetimesound == 3 && etape == 2)
-                  //               ? "assets/fleches/Fleches_2_I.png"
-                  //               : (onetimesound == 4 && etape == 2)
-                  //                   ? "assets/fleches/Fleches_2_O.png"
-                  //                   : (onetimesound == 5 && etape == 2)
-                  //                       ? "assets/fleches/Fleches_2_U.png"
-                  //                       : "assets/fleches/Fleches_2.png",
-
-                  //   fit: BoxFit.contain,
-                  //   height: (7 * height) / 10,
-
-                  //   //width: 300,
-                  // ),
                 ),
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      new GestureDetector(
-                        child: Container(
-                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    lettre,
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'a',
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound(lettre + "a");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    lettre,
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'e',
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound(lettre + "e");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    lettre,
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'i',
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound(lettre + "i");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    lettre,
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'o',
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound(lettre + "o");
-                        },
-                      ),
-                      new GestureDetector(
-                        child: Container(
-                          padding: new EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    lettre,
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 2.0),
-                                height: height / 8,
-                                width: width / 10,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white, width: 0.5),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'u',
-                                    style: TextStyle(
-                                        fontSize: height / 11,
-                                        color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          firstsound(lettre + "u");
-                        },
-                      ),
+                      Colonne_2("a", height, width),
+                      Colonne_2("e", height, width),
+                      Colonne_2("i", height, width),
+                      Colonne_2("o", height, width),
+                      Colonne_2("u", height, width),
                     ],
                   ),
                 ),
@@ -871,25 +285,138 @@ class _SlidePageState extends State<SlidePage> {
     );
   }
 
+  Widget Colonne_1(String lettreUse, double height, double width) {
+    return new GestureDetector(
+      child: Container(
+        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+        height: height / 8,
+        width: width / 10,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 1), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          border: Border.all(color: Colors.white, width: 0.5),
+        ),
+        child: Center(
+          child: Text(
+            '$lettreUse',
+            style: TextStyle(
+              fontSize: height / 11,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      ),
+      onTap: () {
+        firstsound("$lettreUse");
+      },
+    );
+  }
+
+  Widget Colonne_2(String lettreUse, double height, double width) {
+    return new GestureDetector(
+      child: Container(
+        padding: new EdgeInsets.symmetric(horizontal: 0.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: new EdgeInsets.symmetric(horizontal: 2.0),
+              height: height / 8,
+              width: width / 10,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 1), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                border: Border.all(color: Colors.white, width: 0.5),
+              ),
+              child: Center(
+                child: Text(
+                  lettre,
+                  style: TextStyle(fontSize: height / 11, color: Colors.red),
+                ),
+              ),
+            ),
+            Container(
+              margin: new EdgeInsets.symmetric(horizontal: 2.0),
+              height: height / 8,
+              width: width / 10,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 1), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                border: Border.all(color: Colors.white, width: 0.5),
+              ),
+              child: Center(
+                child: Text(
+                  '$lettreUse',
+                  style: TextStyle(fontSize: height / 11, color: Colors.blue),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        firstsound(lettre + lettreUse);
+      },
+    );
+  }
+
   Future firstsound(String letter) async {
     print("Akhi t es dans le premier son");
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
     await flutterTts.setLanguage("fr-FR");
     await flutterTts.setPitch(1);
     await flutterTts.speak(letter);
+  }
 
-    // if (audio.contains(letter + "_file.mp3")) {
-    //   print('Akhi t es rentré dans le if');
-    //   print(letter + "_file.mp3");
-    //   audioCache.play(letter + "_file.mp3");
-    //}
-    //   else {
-    //   print('Akhi t es pas rentré dans le if');
-    // }
+  void changeupletter() {
+    setState(() {
+      if (indiceletter >= 25) {
+        indiceletter = 0;
+      } else {
+        indiceletter += 1;
+      }
+      lettre = alphabet[indiceletter];
+    });
+  }
+
+  void changedownletter() {
+    setState(() {
+      if (indiceletter <= 0) {
+        indiceletter = 25;
+      } else {
+        indiceletter -= 1;
+      }
+      lettre = alphabet[indiceletter];
+    });
   }
 
   Future case1lettre(double width) async {
-    if ((distancex >= ((width * 20) / 100))) {
+    if ((distancex >= ((width * 24.27) / 100)) &&
+        (distancex <= ((width * 48.54) / 100))) {
       print("omg t es dans les premiers bails.");
       //Premieres cases sont au minimum a une distance de 200 et max a 400
       tangente = (distancey.abs() / distancex);

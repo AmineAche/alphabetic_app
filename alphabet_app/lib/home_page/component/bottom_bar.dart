@@ -132,17 +132,22 @@ class _BottomBarState extends State<BottomBar> {
                 height: height / 8,
                 child: ElevatedButton(
                   onPressed: () {
+                    int indicelettre;
+                    indicelettre = indiceletter_1;
+
                     String lettre;
                     lettre = letter_1.toLowerCase();
+
                     if ((lettre == 'a') ||
                         (lettre == 'e') ||
                         (lettre == 'i') ||
                         (lettre == 'o') ||
                         (lettre == 'u') ||
                         (lettre == 'y')) {
-                      lettre = alphabet[indiceletter_1 + 1];
+                      indicelettre = indiceletter_1 + 1;
                     }
-                    Navigator.pushNamed(context, '/slide', arguments: lettre);
+                    Navigator.pushNamed(context, '/slide',
+                        arguments: indicelettre);
                   },
                   child: Text(
                     "SYLLABE",

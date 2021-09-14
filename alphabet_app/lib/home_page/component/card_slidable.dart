@@ -617,9 +617,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
     // await flutterTts.synthesizeToFile(
     //     "Hello World", Platform.isAndroid ? "tts.wav" : "tts.caf");
-    await flutterTts.setLanguage("fr-FR");
+    //await flutterTts.setLanguage("fr-FR");
     await flutterTts.setPitch(1);
-    await flutterTts.setSpeechRate(1);
+    await flutterTts.setSpeechRate(0.5);
 
     Map phonetiques = {
       "be": "beu",
