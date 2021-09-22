@@ -28,19 +28,23 @@ bool isCons;
 
 int lettreidx = 0;
 int accentidx = 0;
+bool activeMaj = false;
+
+var voyelle = ['a', 'e', 'i', 'o', 'u', 'y'];
 
 var voyelleaccent = [
-  'a',
-  'e',
-  'I',
-  'o',
-  'u',
-];
-var accent = [
-  '^',
-  '´',
-  '`',
-  '¨',
+  'à',
+  'â',
+  'é',
+  'è',
+  'ê',
+  'ë',
+  'î',
+  'ï',
+  'ô',
+  'ù',
+  'û',
+  'ü'
 ];
 
 // Fin Accent Page variable
@@ -85,4 +89,41 @@ var alphabet = [
   'z',
 ];
 
+Map phonetiques = {
+  "be": "beu",
+  "co": "so",
+  "cu": "su",
+  "fe": "feu",
+  "fo": "fau",
+  "fu": "fut",
+  "ge": "gueu",
+  "gi": "ji",
+  "gue": "gueu",
+  "hu": "u",
+  "ke": "que",
+  "ko": "co",
+  "ku": "q",
+  "to": "tau",
+  "ye": "yeu",
+  "ve": "veut",
+  "pe": "peut",
+  "sov": "sove",
+  "y": "ygrec",
+  "aj": "a je",
+  "ap": "apeux",
+  "aq": "hack",
+  "av": "have",
+  "aw": "a ou",
+  "az": "hazeu",
+  "eb": "aibeu",
+  "ef": "f",
+  "qa": "ka",
+  "qo": "co",
+  "qe": "que",
+  "qu": "q",
+  "eg": "egg",
+  "we": "wé",
+  "xa": "géza",
+  "ei": "ai"
+};
 //Fin Home Page

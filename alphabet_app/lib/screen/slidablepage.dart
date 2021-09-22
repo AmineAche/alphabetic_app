@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audio_cache.dart';
-//import '../color_list.dart';
 import '../constants.dart';
 import '../list/letter_list.dart';
 
 class SlidePage extends StatefulWidget {
+  SlidePage({
+    Key key,
+    this.indiceletterbefore,
+    this.letterMaj,
+  }) : super(key: key);
+
+  final int indiceletterbefore;
+  final bool letterMaj;
+
   @override
   _SlidePageState createState() => _SlidePageState();
 }
@@ -57,8 +65,8 @@ class _SlidePageState extends State<SlidePage> {
     });
   }
 
+  int indiceletternow;
   String lettre;
-  int indiceletter;
   var initialx;
   var initialy;
   var distancex;
@@ -70,8 +78,6 @@ class _SlidePageState extends State<SlidePage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    indiceletter = ModalRoute.of(context).settings.arguments;
-    lettre = alphabet[indiceletter];
 
     return Scaffold(
       backgroundColor: idxColorBackground,
@@ -157,67 +163,155 @@ class _SlidePageState extends State<SlidePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onPanUpdate: (DragUpdateDetails details) {
-                    //print('pan update'); // won't trigger
-                    distancex = details.globalPosition.dx - initialx;
-                    //print("Distance x : $distancex");
-                    distancey = details.globalPosition.dy - initialy;
-
-                    setState(() {
-                      if (etape == 0) {
-                        case1lettre(width);
-                        //print(onetimesound);
-                      } else if (etape == 1) {
-                        duosound(width);
-                        //print(onetimesound);
-                      }
-                    });
-                  },
-                  onPanStart: (DragStartDetails details) {
-                    initialx = details.globalPosition.dx;
-                    initialy = details.globalPosition.dy;
-                    setState(() {
-                      //onetimesound = 1;
-                      firstsound(lettre);
-                    });
-                  },
-                  onPanEnd: (DragEndDetails details) {
-                    setState(() {
-                      initialx = 0.0;
-                      initialy = 0.0;
-                      etape = 0;
-                      onetimesound = 0;
-                    });
-                  },
-                  // child: SwipeGestureRecognizer(
-                  child: Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                    height: height / 7,
-                    width: height / 7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(150),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white, width: 1),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 5,
-                          offset: Offset(0, 0), // changes position of shadow
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          changedownletter();
+                        });
+                      },
+                      child: Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 10,
+                        width: height / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(150),
+                          color: Colors.white,
+                          border: Border.all(color: Colors.white, width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "$lettre",
-                        textAlign: TextAlign.center,
-                        style:
-                            TextStyle(fontSize: height / 12, color: Colors.red),
+                        child: Center(
+                          child: Icon(
+                            Icons.expand_less,
+                            color: Colors.pink,
+                            size: height / 12,
+                            semanticLabel:
+                                'Text to announce in accessibility modes',
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onPanUpdate: (DragUpdateDetails details) {
+                        distancex = details.globalPosition.dx - initialx;
+                        distancey = details.globalPosition.dy - initialy;
+
+                        setState(() {
+                          if (etape == 0) {
+                            case1lettre(width);
+                          } else if (etape == 1) {
+                            duosound(width);
+                          }
+                        });
+                      },
+                      onPanStart: (DragStartDetails details) {
+                        initialx = details.globalPosition.dx;
+                        initialy = details.globalPosition.dy;
+                        setState(() {
+                          if (indiceletternow == null) {
+                            lettre = alphabet[widget.indiceletterbefore];
+                          }
+                          firstsound(lettre);
+                        });
+                      },
+                      onPanEnd: (DragEndDetails details) {
+                        setState(() {
+                          initialx = 0.0;
+                          initialy = 0.0;
+                          etape = 0;
+                          onetimesound = 0;
+                        });
+                      },
+                      child: Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 7,
+                        width: height / 7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(150),
+                          color: Colors.white,
+                          border: Border.all(color: Colors.white, width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            (lettre == null)
+                                ? (widget.letterMaj)
+                                    ? alphabet[widget.indiceletterbefore]
+                                        .toUpperCase()
+                                    : alphabet[widget.indiceletterbefore]
+                                : (widget.letterMaj)
+                                    ? lettre.toUpperCase()
+                                    : lettre,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: height / 12, color: Colors.red),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          changeupletter();
+                        });
+                      },
+                      child: Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                        height: height / 10,
+                        width: height / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(150),
+                          color: Colors.white,
+                          border: Border.all(color: Colors.white, width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.expand_more,
+                            color: Colors.pink,
+                            size: height / 12,
+                            semanticLabel:
+                                'Text to announce in accessibility modes',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+
+                //),
                 Container(
                   // color: Colors.red,
                   //height: double.infinity,
@@ -306,7 +400,7 @@ class _SlidePageState extends State<SlidePage> {
         ),
         child: Center(
           child: Text(
-            '$lettreUse',
+            (activeMaj) ? lettreUse.toUpperCase() : lettreUse,
             style: TextStyle(
               fontSize: height / 11,
               color: Colors.blue,
@@ -346,7 +440,13 @@ class _SlidePageState extends State<SlidePage> {
               ),
               child: Center(
                 child: Text(
-                  lettre,
+                  (lettre == null)
+                      ? (widget.letterMaj)
+                          ? alphabet[widget.indiceletterbefore].toUpperCase()
+                          : alphabet[widget.indiceletterbefore]
+                      : (widget.letterMaj)
+                          ? lettre.toUpperCase()
+                          : lettre,
                   style: TextStyle(fontSize: height / 11, color: Colors.red),
                 ),
               ),
@@ -370,7 +470,7 @@ class _SlidePageState extends State<SlidePage> {
               ),
               child: Center(
                 child: Text(
-                  '$lettreUse',
+                  (activeMaj) ? lettreUse.toUpperCase() : lettreUse,
                   style: TextStyle(fontSize: height / 11, color: Colors.blue),
                 ),
               ),
@@ -385,32 +485,73 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future firstsound(String letter) async {
+    MapEntry entry = phonetiques.entries
+        .firstWhere((element) => element.key == letter, orElse: () => null);
+
+    if (entry != null) {
+      await flutterTts.speak(entry.value);
+    } else {
+      await flutterTts.speak(letter);
+    }
+
     print("Akhi t es dans le premier son");
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
     await flutterTts.setLanguage("fr-FR");
     await flutterTts.setPitch(1);
-    await flutterTts.speak(letter);
   }
 
   void changeupletter() {
     setState(() {
-      if (indiceletter >= 25) {
-        indiceletter = 0;
-      } else {
-        indiceletter += 1;
+      if (indiceletternow == null) {
+        indiceletternow = widget.indiceletterbefore;
       }
-      lettre = alphabet[indiceletter];
+
+      print("avant = " + indiceletternow.toString());
+      if (indiceletternow >= 25) {
+        indiceletternow = 0;
+      } else {
+        indiceletternow++;
+      }
+      lettre = alphabet[indiceletternow];
+      for (int i = 0; i < voyelle.length; i++) {
+        if (lettre == voyelle[i]) {
+          print("voyelle");
+          if (indiceletternow >= 25) {
+            indiceletternow = 0;
+          } else {
+            indiceletternow++;
+          }
+        }
+      }
+      lettre = alphabet[indiceletternow];
+      print("apres = " + indiceletternow.toString());
     });
   }
 
   void changedownletter() {
     setState(() {
-      if (indiceletter <= 0) {
-        indiceletter = 25;
-      } else {
-        indiceletter -= 1;
+      if (indiceletternow == null) {
+        indiceletternow = widget.indiceletterbefore;
       }
-      lettre = alphabet[indiceletter];
+      print("avant = " + indiceletternow.toString());
+      if (indiceletternow <= 0) {
+        indiceletternow = 25;
+      } else {
+        indiceletternow--;
+      }
+      lettre = alphabet[indiceletternow];
+      for (int i = 0; i < voyelle.length; i++) {
+        if (lettre == voyelle[i]) {
+          print("voyelle");
+          if (indiceletternow <= 0) {
+            indiceletternow = 25;
+          } else {
+            indiceletternow--;
+          }
+        }
+      }
+      lettre = alphabet[indiceletternow];
+      print("apres = " + indiceletternow.toString());
     });
   }
 
@@ -460,31 +601,6 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future duosound(double width) async {
-    Map phonetiques = {
-      "be": "beu",
-      "fe": "feu",
-      "ge": "geu",
-      "gue": "gueu",
-      "to": "tau",
-      "fo": "fau",
-      "ye": "yeu",
-      "ve": "veut",
-      "pe": "peut",
-      "ke": "que",
-      "sov": "sove",
-      "y": "ygrec",
-      "aj": "a je",
-      "ap": "apeux",
-      "aq": "hack",
-      "av": "have",
-      "aw": "a ou",
-      "az": "hazeu",
-      "eb": "aibeu",
-      "ef": "f",
-      "eg": "egg",
-      "ei": "ai"
-    };
-
     MapEntry entryA = phonetiques.entries.firstWhere(
         (element) => element.key == lettre + 'a',
         orElse: () => null);

@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_button/flutter_button.dart';
 import 'package:switcher_button/switcher_button.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
-import '../../color_list.dart';
-import '../../list/list_audio.dart';
 import '../../list/letter_list.dart';
 import 'bottom_bar.dart';
 import 'card_slidable.dart';
@@ -24,7 +18,6 @@ class _BoutonWidget extends State<BoutonWidget> {
     super.initState();
   }
 
-  bool activeMaj = false;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -64,7 +57,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                         height: height / 10,
                         child: ElevatedButton(
                           child: Text(
-                            'a',
+                            activeMaj ? 'A' : "a",
                             style: TextStyle(
                               fontSize: height / 20,
                             ),
@@ -96,7 +89,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                         height: height / 10,
                         child: ElevatedButton(
                           child: Text(
-                            'a a',
+                            activeMaj ? 'A A' : "a a",
                             style: TextStyle(
                               fontSize: height / 20,
                             ),
@@ -108,7 +101,6 @@ class _BoutonWidget extends State<BoutonWidget> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                //borderRadius: BorderRadius.circular(6.0),
                                 side:
                                     BorderSide(color: Colors.grey, width: 0.5),
                               ),
@@ -129,7 +121,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                         height: height / 10,
                         child: ElevatedButton(
                           child: Text(
-                            'a a a',
+                            activeMaj ? 'A A A' : "a a a",
                             style: TextStyle(
                               fontSize: height / 20,
                             ),
@@ -197,8 +189,8 @@ class _BoutonWidget extends State<BoutonWidget> {
                           ),
                         ),
                         Container(
-                          width: width / 20,
-                          height: height / 24,
+                          width: width / 17,
+                          height: height / 17,
                           child: SwitcherButton(
                             value: false,
                             offColor: Colors.grey,

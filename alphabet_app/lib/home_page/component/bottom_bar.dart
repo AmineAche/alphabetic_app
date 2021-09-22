@@ -1,21 +1,16 @@
-import 'dart:io';
 import 'dart:async';
+import 'package:alphabet_app/screen/slidablepage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_button/flutter_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../list/letter_list.dart';
 import '../../sound_recorder.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_sound_lite/flutter_sound.dart';
 import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class BottomBar extends StatefulWidget {
-  //const BottomBar({ Key? key }) : super(key: key);
-
   @override
   _BottomBarState createState() => _BottomBarState();
 }
@@ -49,7 +44,6 @@ class _BottomBarState extends State<BottomBar> {
             border: Border.all(color: Colors.grey, width: 0.5),
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(10),
-              // topRight: Radius.circular(0),
             ),
             color: idxColorButton,
             boxShadow: [
@@ -105,9 +99,6 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all(30),
-                    //shadowColor: MaterialStateProperty.all(
-                    //  Colors.black.withOpacity(1),
-                    //),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -146,8 +137,14 @@ class _BottomBarState extends State<BottomBar> {
                         (lettre == 'y')) {
                       indicelettre = indiceletter_1 + 1;
                     }
-                    Navigator.pushNamed(context, '/slide',
-                        arguments: indicelettre);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SlidePage(
+                                indiceletterbefore: indicelettre,
+                                letterMaj: activeMaj,
+                              )),
+                    );
                   },
                   child: Text(
                     "SYLLABE",
@@ -158,10 +155,6 @@ class _BottomBarState extends State<BottomBar> {
                     ),
                   ),
                   style: ButtonStyle(
-                    //elevation: MaterialStateProperty.all(30),
-                    //shadowColor: MaterialStateProperty.all(
-                    //Colors.black.withOpacity(1),
-                    //),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -196,7 +189,6 @@ class _BottomBarState extends State<BottomBar> {
     double width = MediaQuery.of(context).size.width;
     final isRecording = recorder.isRecording;
     final icon = isRecording ? Icons.stop : Icons.mic;
-    // final text = isRecording ? 'STOP' : 'Start';
     return Listener(
       onPointerDown: (details) async {
         final isRecording = await recorder._record();
@@ -232,28 +224,7 @@ class _BottomBarState extends State<BottomBar> {
               icon,
               size: height / 20,
             ),
-            onPressed: () async {}
-            // onPressed: () async {
-            //   final isRecording = await recorder.toggleRecording();
-            //   setState(() {});
-
-            //   // recorder.isRecording
-            //   //     ? Timer(Duration(seconds: 3), () async {
-            //   //         final isRecording = await recorder.toggleRecording();
-
-            //   //         print("Yeah, this line is printed after 3 seconds");
-            //   //       })
-            //   //     : null;
-            //   showTopSnackBar(
-            //     context,
-            //     CustomSnackBar.info(
-            //       message: recorder.isRecording
-            //           ? "Enregistrement de la voix "
-            //           : "Fin de l'enregistrement",
-            //     ),
-            //   );
-            // },
-            ),
+            onPressed: () async {}),
       ),
     );
   }
@@ -293,10 +264,6 @@ class _BottomBarState extends State<BottomBar> {
                   setState(() {});
                 });
           setState(() {});
-          // showTopSnackBar(
-          //   context,
-          //   CustomSnackBar.success(message: "Lecture en cours"),
-          // );
         },
       ),
     );

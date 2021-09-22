@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_button/flutter_button.dart';
-//import 'package:flutter_sound_lite/flutter_sound.dart';
-//import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
-import 'package:switcher_button/switcher_button.dart';
-import 'package:audioplayers/audio_cache.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../constants.dart';
-import '../../color_list.dart';
 import '../../list/letter_list.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'bottom_bar.dart';
 
 class FavoriteWidget extends StatefulWidget {
   FavoriteWidget({Key key, this.isMaj: false, this.visibility})
@@ -24,27 +15,22 @@ class FavoriteWidget extends StatefulWidget {
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  //AudioCache audioCache = AudioCache();
   final FlutterTts flutterTts = FlutterTts();
-  //final recorder = SoundRecorder();
 
   void initState() {
     _loadString();
     _load();
 
     super.initState();
-    //  recorder.init();
   }
 
   @override
   void dispose() {
-    //  recorder.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    //Size size = MediaQuery.of(context).size;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     _load();
@@ -57,8 +43,8 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             new SwipeGestureRecognizer(
               child: Container(
                 margin: new EdgeInsets.symmetric(horizontal: width / 200),
-                height: height / 3,
-                width: width / 4,
+                height: height / 2,
+                width: width / 5,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -72,9 +58,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                   border: Border.all(color: Colors.white, width: 1.5),
-                  // boxShadow: [
-                  //   BoxShadow(color: Colors.white, spreadRadius: 1),
-                  // ],
                 ),
                 child: Center(
                     child: (i == 0)
@@ -90,17 +73,21 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                 (letter_1 == 'O') ||
                                 (letter_1 == 'U') ||
                                 (letter_1 == 'Y'))
-                            ? Text(
-                                '$letter_1',
-                                style: TextStyle(
-                                    fontSize: height / 4,
-                                    color: idxColorVoyelle),
+                            ? Center(
+                                child: Text(
+                                  '$letter_1',
+                                  style: TextStyle(
+                                      fontSize: height / 3,
+                                      color: idxColorVoyelle),
+                                ),
                               )
-                            : Text(
-                                '$letter_1',
-                                style: TextStyle(
-                                    fontSize: height / 4,
-                                    color: idxColorConsonne),
+                            : Center(
+                                child: Text(
+                                  '$letter_1',
+                                  style: TextStyle(
+                                      fontSize: height / 3,
+                                      color: idxColorConsonne),
+                                ),
                               )
                         : (i == 1)
                             ? ((letter_2 == 'a') ||
@@ -118,13 +105,13 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                 ? Text(
                                     '$letter_2',
                                     style: TextStyle(
-                                        fontSize: height / 4,
+                                        fontSize: height / 3,
                                         color: idxColorVoyelle),
                                   )
                                 : Text(
                                     '$letter_2',
                                     style: TextStyle(
-                                        fontSize: height / 4,
+                                        fontSize: height / 3,
                                         color: idxColorConsonne),
                                   )
                             : ((letter_3 == 'a') ||
@@ -139,16 +126,18 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                                     (letter_3 == 'O') ||
                                     (letter_3 == 'U') ||
                                     (letter_3 == 'Y'))
-                                ? Text(
-                                    '$letter_3',
-                                    style: TextStyle(
-                                        fontSize: height / 4,
-                                        color: idxColorVoyelle),
+                                ? Center(
+                                    child: Text(
+                                      '$letter_3',
+                                      style: TextStyle(
+                                          fontSize: height / 3,
+                                          color: idxColorVoyelle),
+                                    ),
                                   )
                                 : Text(
                                     '$letter_3',
                                     style: TextStyle(
-                                        fontSize: height / 4,
+                                        fontSize: height / 3,
                                         color: idxColorConsonne),
                                   )),
               ),
@@ -204,50 +193,16 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                       tooltip: 'Ecouter',
                       onPressed: () {
                         sound();
-                        // _getLanguages();
-                        // _getEngines();
-                        // _getDefaultEngine();
                       }),
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(top: width / 7, left: height / 20),
-              //   child: Container(
-              //     height: height / 10,
-              //     width: height / 15,
-              //     child: buildStart(),
-              //   ),
-              // ),
             ],
           ),
-          Container(
-              // child: buildStart(),
-              )
+          Container()
         ],
       ),
     );
   }
-
-  // Widget buildStart() {
-  //   final isRecording = recorder.isRecording;
-  //   final icon = isRecording ? Icons.stop : Icons.mic;
-  //   final text = isRecording ? Colors.red : Colors.white;
-  //   final onPrimary = isRecording ? Colors.white : Colors.black;
-
-  //   return ElevatedButton.icon(
-  //     style: ElevatedButton.styleFrom(
-  //         minimumSize: Size(175, 50),
-  //         primary: Colors.white,
-  //         onPrimary: Colors.black),
-  //     icon: Icon(Icons.mic),
-  //     label: Text(
-  //       "Start",
-  //     ),
-  //     onPressed: () async {
-  //       final isRecording = await recorder.toggleRecording();
-  //     },
-  //   );
-  // }
 
   _loadString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -308,17 +263,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       prefs.setInt('indice3', indiceletter_3);
     });
   }
-
-  // Future<dynamic> _getLanguages() => flutterTts.getLanguages;
-
-  // Future<dynamic> _getEngines() => flutterTts.getEngines;
-
-  // Future _getDefaultEngine() async {
-  //   var engine = await flutterTts.getDefaultEngine;
-  //   if (engine != null) {
-  //     print(engine);
-  //   }
-  // }
 
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -612,26 +556,29 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
     lettertot = lettertot.toLowerCase();
     print(lettertot);
-    //print(await flutterTts.getVoices);
-    //await flutterTts.setVoice("fr-fr-x-frc-local");
+
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
-    // await flutterTts.synthesizeToFile(
-    //     "Hello World", Platform.isAndroid ? "tts.wav" : "tts.caf");
-    //await flutterTts.setLanguage("fr-FR");
+
     await flutterTts.setPitch(1);
     await flutterTts.setSpeechRate(0.5);
-
     Map phonetiques = {
       "be": "beu",
+      "co": "so",
+      "cu": "su",
       "fe": "feu",
-      "ge": "geu",
-      "gue": "gueu",
-      "to": "tau",
       "fo": "fau",
+      "fu": "fut",
+      "ge": "gueu",
+      "gi": "ji",
+      "gue": "gueu",
+      "hu": "u",
+      "ke": "que",
+      "ko": "co",
+      "ku": "q",
+      "to": "tau",
       "ye": "yeu",
       "ve": "veut",
       "pe": "peut",
-      "ke": "que",
       "sov": "sove",
       "y": "ygrec",
       "aj": "a je",
@@ -642,9 +589,16 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       "az": "hazeu",
       "eb": "aibeu",
       "ef": "f",
+      "qa": "ka",
+      "qo": "co",
+      "qe": "que",
+      "qu": "q",
       "eg": "egg",
+      "we": "wé",
+      "xa": "géza",
       "ei": "ai"
     };
+
     MapEntry entry = phonetiques.entries.firstWhere(
         (element) => element.key == '$lettertot',
         orElse: () => null);
@@ -658,18 +612,4 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       print("pas dans la map");
     }
   }
-
-  // Future<void> start({
-  //   String path = 'assets/',
-  //   AudioEncoder encoder = AudioEncoder.AAC,
-  //   int bitRate = 128000,
-  //   double samplingRate = 44100.0,
-  // }) {
-  //   return RecordPlatform.instance.start(
-  //     path: path,
-  //     encoder: encoder,
-  //     bitRate: bitRate,
-  //     samplingRate: samplingRate,
-  //   );
-  // }
 }

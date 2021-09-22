@@ -1,5 +1,6 @@
 import 'package:alphabet_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:alphabet_app/list/letter_list.dart';
@@ -10,6 +11,8 @@ class AccentPage extends StatefulWidget {
 }
 
 class _AccentPageState extends State<AccentPage> {
+  final FlutterTts flutterTts = FlutterTts();
+
   @override
   void initState() {
     _load();
@@ -24,7 +27,6 @@ class _AccentPageState extends State<AccentPage> {
     return Scaffold(
       backgroundColor: idxColorBackground,
       body: Container(
-        //color: Colors.green,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -106,94 +108,90 @@ class _AccentPageState extends State<AccentPage> {
                 child: Container(
                   child: Column(
                     children: [
-                      new SwipeGestureRecognizer(
-                        child: Center(
-                          child: Container(
-                            margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                            height: height / 10,
-                            width: height / 10,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 3,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                              //shape: BoxShape.circle,
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white,
-                              border:
-                                  Border.all(color: Colors.white, width: 1.5),
-                              // boxShadow: [
-                              //   BoxShadow(color: Colors.white, spreadRadius: 1),
-                              // ],
-                            ),
-                            child: Center(
-                                child: Text(
-                              accent[accentidx],
-                              style: TextStyle(
-                                  fontSize: height / 7.5, color: Colors.blue),
-                            )),
-                          ),
-                        ),
-                        onSwipeRight: () {
-                          setState(() {
-                            accentright();
-                          });
-                        },
-                        onSwipeLeft: () {
-                          setState(() {
-                            accentleft();
-                          });
-                        },
-                      ),
                       SizedBox(
                         height: 10,
                       ),
-                      new SwipeGestureRecognizer(
-                        child: Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                          height: height / 3,
-                          width: height / 3,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          new SwipeGestureRecognizer(
+                            child: Container(
+                              margin: new EdgeInsets.symmetric(horizontal: 3.0),
+                              height: height / 2,
+                              width: width / 5,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 1), // changes position of shadow
+                                  ),
+                                ],
+                                //shape: BoxShape.circle,
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
+                                // boxShadow: [
+                                //   BoxShadow(color: Colors.white, spreadRadius: 1),
+                                // ],
                               ),
-                            ],
-                            //shape: BoxShape.circle,
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 1),
-                            // boxShadow: [
-                            //   BoxShadow(color: Colors.white, spreadRadius: 1),
-                            // ],
+                              child: Center(
+                                child: Text(
+                                  voyelleaccent[lettreidx],
+                                  style: TextStyle(
+                                      fontSize: height / 3.5,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            onSwipeUp: () {
+                              setState(() {
+                                lettreright();
+                              });
+                            },
+                            onSwipeDown: () {
+                              setState(() {
+                                lettreleft();
+                              });
+                            },
                           ),
-                          child: Center(
-                            child: Text(
-                              voyelleaccent[lettreidx],
-                              style: TextStyle(
-                                  fontSize: height / 3.5, color: Colors.blue),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: width / 7, left: height / 20),
+                            child: Container(
+                              height: height / 10,
+                              width: height / 10,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                                border:
+                                    Border.all(color: idxColorButton, width: 2),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: IconButton(
+                                  iconSize: height / 20,
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    color: Colors.black,
+                                  ),
+                                  tooltip: 'Ecouter',
+                                  onPressed: () {
+                                    sound();
+                                  }),
                             ),
                           ),
-                        ),
-                        onSwipeRight: () {
-                          setState(() {
-                            lettreright();
-                          });
-                        },
-                        onSwipeLeft: () {
-                          setState(() {
-                            lettreleft();
-                          });
-                        },
+                        ],
                       ),
                     ],
                   ),
@@ -205,6 +203,29 @@ class _AccentPageState extends State<AccentPage> {
         ),
       ),
     );
+  }
+
+  Future sound() async {
+    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(0.5);
+
+    Map phonetiques = {
+      "à": "a accent grave",
+      "é": "e accent aigu",
+      "ù": "u accent grave",
+      "ô": "o accent circonflexe"
+    };
+
+    MapEntry entry = phonetiques.entries.firstWhere(
+        (element) => element.key == voyelleaccent[lettreidx],
+        orElse: () => null);
+
+    if (entry != null) {
+      await flutterTts.speak(entry.value);
+    } else {
+      await flutterTts.speak(voyelleaccent[lettreidx]);
+    }
   }
 
   Future _load() async {
@@ -219,51 +240,19 @@ class _AccentPageState extends State<AccentPage> {
     });
   }
 
-  void accentright() {
-    if (accentidx <= 0) {
-      accentidx = 3;
-    } else {
-      accentidx -= 1;
-    }
-
-    if (lettreidx == 3) {
-      accentidx = 0;
-    }
-  }
-
-  void accentleft() {
-    if (accentidx >= 3) {
-      accentidx = 0;
-    } else {
-      accentidx += 1;
-    }
-
-    if (lettreidx == 3) {
-      accentidx = 0;
-    }
-  }
-
   void lettreleft() {
     if (lettreidx <= 0) {
-      lettreidx = 4;
+      lettreidx = 11;
     } else {
       lettreidx -= 1;
-    }
-
-    if (lettreidx == 3) {
-      accentidx = 0;
     }
   }
 
   void lettreright() {
-    if (lettreidx >= 4) {
+    if (lettreidx >= 11) {
       lettreidx = 0;
     } else {
       lettreidx += 1;
-    }
-
-    if (lettreidx == 3) {
-      accentidx = 0;
     }
   }
 }

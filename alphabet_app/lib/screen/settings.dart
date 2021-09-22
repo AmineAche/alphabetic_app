@@ -221,7 +221,7 @@ class _SettingPageState extends State<SettingPage> {
                       children: [
                         Container(
                           child: Text(
-                            'Couleur des lettres :',
+                            'Couleur des lettres : ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: width / 40,
@@ -238,7 +238,7 @@ class _SettingPageState extends State<SettingPage> {
                                   children: [
                                     Container(
                                       child: Text(
-                                        'Voyelles :     ',
+                                        'Voyelles :         ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: width / 50,
@@ -271,9 +271,6 @@ class _SettingPageState extends State<SettingPage> {
                                         child: const Text('A'),
                                         color: Color(0xFFd5e5e4),
                                         textColor: idxColorVoyelle,
-                                        // useWhiteForeground(currentColor)
-                                        //     ? const Color(0xffffffff)
-                                        //     : const Color(0xff000000),
                                       ),
                                     ),
                                   ],
@@ -286,7 +283,7 @@ class _SettingPageState extends State<SettingPage> {
                                   children: [
                                     Container(
                                       child: Text(
-                                        'Consomnes :',
+                                        'Consomnes :   ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: width / 50,
