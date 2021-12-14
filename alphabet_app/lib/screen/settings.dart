@@ -1,3 +1,4 @@
+import 'package:alphabet_app/color_list.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -76,73 +77,103 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     _saveString();
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.height;
     return Scaffold(
-      //length: 1,
-      //child: Scaffold(
-      //backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: width / 9,
-                  height: height / 10,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        spreadRadius: 0.1,
-                        blurRadius: 15,
-                        offset: Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                    border: Border.all(color: Colors.grey[600], width: 0.5),
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(0),
-                      bottomRight: Radius.circular(70),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: width / 5,
+                height: height / 10,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 0.1,
+                      blurRadius: 15,
+                      offset: Offset(0, 1), // changes position of shadow
                     ),
-                    color: idxColorButton,
+                  ],
+                  border: Border.all(color: Colors.grey[600], width: 0.5),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(0),
+                    bottomRight: Radius.circular(70),
                   ),
-                  child: SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: width / 70),
-                      child: IconButton(
-                        iconSize: height / 20,
-                        icon: Icon(
-                          Icons.home,
-                          color: Colors.white,
-                        ),
-                        onPressed: () => Navigator.pushNamed(context, '/'),
+                  color: idxColorButton,
+                ),
+                child: SizedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: width / 70),
+                    child: IconButton(
+                      iconSize: height / 20,
+                      icon: Icon(
+                        Icons.home,
+                        color: Colors.white,
                       ),
+                      onPressed: () => Navigator.pushNamed(context, '/'),
                     ),
                   ),
                 ),
+              ),
+            ],
+          ),
+          //backgroundColor: idxColorBackground,
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 3,
+                  offset: Offset(0, 0), // changes position of shadow
+                ),
               ],
             ),
-            //backgroundColor: idxColorBackground,
-
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    width: width / 2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Couleur des boutons :',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: width / 40,
-                            ),
+            width: width,
+            height: height / 1.2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: height / 30,
+                ),
+                Container(
+                  height: height / 7.5,
+                  margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  width: width / 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          'Couleur des boutons :',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: width / 40,
                           ),
                         ),
-                        Container(
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
                           child: RaisedButton(
                             elevation: 3.0,
                             onPressed: () {
@@ -168,24 +199,45 @@ class _SettingPageState extends State<SettingPage> {
                                 : const Color(0xff000000),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: width / 2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Couleur du fond :',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: width / 40,
-                            ),
+                ),
+                SizedBox(
+                  height: height / 30,
+                ),
+                Container(
+                  height: height / 7.5,
+                  margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  width: width / 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          'Couleur du fond :',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: width / 40,
                           ),
                         ),
-                        Container(
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
                           child: RaisedButton(
                             elevation: 3.0,
                             onPressed: () {
@@ -211,34 +263,57 @@ class _SettingPageState extends State<SettingPage> {
                                 : const Color(0xff000000),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: width / 2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Couleur des lettres : ',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: width / 40,
-                            ),
+                ),
+                SizedBox(
+                  height: height / 30,
+                ),
+                Container(
+                  height: height / 3.1,
+                  margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  width: width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          'Couleur des lettres :',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: width / 40,
                           ),
                         ),
-                        Container(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
+                                width: width / 2,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                       child: Text(
-                                        'Voyelles :         ',
+                                        'Voyelles : ',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: width / 50,
@@ -246,119 +321,135 @@ class _SettingPageState extends State<SettingPage> {
                                       ),
                                     ),
                                     Container(
-                                      child: RaisedButton(
-                                        onPressed: () {
-                                          isCons = false;
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title:
-                                                    Text('Choisir une couleur'),
-                                                backgroundColor:
-                                                    Color(0xffdddddd),
-                                                content: SingleChildScrollView(
-                                                  child: BlockPicker(
-                                                    pickerColor: currentColor,
-                                                    onColorChanged:
-                                                        changeColorVoyCons,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 4.0),
+                                        child: RaisedButton(
+                                          onPressed: () {
+                                            isCons = false;
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Choisir une couleur'),
+                                                  backgroundColor:
+                                                      Color(0xffdddddd),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: BlockPicker(
+                                                      pickerColor: currentColor,
+                                                      onColorChanged:
+                                                          changeColorVoyCons,
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: const Text('A'),
-                                        color: Color(0xFFd5e5e4),
-                                        textColor: idxColorVoyelle,
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: const Text(
+                                            'A',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          color: Color(0xFFd5e5e4),
+                                          textColor: idxColorVoyelle,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        'Consomnes :   ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: width / 50,
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: width / 2,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          'Consomnes : ',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: width / 50,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      child: RaisedButton(
-                                        onPressed: () {
-                                          isCons = true;
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title:
-                                                    Text('Choisir une couleur'),
-                                                backgroundColor:
-                                                    Color(0xffdddddd),
-                                                content: SingleChildScrollView(
-                                                  child: BlockPicker(
-                                                    pickerColor: currentColor,
-                                                    onColorChanged:
-                                                        changeColorVoyCons,
-                                                  ),
-                                                ),
+                                      Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 4.0, left: 4.0),
+                                          child: RaisedButton(
+                                            onPressed: () {
+                                              isCons = true;
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Choisir une couleur'),
+                                                    backgroundColor:
+                                                        Color(0xffdddddd),
+                                                    content:
+                                                        SingleChildScrollView(
+                                                      child: BlockPicker(
+                                                        pickerColor:
+                                                            currentColor,
+                                                        onColorChanged:
+                                                            changeColorVoyCons,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               );
                                             },
-                                          );
-                                        },
-                                        child: const Text(
-                                          'B',
+                                            child: const Text(
+                                              'B',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            color: Color(0xFFd5e5e4),
+                                            textColor: idxColorConsonne,
+                                            // useWhiteForeground(currentColor)
+                                            //     ? const Color(0xffffffff)
+                                            //     : const Color(0xff000000),
+                                          ),
                                         ),
-                                        color: Color(0xFFd5e5e4),
-                                        textColor: idxColorConsonne,
-                                        // useWhiteForeground(currentColor)
-                                        //     ? const Color(0xffffffff)
-                                        //     : const Color(0xff000000),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: RaisedButton(
-                      onPressed: () {
-                        isCons = true;
-                        resetColor();
-                      },
-                      child: const Text(
-                        'REINITIALISER',
                       ),
-                      color: Color(0xFFd5e5e4),
-                      textColor: Colors.black,
-                      // useWhiteForeground(currentColor)
-                      //     ? const Color(0xffffffff)
-                      //     : const Color(0xff000000),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  child: RaisedButton(
+                    onPressed: () {
+                      isCons = true;
+                      resetColor();
+                    },
+                    child: const Text(
+                      'REINITIALISER',
+                      textAlign: TextAlign.center,
+                    ),
+                    color: Color(0xFFd5e5e4),
+                    textColor: Colors.black,
+                    // useWhiteForeground(currentColor)
+                    //     ? const Color(0xffffffff)
+                    //     : const Color(0xff000000),
+                  ),
+                ),
+              ],
             ),
-            Container(),
-          ],
-        ),
-        //toolbarHeight: height / 6,
-        //leadingWidth: width / 10,
-
-        //elevation: 1,
-        //automaticallyImplyLeading: false,
+          ),
+          Container(),
+        ],
       ),
     );
   }

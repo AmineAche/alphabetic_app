@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:alphabet_app/screen/revision.dart';
 import 'package:alphabet_app/screen/slidablepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -177,8 +178,47 @@ class _BottomBarState extends State<BottomBar> {
             ],
           ),
         ),
-        Container(
-          width: width / 5.5,
+        SizedBox(
+          width: width / 6,
+          height: height / 8,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RevisionPage(
+                          maj: activeMaj,
+                        )),
+              );
+            },
+            child: Text(
+              "REVISION",
+              style: GoogleFonts.lato(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: height / 26,
+              ),
+            ),
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(30),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(0),
+                  ),
+                  side: BorderSide(color: Colors.grey, width: 0.5),
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed))
+                    return Colors.green;
+                  return idxColorButton;
+                },
+              ),
+            ),
+          ),
         ),
       ],
     );

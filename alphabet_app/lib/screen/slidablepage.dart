@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audio_cache.dart';
+//import 'package:audioplayers/audio_cache.dart';
 import '../constants.dart';
 import '../list/letter_list.dart';
 
@@ -21,7 +21,7 @@ class SlidePage extends StatefulWidget {
 
 class _SlidePageState extends State<SlidePage> {
   final FlutterTts flutterTts = FlutterTts();
-  AudioCache audioCache = AudioCache();
+  // AudioCache audioCache = AudioCache();
 
   @override
   void initState() {
@@ -669,4 +669,49 @@ class _SlidePageState extends State<SlidePage> {
       //rien
     }
   }
+
+  Map phonetiques = {
+    "be": "beu",
+    "ca": "k",
+    "co": "quo",
+    "cu": "cul",
+    "fe": "feu",
+    "fo": "fau",
+    "fu": "fut",
+    "ge": "je",
+    "gi": "ji",
+    "gue": "gueu",
+    "he": "eux",
+    "hu": "u",
+    "ke": "que",
+    "ko": "co",
+    "ku": "q",
+    "to": "tau",
+    "ye": "yeu",
+    "ve": "veut",
+    "pe": "peut",
+    "sov": "sove",
+    "y": "ygrec",
+    "aj": "a je",
+    "ap": "apeux",
+    "aq": "hack",
+    "av": "have",
+    "aw": "a ou",
+    "az": "hazeu",
+    "eb": "aibeu",
+    "ef": "f",
+    "qa": "ka",
+    "qo": "co",
+    "qe": "que",
+    "qu": "q",
+    "eg": "egg",
+    "we": "wé",
+    "xa": "gza",
+    "xe": "xélophone",
+    "xi": "gue zi",
+    "xo": "guezo",
+    "xu": "guezut",
+    "ei": "ai",
+    "zu": "zu"
+  };
 }

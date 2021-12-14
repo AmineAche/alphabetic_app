@@ -1,3 +1,4 @@
+import 'package:alphabet_app/list/letter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound_lite/flutter_sound.dart';
 import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
@@ -62,7 +63,6 @@ class _RecordPageState extends State<RecordPage> {
         text,
       ),
       onPressed: () async {
-        // final isPlaying = await recorder._play();
         await player.togglePlaying(whenFinished: () {
           setState(() {});
         });
@@ -72,7 +72,7 @@ class _RecordPageState extends State<RecordPage> {
   }
 }
 
-final pathToSaveAudio = "audio_example.mp3";
+final pathToSaveAudio = 'example.aac';
 
 class SoundPlayer {
   FlutterSoundPlayer _audioPlayer;
@@ -82,7 +82,6 @@ class SoundPlayer {
     _audioPlayer = FlutterSoundPlayer();
 
     await _audioPlayer.openAudioSession();
-    print('oe');
   }
 
   void dispose() {

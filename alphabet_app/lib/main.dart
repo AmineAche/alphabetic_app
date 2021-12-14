@@ -1,3 +1,4 @@
+import 'package:alphabet_app/screen/revision.dart';
 import 'package:alphabet_app/sound_recorder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'SYLLABES',
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           '/reliable': (context) => ReliablePage(),
           '/accent': (context) => AccentPage(),
           '/slide': (context) => SlidePage(),
+          '/revision': (context) => RevisionPage(),
         },
         initialRoute: '/');
   }

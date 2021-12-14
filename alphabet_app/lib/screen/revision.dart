@@ -1,31 +1,44 @@
-import 'package:alphabet_app/constants.dart';
+import 'package:alphabet_app/list/letter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:alphabet_app/list/letter_list.dart';
+import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
+import 'package:switcher_button/switcher_button.dart';
 
-class AccentPage extends StatefulWidget {
+import '../constants.dart';
+
+class RevisionPage extends StatefulWidget {
+  RevisionPage({
+    Key key,
+    this.maj,
+  }) : super(key: key);
+
+  final bool maj;
+
   @override
-  _AccentPageState createState() => _AccentPageState();
+  _RevisionPageState createState() => _RevisionPageState();
 }
 
-class _AccentPageState extends State<AccentPage> {
-  final FlutterTts flutterTts = FlutterTts();
+final FlutterTts flutterTts = FlutterTts();
 
-  @override
+class _RevisionPageState extends State<RevisionPage> {
   void initState() {
-    _load();
+    _loadString();
+
     super.initState();
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _saveString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      backgroundColor: idxColorBackground,
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,9 +115,9 @@ class _AccentPageState extends State<AccentPage> {
                 ],
               ),
             ),
-            Center(
+            Container(
               child: Padding(
-                padding: EdgeInsets.only(bottom: height / 5),
+                padding: EdgeInsets.only(bottom: height / 3),
                 child: Container(
                   child: Column(
                     children: [
@@ -114,49 +127,82 @@ class _AccentPageState extends State<AccentPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          new SwipeGestureRecognizer(
-                            child: Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                              height: height / 2,
-                              width: width / 5,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 3,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 1), // changes position of shadow
+                          new Flexible(
+                            child: SwipeGestureRecognizer(
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 3.0),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                  //shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: ConstrainedBox(
+                                  constraints: new BoxConstraints(
+                                    maxWidth: width - 85,
+                                    minWidth: width / 5,
+                                    maxHeight: height / 2.5,
                                   ),
-                                ],
-                                //shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 1),
-                                // boxShadow: [
-                                //   BoxShadow(color: Colors.white, spreadRadius: 1),
-                                // ],
-                              ),
-                              child: Center(
-                                child: Text(
-                                  voyelleaccent[lettreidx],
-                                  style: TextStyle(
-                                      fontSize: height / 3.5,
-                                      color: Colors.blue),
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: Text(
+                                            widget.maj
+                                                ? revision[revisionidx]
+                                                    .toUpperCase()
+                                                : revision[revisionidx]
+                                                    .toLowerCase(),
+                                            //"les oiseaux montent sur les arbres car",
+                                            // "o",
+
+                                            textAlign: TextAlign.center,
+
+                                            style: TextStyle(
+                                                fontSize: height / 7,
+                                                color: Colors.blue),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
+                              onSwipeRight: () {
+                                setState(() {
+                                  print(revisionidx);
+                                  if (revisionidx == 0) {
+                                    revisionidx = revision.length - 1;
+                                  } else {
+                                    revisionidx--;
+                                  }
+                                });
+                              },
+                              onSwipeLeft: () {
+                                setState(() {
+                                  if (revisionidx == revision.length - 1) {
+                                    revisionidx = 0;
+                                  } else {
+                                    revisionidx++;
+                                  }
+                                });
+                              },
                             ),
-                            onSwipeUp: () {
-                              setState(() {
-                                lettreright();
-                              });
-                            },
-                            onSwipeDown: () {
-                              setState(() {
-                                lettreleft();
-                              });
-                            },
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -198,62 +244,38 @@ class _AccentPageState extends State<AccentPage> {
                 ),
               ),
             ),
-            Container(),
           ],
         ),
       ),
     );
   }
 
-  Future sound() async {
-    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
-    await flutterTts.setPitch(1);
-    await flutterTts.setSpeechRate(0.5);
-
-    Map phonetiques = {
-      "à": "a accent grave",
-      "é": "e accent aigu",
-      "ù": "u accent grave",
-      "ü": "u tréma",
-      "ô": "o accent circonflexe"
-    };
-
-    MapEntry entry = phonetiques.entries.firstWhere(
-        (element) => element.key == voyelleaccent[lettreidx],
-        orElse: () => null);
-
-    if (entry != null) {
-      await flutterTts.speak(entry.value);
-    } else {
-      await flutterTts.speak(voyelleaccent[lettreidx]);
-    }
-  }
-
-  Future _load() async {
+  _saveString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-      if (idxColorBackgroundsave == null) {
-        idxColorBackgroundsave = 'F5F5F5';
+      if (revisionidx == null) {
+        revisionidx = 0;
       }
-      valueback = int.parse(idxColorBackgroundsave, radix: 16);
-      idxColorBackground = new Color(valueback);
+      prefs.setInt('indiceRev', revisionidx);
     });
   }
 
-  void lettreleft() {
-    if (lettreidx <= 0) {
-      lettreidx = 11;
-    } else {
-      lettreidx -= 1;
-    }
+  _loadString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      revisionidx = (prefs.getInt('indiceRev'));
+      if (revisionidx == null) {
+        revisionidx = 0;
+      }
+    });
   }
 
-  void lettreright() {
-    if (lettreidx >= 11) {
-      lettreidx = 0;
-    } else {
-      lettreidx += 1;
-    }
+  Future sound() async {
+    // await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    // await flutterTts.setLanguage("fr-FR");
+    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(0.5);
+
+    await flutterTts.speak(revision[revisionidx]);
   }
 }
