@@ -560,7 +560,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
 
     await flutterTts.setPitch(1);
-    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setSpeechRate(0.3);
     Map phonetiques = {
       "be": "beu",
       "co": "so",
@@ -596,6 +596,8 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       "eg": "egg",
       "we": "wé",
       "xa": "géza",
+      "pl": "p l",
+      "pr": "p r",
       "ei": "ai"
     };
 

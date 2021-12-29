@@ -47,8 +47,8 @@ class _RecordPageState extends State<RecordPage> {
           text,
         ),
         onPressed: () async {
-          final isRecording = await recorder.toggleRecording();
-          setState(() {});
+          // final isRecording = await recorder.toggleRecording();
+          // setState(() {});
         });
   }
 
@@ -63,10 +63,10 @@ class _RecordPageState extends State<RecordPage> {
         text,
       ),
       onPressed: () async {
-        await player.togglePlaying(whenFinished: () {
-          setState(() {});
-        });
-        setState(() {});
+        // await player.togglePlaying(whenFinished: () {
+        //   setState(() {});
+        // });
+        // setState(() {});
       },
     );
   }

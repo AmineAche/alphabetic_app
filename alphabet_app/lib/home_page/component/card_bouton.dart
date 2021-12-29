@@ -260,7 +260,7 @@ class _BoutonWidget extends State<BoutonWidget> {
             ),
           ),
           FavoriteWidget(isMaj: activeMaj, visibility: visibilityidx),
-          BottomBar(),
+          BottomBar(visible: visibilityidx),
         ],
       ),
     );

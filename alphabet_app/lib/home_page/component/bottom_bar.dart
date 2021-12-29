@@ -1,17 +1,23 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:alphabet_app/home_page/component/view.dart';
 import 'package:alphabet_app/screen/revision.dart';
 import 'package:alphabet_app/screen/slidablepage.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../list/letter_list.dart';
 import '../../sound_recorder.dart';
 import 'package:flutter_sound_lite/flutter_sound.dart';
 import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class BottomBar extends StatefulWidget {
+  BottomBar({Key key, this.visible}) : super(key: key);
+
+  final int visible;
   @override
   _BottomBarState createState() => _BottomBarState();
 }
@@ -19,14 +25,38 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   final recorder = SoundRecorder();
   final player = SoundPlayer();
+
+  Directory appDir;
+  List<String> records;
+  bool isPlay = false;
+  AudioPlayer advancedPlayer = AudioPlayer();
+  int _totalTime;
+  int _currentTime;
+  double _percent = 0.0;
+  int _selected = -1;
+
   @override
   void initState() {
     super.initState();
+    records = [];
+    getExternalStorageDirectory().then((value) {
+      appDir = value;
+      Directory appDirec = Directory("${appDir.path}/Audiorecords/");
+      appDir = appDirec;
+      appDir.list().listen((onData) {
+        records.add(onData.path);
+      }).onDone(() {
+        records = records.reversed.toList();
+        setState(() {});
+      });
+    });
     recorder.init();
     player.init();
   }
 
   void dispose() {
+    appDir = null;
+    records = null;
     player.dispose();
     recorder.dispose();
     super.dispose();
@@ -227,29 +257,16 @@ class _BottomBarState extends State<BottomBar> {
   Widget buildStart() {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final isRecording = recorder.isRecording;
-    final icon = isRecording ? Icons.stop : Icons.mic;
+    final icon = Icons.mic;
     return Listener(
       onPointerDown: (details) async {
-        final isRecording = await recorder._record();
         setState(() {});
-        showTopSnackBar(
-          context,
-          CustomSnackBar.info(
-            message: "Enregistrement de la voix ",
-          ),
-        );
       },
       onPointerUp: (details) async {
-        final isRecording = await recorder._stop();
         setState(() {});
-        showTopSnackBar(
-          context,
-          CustomSnackBar.info(message: "Fin de l'enregistrement"),
-        );
       },
       child: SizedBox(
-        width: width / 15,
+        width: width / 13,
         height: height / 8,
         child: ElevatedButton(
             style: ButtonStyle(
@@ -264,7 +281,9 @@ class _BottomBarState extends State<BottomBar> {
               icon,
               size: height / 20,
             ),
-            onPressed: () async {}),
+            onPressed: () async {
+              show(context);
+            }),
       ),
     );
   }
@@ -278,7 +297,7 @@ class _BottomBarState extends State<BottomBar> {
 
     return SizedBox(
       height: height / 8,
-      width: width / 15,
+      width: width / 13,
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(idxColorButton),
@@ -297,15 +316,62 @@ class _BottomBarState extends State<BottomBar> {
           size: height / 20,
         ),
         onPressed: () async {
-          // final isPlaying = await recorder._play();
-          recorder.isRecording
-              ? null
-              : await player.togglePlaying(whenFinished: () {
-                  setState(() {});
-                });
+          setState(() {
+            if (widget.visible == 3) {
+              lettertot = letter_1 + letter_2 + letter_3;
+            } else if (widget.visible == 2) {
+              lettertot = letter_1 + letter_2;
+            } else {
+              lettertot = letter_1;
+            }
+
+            isPlay = true;
+          });
+          print(appDir.path);
+
+          String path = "${appDir.path}/$lettertot.wav";
+          bool directoryExists = await Directory(path).exists();
+          bool fileExists = await File(path).exists();
+          if (directoryExists || fileExists) {
+            advancedPlayer.play("${appDir.path}/$lettertot.wav", isLocal: true);
+          } else {
+            Fluttertoast.showToast(
+                msg: "Il faut d'abord créer un enregistrement.");
+          }
+
           setState(() {});
         },
       ),
+    );
+  }
+
+  _onFinish() {
+    records.clear();
+    print(records.length.toString());
+    appDir.list().listen((onData) {
+      records.add(onData.path);
+    }).onDone(() {
+      records.sort();
+      records = records.reversed.toList();
+      setState(() {});
+    });
+  }
+
+  void show(
+    BuildContext context,
+  ) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.white70,
+          child: Recorder(
+            cardVisible: widget.visible,
+            save: _onFinish,
+          ),
+        );
+      },
     );
   }
 }
