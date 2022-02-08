@@ -39,17 +39,32 @@ class _BottomBarState extends State<BottomBar> {
   void initState() {
     super.initState();
     records = [];
-    getExternalStorageDirectory().then((value) {
-      appDir = value;
-      Directory appDirec = Directory("${appDir.path}/Audiorecords/");
-      appDir = appDirec;
-      appDir.list().listen((onData) {
-        records.add(onData.path);
-      }).onDone(() {
-        records = records.reversed.toList();
-        setState(() {});
-      });
-    });
+    //getExternalStorageDirectory()
+    Platform.isAndroid
+        ? getExternalStorageDirectory().then((value) {
+            appDir = value;
+            Directory appDirec =
+                Directory("${appDir.path.replaceAll(' ', '')}/Audiorecords/");
+            appDir = appDirec;
+            appDir.list().listen((onData) {
+              records.add(onData.path);
+            }).onDone(() {
+              records = records.reversed.toList();
+              setState(() {});
+            });
+          })
+        : getApplicationSupportDirectory().then((value) {
+            appDir = value;
+            Directory appDirec =
+                Directory("${appDir.path.replaceAll(' ', '')}/Audiorecords/");
+            appDir = appDirec;
+            appDir.list().listen((onData) {
+              records.add(onData.path);
+            }).onDone(() {
+              records = records.reversed.toList();
+              setState(() {});
+            });
+          });
     recorder.init();
     player.init();
   }
@@ -327,13 +342,14 @@ class _BottomBarState extends State<BottomBar> {
 
             isPlay = true;
           });
-          print(appDir.path);
+          //print(appDir.path.replaceAll(' ', ''));
 
-          String path = "${appDir.path}/$lettertot.wav";
+          String path = "${appDir.path.replaceAll(' ', '')}$lettertot.wav";
           bool directoryExists = await Directory(path).exists();
           bool fileExists = await File(path).exists();
           if (directoryExists || fileExists) {
-            advancedPlayer.play("${appDir.path}/$lettertot.wav", isLocal: true);
+            print(path);
+            advancedPlayer.play(path, isLocal: true);
           } else {
             Fluttertoast.showToast(
                 msg: "Il faut d'abord créer un enregistrement.");

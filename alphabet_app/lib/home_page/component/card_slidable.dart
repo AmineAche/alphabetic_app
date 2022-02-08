@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -244,7 +246,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       valuecons = int.parse(idxConsSave, radix: 16);
       idxColorConsonne = new Color(valuecons);
 
-      print('amine');
       print(idxColorVoyelle);
       print(idxColorConsonne);
     });
@@ -557,61 +558,39 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     lettertot = lettertot.toLowerCase();
     print(lettertot);
 
-    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    //await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    //print(await flutterTts.getVoices);
 
+    await flutterTts.setVoice({"name": "Marie", "locale": "fr-FR"});
     await flutterTts.setPitch(1);
-    await flutterTts.setSpeechRate(0.3);
-    Map phonetiques = {
-      "be": "beu",
-      "co": "so",
-      "cu": "su",
-      "fe": "feu",
-      "fo": "fau",
-      "fu": "fut",
-      "ge": "gueu",
-      "gi": "ji",
-      "gue": "gueu",
-      "hu": "u",
-      "ke": "que",
-      "ko": "co",
-      "ku": "q",
-      "to": "tau",
-      "ye": "yeu",
-      "ve": "veut",
-      "pe": "peut",
-      "sov": "sove",
-      "y": "ygrec",
-      "aj": "a je",
-      "ap": "apeux",
-      "aq": "hack",
-      "av": "have",
-      "aw": "a ou",
-      "az": "hazeu",
-      "eb": "aibeu",
-      "ef": "f",
-      "qa": "ka",
-      "qo": "co",
-      "qe": "que",
-      "qu": "q",
-      "eg": "egg",
-      "we": "wé",
-      "xa": "géza",
-      "pl": "p l",
-      "pr": "p r",
-      "ei": "ai"
-    };
+    await flutterTts.setSpeechRate(0.4);
 
-    MapEntry entry = phonetiques.entries.firstWhere(
-        (element) => element.key == '$lettertot',
-        orElse: () => null);
+    if (Platform.isAndroid) {
+      MapEntry entry = phonetiques2.entries.firstWhere(
+          (element) => element.key == '$lettertot',
+          orElse: () => null);
 
-    if (entry != null) {
-      await flutterTts.speak(entry.value);
-      print('key = ${entry.key}');
-      print('value = ${entry.value}');
+      if (entry != null) {
+        await flutterTts.speak(entry.value);
+        print('key = ${entry.key}');
+        print('value = ${entry.value}');
+      } else {
+        await flutterTts.speak(lettertot);
+        print("pas dans la map");
+      }
     } else {
-      await flutterTts.speak(lettertot);
-      print("pas dans la map");
+      MapEntry entry = phonetiques.entries.firstWhere(
+          (element) => element.key == '$lettertot',
+          orElse: () => null);
+
+      if (entry != null) {
+        await flutterTts.speak(entry.value);
+        print('key = ${entry.key}');
+        print('value = ${entry.value}');
+      } else {
+        await flutterTts.speak(lettertot);
+        print("pas dans la map");
+      }
     }
   }
 }

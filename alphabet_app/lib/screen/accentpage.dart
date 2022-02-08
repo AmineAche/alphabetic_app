@@ -143,7 +143,7 @@ class _AccentPageState extends State<AccentPage> {
                                   voyelleaccent[lettreidx],
                                   style: TextStyle(
                                       fontSize: height / 3.5,
-                                      color: Colors.blue),
+                                      color: idxColorVoyelle),
                                 ),
                               ),
                             ),
@@ -206,9 +206,9 @@ class _AccentPageState extends State<AccentPage> {
   }
 
   Future sound() async {
-    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
+    await flutterTts.setVoice({"name": "Marie", "locale": "fr-FR"});
     await flutterTts.setPitch(1);
-    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setSpeechRate(0.45);
 
     Map phonetiques = {
       "à": "a accent grave",

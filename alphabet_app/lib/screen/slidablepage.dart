@@ -1,9 +1,11 @@
+import 'package:alphabet_app/screen/doubleLettre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:audioplayers/audio_cache.dart';
 import '../constants.dart';
 import '../list/letter_list.dart';
+import 'dart:io' show Platform;
 
 class SlidePage extends StatefulWidget {
   SlidePage({
@@ -117,7 +119,49 @@ class _SlidePageState extends State<SlidePage> {
                           Icons.home,
                           color: Colors.white,
                         ),
-                        onPressed: () => Navigator.of(context).pop(null),
+                        onPressed: () => Navigator.pushNamed(context, '/'),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: width / 2),
+                  child: Container(
+                    width: width / 9,
+                    height: height / 10,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 0.1,
+                          blurRadius: 15,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                      border: Border.all(color: Colors.grey[600], width: 0.5),
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      color: idxColorButton,
+                    ),
+                    child: SizedBox(
+                      child: IconButton(
+                        iconSize: height / 20,
+                        icon: Icon(
+                          Icons.filter_2_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DoubleLettre(
+                                      indiceletterbefore2: indiceletternow,
+                                      letterMaj2: activeMaj,
+                                    )),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -193,7 +237,7 @@ class _SlidePageState extends State<SlidePage> {
                         child: Center(
                           child: Icon(
                             Icons.expand_less,
-                            color: Colors.pink,
+                            color: idxColorConsonne,
                             size: height / 12,
                             semanticLabel:
                                 'Text to announce in accessibility modes',
@@ -265,7 +309,7 @@ class _SlidePageState extends State<SlidePage> {
                                     : lettre,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: height / 12, color: Colors.red),
+                                fontSize: height / 12, color: idxColorConsonne),
                           ),
                         ),
                       ),
@@ -300,7 +344,7 @@ class _SlidePageState extends State<SlidePage> {
                         child: Center(
                           child: Icon(
                             Icons.expand_more,
-                            color: Colors.pink,
+                            color: idxColorConsonne,
                             size: height / 12,
                             semanticLabel:
                                 'Text to announce in accessibility modes',
@@ -403,7 +447,7 @@ class _SlidePageState extends State<SlidePage> {
             (activeMaj) ? lettreUse.toUpperCase() : lettreUse,
             style: TextStyle(
               fontSize: height / 11,
-              color: Colors.blue,
+              color: idxColorVoyelle,
             ),
           ),
         ),
@@ -447,7 +491,8 @@ class _SlidePageState extends State<SlidePage> {
                       : (widget.letterMaj)
                           ? lettre.toUpperCase()
                           : lettre,
-                  style: TextStyle(fontSize: height / 11, color: Colors.red),
+                  style:
+                      TextStyle(fontSize: height / 11, color: idxColorConsonne),
                 ),
               ),
             ),
@@ -471,7 +516,8 @@ class _SlidePageState extends State<SlidePage> {
               child: Center(
                 child: Text(
                   (activeMaj) ? lettreUse.toUpperCase() : lettreUse,
-                  style: TextStyle(fontSize: height / 11, color: Colors.blue),
+                  style:
+                      TextStyle(fontSize: height / 11, color: idxColorVoyelle),
                 ),
               ),
             ),
@@ -485,7 +531,7 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future firstsound(String letter) async {
-    MapEntry entry = phonetiques.entries
+    MapEntry entry = phonetiques2.entries
         .firstWhere((element) => element.key == letter, orElse: () => null);
 
     if (entry != null) {
@@ -495,9 +541,9 @@ class _SlidePageState extends State<SlidePage> {
     }
 
     print("Akhi t es dans le premier son");
-    await flutterTts.setVoice({"name": "fr-fr-x-frc-local", "locale": "fr-FR"});
-    await flutterTts.setLanguage("fr-FR");
+    await flutterTts.setVoice({"name": "Marie", "locale": "fr-FR"});
     await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(0.3);
   }
 
   void changeupletter() {
@@ -601,23 +647,23 @@ class _SlidePageState extends State<SlidePage> {
   }
 
   Future duosound(double width) async {
-    MapEntry entryA = phonetiques.entries.firstWhere(
+    MapEntry entryA = phonetiques2.entries.firstWhere(
         (element) => element.key == lettre + 'a',
         orElse: () => null);
 
-    MapEntry entryE = phonetiques.entries.firstWhere(
+    MapEntry entryE = phonetiques2.entries.firstWhere(
         (element) => element.key == lettre + 'e',
         orElse: () => null);
 
-    MapEntry entryI = phonetiques.entries.firstWhere(
+    MapEntry entryI = phonetiques2.entries.firstWhere(
         (element) => element.key == lettre + 'i',
         orElse: () => null);
 
-    MapEntry entryO = phonetiques.entries.firstWhere(
+    MapEntry entryO = phonetiques2.entries.firstWhere(
         (element) => element.key == lettre + 'o',
         orElse: () => null);
 
-    MapEntry entryU = phonetiques.entries.firstWhere(
+    MapEntry entryU = phonetiques2.entries.firstWhere(
         (element) => element.key == lettre + 'u',
         orElse: () => null);
 
@@ -662,56 +708,13 @@ class _SlidePageState extends State<SlidePage> {
         }
       }
       etape = 2;
-      //print("t es a la fin de duo sound et Onetimesound est maintenant egale a : ");
-      //print(onetimesound);
-      //print("Tu n est pas aller assez loin pour activer les 2 dernieres cases.");
-    } else {
+    }
+
+    //print("t es a la fin de duo sound et Onetimesound est maintenant egale a : ");
+    //print(onetimesound);
+    //print("Tu n est pas aller assez loin pour activer les 2 dernieres cases.");
+    else {
       //rien
     }
   }
-
-  Map phonetiques = {
-    "be": "beu",
-    "ca": "k",
-    "co": "quo",
-    "cu": "cul",
-    "fe": "feu",
-    "fo": "fau",
-    "fu": "fut",
-    "ge": "je",
-    "gi": "ji",
-    "gue": "gueu",
-    "he": "eux",
-    "hu": "u",
-    "ke": "que",
-    "ko": "co",
-    "ku": "q",
-    "to": "tau",
-    "ye": "yeu",
-    "ve": "veut",
-    "pe": "peut",
-    "sov": "sove",
-    "y": "ygrec",
-    "aj": "a je",
-    "ap": "apeux",
-    "aq": "hack",
-    "av": "have",
-    "aw": "a ou",
-    "az": "hazeu",
-    "eb": "aibeu",
-    "ef": "f",
-    "qa": "ka",
-    "qo": "co",
-    "qe": "que",
-    "qu": "q",
-    "eg": "egg",
-    "we": "wé",
-    "xa": "gza",
-    "xe": "xélophone",
-    "xi": "gue zi",
-    "xo": "guezo",
-    "xu": "guezut",
-    "ei": "ai",
-    "zu": "zu"
-  };
 }

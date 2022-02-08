@@ -162,6 +162,7 @@ class _SettingPageState extends State<SettingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
+                        width: width / 2,
                         child: Text(
                           'Couleur des boutons :',
                           textAlign: TextAlign.center,
@@ -226,8 +227,9 @@ class _SettingPageState extends State<SettingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
+                        width: width / 2,
                         child: Text(
-                          'Couleur du fond :',
+                          'Couleur des boutons :',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -311,6 +313,7 @@ class _SettingPageState extends State<SettingPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
+                                      width: width / 4.5,
                                       child: Text(
                                         'Voyelles : ',
                                         textAlign: TextAlign.center,
@@ -322,8 +325,8 @@ class _SettingPageState extends State<SettingPage> {
                                     ),
                                     Container(
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 4.0, right: 4),
                                         child: RaisedButton(
                                           onPressed: () {
                                             isCons = false;
@@ -367,6 +370,7 @@ class _SettingPageState extends State<SettingPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
+                                        width: width / 4.5,
                                         child: Text(
                                           'Consomnes : ',
                                           textAlign: TextAlign.center,

@@ -1,3 +1,4 @@
+import 'package:alphabet_app/screen/doubleLettre.dart';
 import 'package:alphabet_app/screen/revision.dart';
 import 'package:alphabet_app/sound_recorder.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           '/accent': (context) => AccentPage(),
           '/slide': (context) => SlidePage(),
           '/revision': (context) => RevisionPage(),
+          '/doubleLettre': (context) => DoubleLettre(),
         },
         initialRoute: '/');
   }

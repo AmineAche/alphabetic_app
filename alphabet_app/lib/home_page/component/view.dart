@@ -193,10 +193,17 @@ class _RecorderState extends State<Recorder> {
     } else {
       lettertot = letter_1;
     }
-    Directory appDir = await getExternalStorageDirectory();
+
+    Directory appDir = Platform.isAndroid
+        ? await getExternalStorageDirectory() //FOR ANDROID
+        : await getApplicationSupportDirectory();
+
+    //Directory appDir = await getExternalStorageDirectory();
     String jrecord = 'Audiorecords';
     String dato = "${lettertot?.toString()}.wav";
-    Directory appDirec = Directory("${appDir.path}/$jrecord/");
+    Directory appDirec =
+        Directory("${appDir.path.replaceAll(' ', '')}/$jrecord/");
+
     if (await appDirec.exists()) {
       String patho = "${appDirec.path}$dato";
 
@@ -204,6 +211,8 @@ class _RecorderState extends State<Recorder> {
       if (appDelete != null) {
         appDelete.delete(recursive: true);
       }
+      print("path delete $appDelete");
+
       print("path for file11 ${patho}");
       // print(appDelete);
 
@@ -269,7 +278,7 @@ class _RecorderState extends State<Recorder> {
     setState(() {
       _current = result;
       _currentStatus = _current.status;
-      _current.duration = null;
+      // _current.duration = null;
       _recordIcon = Icons.mic;
       stop = false;
     });
