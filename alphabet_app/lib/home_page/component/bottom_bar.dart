@@ -377,16 +377,19 @@ class _BottomBarState extends State<BottomBar> {
     BuildContext context,
   ) {
     showModalBottomSheet<void>(
+      isDismissible: false,
+      enableDrag: false,
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 200,
-          color: Colors.white70,
-          child: Recorder(
-            cardVisible: widget.visible,
-            save: _onFinish,
-          ),
-        );
+            height: 200,
+            color: Colors.white70,
+            child: Container(
+              child: Recorder(
+                cardVisible: widget.visible,
+                save: _onFinish,
+              ),
+            ));
       },
     );
   }

@@ -79,6 +79,7 @@ class _SettingPageState extends State<SettingPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: idxColorBackground,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -229,7 +230,7 @@ class _SettingPageState extends State<SettingPage> {
                       Container(
                         width: width / 2,
                         child: Text(
-                          'Couleur des boutons :',
+                          'Couleur du fond :',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -354,7 +355,7 @@ class _SettingPageState extends State<SettingPage> {
                                             'A',
                                             textAlign: TextAlign.center,
                                           ),
-                                          color: Color(0xFFd5e5e4),
+                                          color: Color(0xffffffff),
                                           textColor: idxColorVoyelle,
                                         ),
                                       ),
@@ -413,7 +414,7 @@ class _SettingPageState extends State<SettingPage> {
                                               'B',
                                               textAlign: TextAlign.center,
                                             ),
-                                            color: Color(0xFFd5e5e4),
+                                            color: Color(0xffffffff),
                                             textColor: idxColorConsonne,
                                             // useWhiteForeground(currentColor)
                                             //     ? const Color(0xffffffff)
@@ -442,7 +443,7 @@ class _SettingPageState extends State<SettingPage> {
                       'REINITIALISER',
                       textAlign: TextAlign.center,
                     ),
-                    color: Color(0xFFd5e5e4),
+                    color: Color(0xffffffff),
                     textColor: Colors.black,
                     // useWhiteForeground(currentColor)
                     //     ? const Color(0xffffffff)

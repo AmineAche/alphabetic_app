@@ -9,7 +9,7 @@
             "name": "alphabet_app",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "debug"
 
         }
     ]

@@ -24,6 +24,7 @@ class _RecorderState extends State<Recorder> {
   Recording _current;
   // Recorder properties
   FlutterAudioRecorder2 audioRecorder;
+  static const end = const Duration(seconds: 5);
 
   @override
   void initState() {
@@ -77,35 +78,71 @@ class _RecorderState extends State<Recorder> {
               height: 20,
             ),
             stop == false
-                ? RaisedButton(
-                    color: Colors.orange,
-                    onPressed: () async {
-                      await _onRecordButtonPressed();
-                      setState(() {});
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 80,
-                          height: 80,
-                          child: Icon(
-                            _recordIcon,
-                            color: Colors.white,
-                            size: 80,
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          child: RaisedButton(
+                            color: Colors.orange,
+                            onPressed: null,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Container(
+                                width: 80,
+                                height: 115,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_back,
+                                      color: Colors.white,
+                                      size: 80,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "Retour",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                )),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "S'enregistrer",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      RaisedButton(
+                        color: Colors.orange,
+                        onPressed: () async {
+                          await _onRecordButtonPressed();
+                          setState(() {});
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              child: Icon(
+                                _recordIcon,
+                                color: Colors.white,
+                                size: 80,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "S'enregistrer",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -310,5 +347,13 @@ class _RecorderState extends State<Recorder> {
     } else {
       Fluttertoast.showToast(msg: "Allow App To Use Mic");
     }
+
+    Timer(Duration(seconds: 5), () {
+      setState(() {
+        Fluttertoast.showToast(msg: "Temps dépassé");
+
+        _stop();
+      });
+    });
   }
 }
