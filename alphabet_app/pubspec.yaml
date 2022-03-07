@@ -57,13 +57,14 @@ dev_dependencies:
   flutter_launcher_icons: ^0.9.0
 
 flutter_icons:
-  image_path: "assets/icons/icon_app"
+  image_path: "assets/icons/yomuLogo.png"
   android: true  
   ios: true
+  remove_alpha_ios: true
 
 flutter_native_splash:
-  color: "#42a5fa"
-  image: "assets/icons/icon_app.png"
+  color: "#4385F5"
+  image: "assets/icons/yomuLogo.png"
 
 
 

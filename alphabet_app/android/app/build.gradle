@@ -33,7 +33,7 @@ android {
      lintOptions { 
       checkReleaseBuilds false 
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
 
 
 
