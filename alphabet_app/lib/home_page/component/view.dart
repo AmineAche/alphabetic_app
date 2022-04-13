@@ -67,6 +67,7 @@ class _RecorderState extends State<Recorder> {
       alignment: Alignment.center,
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 20,

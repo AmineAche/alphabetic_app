@@ -1,4 +1,4 @@
-package com.example.alphabet_app
+package com.farajeditions.yomu
 
 import io.flutter.embedding.android.FlutterActivity
 
