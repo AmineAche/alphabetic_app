@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alphabet_app/list/letter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -21,11 +23,16 @@ class RevisionPage extends StatefulWidget {
 
 final FlutterTts flutterTts = FlutterTts();
 AnimationController _animationController;
+AnimationController _animation;
 
 class _RevisionPageState extends State<RevisionPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   void initState() {
     _loadString();
+    _animation = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 200), () => _animation.forward());
+
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
@@ -37,6 +44,8 @@ class _RevisionPageState extends State<RevisionPage>
   @override
   void dispose() {
     _animationController.dispose();
+    _animation.dispose();
+
     super.dispose();
   }
 
@@ -72,21 +81,18 @@ class _RevisionPageState extends State<RevisionPage>
                       border: Border.all(color: Colors.grey[600], width: 0.5),
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(0),
-                        bottomRight: Radius.circular(70),
+                        bottomRight: Radius.circular(10),
                       ),
                       color: idxColorButton,
                     ),
                     child: SizedBox(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: width / 70.0),
-                        child: IconButton(
-                          iconSize: height / 20,
-                          icon: Icon(
-                            Icons.home,
-                            color: Colors.white,
-                          ),
-                          onPressed: () => Navigator.of(context).pop(null),
+                      child: IconButton(
+                        iconSize: height / 20,
+                        icon: Icon(
+                          Icons.home,
+                          color: Colors.white,
                         ),
+                        onPressed: () => Navigator.of(context).pop(null),
                       ),
                     ),
                   ),
@@ -111,7 +117,7 @@ class _RevisionPageState extends State<RevisionPage>
                       border: Border.all(color: Colors.grey[600], width: 0.5),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(0),
-                        bottomLeft: Radius.circular(70),
+                        bottomLeft: Radius.circular(10),
                       ),
                       color: idxColorButton,
                     ),
@@ -181,56 +187,59 @@ class _RevisionPageState extends State<RevisionPage>
                           ),
                           new Flexible(
                             child: SwipeGestureRecognizer(
-                              child: Container(
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 3.0),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 3,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                  //shape: BoxShape.circle,
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white,
-                                  border:
-                                      Border.all(color: Colors.black, width: 1),
-                                ),
-                                child: ConstrainedBox(
-                                  constraints: new BoxConstraints(
-                                    maxWidth: width - 85,
-                                    minWidth: width / 5,
-                                    maxHeight: height / 2.5,
+                              child: FadeTransition(
+                                opacity: _animation,
+                                child: Container(
+                                  margin:
+                                      new EdgeInsets.symmetric(horizontal: 3.0),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 3,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 1), // changes position of shadow
+                                      ),
+                                    ],
+                                    //shape: BoxShape.circle,
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: Colors.black, width: 1),
                                   ),
-                                  child: Container(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8.0, right: 8.0),
-                                          child: Text(
-                                            widget.maj
-                                                ? revision[revisionidx]
-                                                    .toUpperCase()
-                                                : revision[revisionidx]
-                                                    .toLowerCase(),
-                                            //"les oiseaux montent sur les arbres car",
-                                            // "o",
+                                  child: ConstrainedBox(
+                                    constraints: new BoxConstraints(
+                                      maxWidth: width - 85,
+                                      minWidth: width / 5,
+                                      maxHeight: height / 2.5,
+                                    ),
+                                    child: Container(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0, right: 8.0),
+                                            child: Text(
+                                              widget.maj
+                                                  ? revision[revisionidx]
+                                                      .toUpperCase()
+                                                  : revision[revisionidx]
+                                                      .toLowerCase(),
+                                              //"les oiseaux montent sur les arbres car",
+                                              // "o",
 
-                                            textAlign: TextAlign.center,
+                                              textAlign: TextAlign.center,
 
-                                            style: TextStyle(
-                                                fontSize: height / 7,
-                                                color: Colors.blue),
+                                              style: TextStyle(
+                                                  fontSize: height / 7,
+                                                  color: idxColorButton),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

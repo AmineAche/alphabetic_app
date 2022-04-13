@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alphabet_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -10,13 +12,22 @@ class AccentPage extends StatefulWidget {
   _AccentPageState createState() => _AccentPageState();
 }
 
-class _AccentPageState extends State<AccentPage> {
+class _AccentPageState extends State<AccentPage> with TickerProviderStateMixin {
+  AnimationController _animationController;
   final FlutterTts flutterTts = FlutterTts();
 
   @override
   void initState() {
     _load();
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 200), () => _animationController.forward());
     super.initState();
+  }
+
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,21 +60,18 @@ class _AccentPageState extends State<AccentPage> {
                       border: Border.all(color: Colors.grey[600], width: 0.5),
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(0),
-                        bottomRight: Radius.circular(70),
+                        bottomRight: Radius.circular(10),
                       ),
                       color: idxColorButton,
                     ),
                     child: SizedBox(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: width / 70.0),
-                        child: IconButton(
-                          iconSize: height / 20,
-                          icon: Icon(
-                            Icons.home,
-                            color: Colors.white,
-                          ),
-                          onPressed: () => Navigator.of(context).pop(null),
+                      child: IconButton(
+                        iconSize: height / 20,
+                        icon: Icon(
+                          Icons.home,
+                          color: Colors.white,
                         ),
+                        onPressed: () => Navigator.of(context).pop(null),
                       ),
                     ),
                   ),
@@ -82,7 +90,7 @@ class _AccentPageState extends State<AccentPage> {
                       border: Border.all(color: Colors.grey[600], width: 0.5),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(0),
-                        bottomLeft: Radius.circular(70),
+                        bottomLeft: Radius.circular(10),
                       ),
                       color: idxColorButton,
                     ),
@@ -115,35 +123,39 @@ class _AccentPageState extends State<AccentPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           new SwipeGestureRecognizer(
-                            child: Container(
-                              margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                              height: height / 2,
-                              width: width / 5,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 3,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 1), // changes position of shadow
+                            child: FadeTransition(
+                              opacity: _animationController,
+                              child: Container(
+                                margin:
+                                    new EdgeInsets.symmetric(horizontal: 3.0),
+                                height: height / 2,
+                                width: width / 5,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                  //shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                  // boxShadow: [
+                                  //   BoxShadow(color: Colors.white, spreadRadius: 1),
+                                  // ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    voyelleaccent[lettreidx],
+                                    style: TextStyle(
+                                        fontSize: height / 3.5,
+                                        color: idxColorVoyelle),
                                   ),
-                                ],
-                                //shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 1),
-                                // boxShadow: [
-                                //   BoxShadow(color: Colors.white, spreadRadius: 1),
-                                // ],
-                              ),
-                              child: Center(
-                                child: Text(
-                                  voyelleaccent[lettreidx],
-                                  style: TextStyle(
-                                      fontSize: height / 3.5,
-                                      color: idxColorVoyelle),
                                 ),
                               ),
                             ),
@@ -230,15 +242,15 @@ class _AccentPageState extends State<AccentPage> {
   }
 
   Future _load() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-      if (idxColorBackgroundsave == null) {
-        idxColorBackgroundsave = 'F5F5F5';
-      }
-      valueback = int.parse(idxColorBackgroundsave, radix: 16);
-      idxColorBackground = new Color(valueback);
-    });
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // setState(() {
+    //   idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+    //   if (idxColorBackgroundsave == null) {
+    //     idxColorBackgroundsave = 'F5F5F5';
+    //   }
+    //   valueback = int.parse(idxColorBackgroundsave, radix: 16);
+    //   idxColorBackground = new Color(valueback);
+    // });
   }
 
   void lettreleft() {

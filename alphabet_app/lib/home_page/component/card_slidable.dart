@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:io';
-
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../constants.dart';
 import '../../list/letter_list.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class FavoriteWidget extends StatefulWidget {
@@ -16,18 +19,32 @@ class FavoriteWidget extends StatefulWidget {
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
 
-class _FavoriteWidgetState extends State<FavoriteWidget> {
+class _FavoriteWidgetState extends State<FavoriteWidget>
+    with SingleTickerProviderStateMixin {
   final FlutterTts flutterTts = FlutterTts();
+  AnimationController _animationController;
 
   void initState() {
     _loadString();
     _load();
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 200), () => _animationController.forward());
 
     super.initState();
+    img = imgDown;
+  }
+
+  void didChangeDependencies() {
+    precacheImage(imgDown.image, context);
+    precacheImage(imgUp.image, context);
+    precacheImage(img.image, context);
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -35,174 +52,199 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     _load();
     _saveString();
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int i = 0; i < widget.visibility; i++)
-            new SwipeGestureRecognizer(
-              child: Container(
-                margin: new EdgeInsets.symmetric(horizontal: width / 200),
-                height: height / 2,
-                width: width / 5,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 5,
-                      offset: Offset(0, 1), // changes position of shadow
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (int i = 0; i < widget.visibility; i++)
+              new SwipeGestureRecognizer(
+                child: FadeTransition(
+                  opacity: _animationController,
+                  child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: width / 200),
+                    height: height / 2,
+                    width: width / 5,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                      //shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white, width: 1.5),
                     ),
-                  ],
-                  //shape: BoxShape.circle,
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  border: Border.all(color: Colors.white, width: 1.5),
-                ),
-                child: Center(
-                    child: (i == 0)
-                        ? ((letter_1 == 'a') ||
-                                (letter_1 == 'e') ||
-                                (letter_1 == 'i') ||
-                                (letter_1 == 'o') ||
-                                (letter_1 == 'u') ||
-                                (letter_1 == 'y') ||
-                                (letter_1 == 'A') ||
-                                (letter_1 == 'E') ||
-                                (letter_1 == 'I') ||
-                                (letter_1 == 'O') ||
-                                (letter_1 == 'U') ||
-                                (letter_1 == 'Y'))
-                            ? Center(
-                                child: Text(
-                                  '$letter_1',
-                                  style: TextStyle(
-                                      fontSize: height / 3,
-                                      color: idxColorVoyelle),
-                                ),
-                              )
-                            : Center(
-                                child: Text(
-                                  '$letter_1',
-                                  style: TextStyle(
-                                      fontSize: height / 3,
-                                      color: idxColorConsonne),
-                                ),
-                              )
-                        : (i == 1)
-                            ? ((letter_2 == 'a') ||
-                                    (letter_2 == 'e') ||
-                                    (letter_2 == 'i') ||
-                                    (letter_2 == 'o') ||
-                                    (letter_2 == 'u') ||
-                                    (letter_2 == 'y') ||
-                                    (letter_2 == 'A') ||
-                                    (letter_2 == 'E') ||
-                                    (letter_2 == 'I') ||
-                                    (letter_2 == 'O') ||
-                                    (letter_2 == 'U') ||
-                                    (letter_2 == 'Y'))
-                                ? Text(
-                                    '$letter_2',
+                    child: Center(
+                      child: (i == 0)
+                          ? ((letter_1 == 'a') ||
+                                  (letter_1 == 'e') ||
+                                  (letter_1 == 'i') ||
+                                  (letter_1 == 'o') ||
+                                  (letter_1 == 'u') ||
+                                  (letter_1 == 'y') ||
+                                  (letter_1 == 'A') ||
+                                  (letter_1 == 'E') ||
+                                  (letter_1 == 'I') ||
+                                  (letter_1 == 'O') ||
+                                  (letter_1 == 'U') ||
+                                  (letter_1 == 'Y'))
+                              ? Center(
+                                  child: Text(
+                                    '$letter_1',
                                     style: TextStyle(
-                                        fontSize: height / 3,
+                                        fontSize: height / 3.5,
                                         color: idxColorVoyelle),
-                                  )
-                                : Text(
-                                    '$letter_2',
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    '$letter_1',
                                     style: TextStyle(
-                                        fontSize: height / 3,
+                                        fontSize: height / 3.5,
                                         color: idxColorConsonne),
-                                  )
-                            : ((letter_3 == 'a') ||
-                                    (letter_3 == 'e') ||
-                                    (letter_3 == 'i') ||
-                                    (letter_3 == 'o') ||
-                                    (letter_3 == 'u') ||
-                                    (letter_3 == 'y') ||
-                                    (letter_3 == 'A') ||
-                                    (letter_3 == 'E') ||
-                                    (letter_3 == 'I') ||
-                                    (letter_3 == 'O') ||
-                                    (letter_3 == 'U') ||
-                                    (letter_3 == 'Y'))
-                                ? Center(
-                                    child: Text(
+                                  ),
+                                )
+                          : (i == 1)
+                              ? ((letter_2 == 'a') ||
+                                      (letter_2 == 'e') ||
+                                      (letter_2 == 'i') ||
+                                      (letter_2 == 'o') ||
+                                      (letter_2 == 'u') ||
+                                      (letter_2 == 'y') ||
+                                      (letter_2 == 'A') ||
+                                      (letter_2 == 'E') ||
+                                      (letter_2 == 'I') ||
+                                      (letter_2 == 'O') ||
+                                      (letter_2 == 'U') ||
+                                      (letter_2 == 'Y'))
+                                  ? Text(
+                                      '$letter_2',
+                                      style: TextStyle(
+                                          fontSize: height / 3.5,
+                                          color: idxColorVoyelle),
+                                    )
+                                  : Text(
+                                      '$letter_2',
+                                      style: TextStyle(
+                                          fontSize: height / 3.5,
+                                          color: idxColorConsonne),
+                                    )
+                              : ((letter_3 == 'a') ||
+                                      (letter_3 == 'e') ||
+                                      (letter_3 == 'i') ||
+                                      (letter_3 == 'o') ||
+                                      (letter_3 == 'u') ||
+                                      (letter_3 == 'y') ||
+                                      (letter_3 == 'A') ||
+                                      (letter_3 == 'E') ||
+                                      (letter_3 == 'I') ||
+                                      (letter_3 == 'O') ||
+                                      (letter_3 == 'U') ||
+                                      (letter_3 == 'Y'))
+                                  ? Center(
+                                      child: Text(
+                                        '$letter_3',
+                                        style: TextStyle(
+                                            fontSize: height / 3.5,
+                                            color: idxColorVoyelle),
+                                      ),
+                                    )
+                                  : Text(
                                       '$letter_3',
                                       style: TextStyle(
-                                          fontSize: height / 3,
-                                          color: idxColorVoyelle),
+                                          fontSize: height / 3.5,
+                                          color: idxColorConsonne),
                                     ),
-                                  )
-                                : Text(
-                                    '$letter_3',
-                                    style: TextStyle(
-                                        fontSize: height / 3,
-                                        color: idxColorConsonne),
-                                  )),
-              ),
-              onSwipeDown: () {
-                setState(() {
-                  if (i == 0) {
-                    changedownletter_1();
-                  } else if (i == 1) {
-                    changedownletter_2();
-                  } else {
-                    changedownletter_3();
-                  }
-                });
-              },
-              onSwipeUp: () {
-                setState(() {
-                  if (i == 0) {
-                    changeupletter_1();
-                  } else if (i == 1) {
-                    changeupletter_2();
-                  } else {
-                    changeupletter_3();
-                  }
-                });
-              },
-            ),
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: width / 7, left: height / 20),
-                child: Container(
-                  height: height / 10,
-                  width: height / 10,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                    border: Border.all(color: idxColorButton, width: 2),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
-                  child: IconButton(
-                      iconSize: height / 20,
-                      icon: Icon(
-                        Icons.volume_up,
-                        color: Colors.black,
-                      ),
-                      tooltip: 'Ecouter',
-                      onPressed: () {
-                        sound();
-                      }),
                 ),
+                onSwipeDown: () {
+                  setState(() {
+                    if (i == 0) {
+                      changedownletter_1();
+                    } else if (i == 1) {
+                      changedownletter_2();
+                    } else {
+                      changedownletter_3();
+                    }
+                  });
+                },
+                onSwipeUp: () {
+                  setState(
+                    () {
+                      if (i == 0) {
+                        changeupletter_1();
+                      } else if (i == 1) {
+                        changeupletter_2();
+                      } else {
+                        changeupletter_3();
+                      }
+                    },
+                  );
+                },
               ),
-            ],
+          ],
+        ),
+        SizedBox(
+          width: width / 50,
+        ),
+        Container(
+          margin: new EdgeInsets.symmetric(horizontal: width / 200),
+          height: height / 2.5,
+          width: width / 9,
+          // decoration: BoxDecoration(
+          //   boxShadow: [
+          //     BoxShadow(
+          //       color: Colors.grey.withOpacity(0.5),
+          //       spreadRadius: 5,
+          //       blurRadius: 7,
+          //       offset: Offset(0, 3), // changes position of shadow
+          //     ),
+          //   ],
+          //   border: Border.all(color: idxColorButton, width: 2),
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(50),
+          // ),
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                Timer(Duration(seconds: 2), () {
+                  setState(() {
+                    img = imgDown;
+                  });
+                });
+                sound();
+              });
+            },
+            onTapUp: (tap) {
+              setState(() {
+                img = imgUp;
+              });
+            },
+            child: img,
           ),
-          Container()
-        ],
-      ),
+        ),
+        // child: IconButton(
+        //   iconSize: height / 20,
+        //   icon: Icon(
+        //     Icons.volume_up,
+        //     color: Colors.black,
+        //   ),
+        //   tooltip: 'Ecouter',
+        //   onPressed: () {
+        //     sound();
+        //   },
+        // ),
+      ],
     );
   }
 
@@ -266,15 +308,15 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   }
 
   Future _load() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-      if (idxColorBackgroundsave == null) {
-        idxColorBackgroundsave = 'F5F5F5';
-      }
-      valueback = int.parse(idxColorBackgroundsave, radix: 16);
-      idxColorBackground = new Color(valueback);
-    });
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // setState(() {
+    //   idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+    //   if (idxColorBackgroundsave == null) {
+    //     idxColorBackgroundsave = 'F5F5F5';
+    //   }
+    //   valueback = int.parse(idxColorBackgroundsave, radix: 16);
+    //   idxColorBackground = new Color(valueback);
+    // });
   }
 
   void changedownletter_1() {

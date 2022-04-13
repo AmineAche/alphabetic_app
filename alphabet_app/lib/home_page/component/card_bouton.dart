@@ -89,7 +89,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                         height: height / 10,
                         child: ElevatedButton(
                           child: Text(
-                            activeMaj ? 'A A' : "a a",
+                            activeMaj ? 'A B' : "a b",
                             style: TextStyle(
                               fontSize: height / 20,
                             ),
@@ -117,11 +117,11 @@ class _BoutonWidget extends State<BoutonWidget> {
                         ),
                       ),
                       SizedBox(
-                        width: width / 6,
+                        width: width / 8,
                         height: height / 10,
                         child: ElevatedButton(
                           child: Text(
-                            activeMaj ? 'A A A' : "a a a",
+                            activeMaj ? 'A B C' : "a b c",
                             style: TextStyle(
                               fontSize: height / 20,
                             ),
@@ -135,7 +135,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(0),
-                                  bottomRight: Radius.circular(150),
+                                  bottomRight: Radius.circular(10),
                                 ),
                                 side:
                                     BorderSide(color: Colors.grey, width: 0.5),
@@ -239,7 +239,7 @@ class _BoutonWidget extends State<BoutonWidget> {
                     border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
-                      bottomLeft: Radius.circular(150),
+                      bottomLeft: Radius.circular(10),
                     ),
                     color: idxColorButton,
                   ),
@@ -284,6 +284,13 @@ class _BoutonWidget extends State<BoutonWidget> {
       idxColorButton = new Color(value);
       print(idxColorButton);
     });
+
+    // idxBackSave = (prefs.getString('idx_color_background_values'));
+    // if (idxBackSave == null) {
+    //   idxBackSave = 'ffffffff';
+    // }
+    // valueback = int.parse(idxBackSave, radix: 16);
+    // idxColorBackground = new Color(valueback);
   }
 
   _saveString() async {

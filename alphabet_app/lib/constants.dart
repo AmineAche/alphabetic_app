@@ -10,6 +10,19 @@ const my_RougeBackground = Color(0xfff86161);
 const backLetterCase = const Color(0xFFB0CBFF);
 const caseColor = const Color(0xFFFFCDCD);
 
+Image img = Image.asset(
+  "assets/icons/chatpull.png",
+  fit: BoxFit.cover,
+);
+final Image imgUp = Image.asset(
+  "assets/icons/chatparle.png",
+  fit: BoxFit.cover,
+);
+final Image imgDown = Image.asset(
+  "assets/icons/chatpull.png",
+  fit: BoxFit.cover,
+);
+
 final image1 = Image.asset(
   "assets/fleches/Fleches_1.png",
   fit: BoxFit.contain,

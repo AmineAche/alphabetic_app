@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alphabet_app/list/letter_list.dart';
 import 'package:alphabet_app/screen/revision.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,8 @@ class DoubleLettre extends StatefulWidget {
   _DoubleLettreState createState() => _DoubleLettreState();
 }
 
-class _DoubleLettreState extends State<DoubleLettre> {
+class _DoubleLettreState extends State<DoubleLettre>
+    with TickerProviderStateMixin {
   int indiceletternow;
   String lettre;
   var initialx;
@@ -29,25 +32,44 @@ class _DoubleLettreState extends State<DoubleLettre> {
   int onetimesound;
   var etape = 0;
   double tangente;
+  AnimationController _animationController;
+  AnimationController _animationController2;
+
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 200), () => _animationController.forward());
+    _animationController2 = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 500), () => _animationController2.forward());
+    super.initState();
+  }
+
+  void didChangeDependencies() {
+    precacheImage(image1A.image, context);
+    precacheImage(image1E.image, context);
+    precacheImage(image1I.image, context);
+    precacheImage(image1O.image, context);
+    precacheImage(image1U.image, context);
+
+    precacheImage(image2A.image, context);
+    precacheImage(image2E.image, context);
+    precacheImage(image2I.image, context);
+    precacheImage(image2O.image, context);
+    precacheImage(image2U.image, context);
+    super.didChangeDependencies();
+  }
+
+  void dispose() {
+    _animationController.dispose();
+    _animationController2.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    void didChangeDependencies() {
-      precacheImage(image1A.image, context);
-      precacheImage(image1E.image, context);
-      precacheImage(image1I.image, context);
-      precacheImage(image1O.image, context);
-      precacheImage(image1U.image, context);
-
-      precacheImage(image2A.image, context);
-      precacheImage(image2E.image, context);
-      precacheImage(image2I.image, context);
-      precacheImage(image2O.image, context);
-      precacheImage(image2U.image, context);
-      super.didChangeDependencies();
-    }
 
     return Scaffold(
       backgroundColor: idxColorBackground,
@@ -74,21 +96,18 @@ class _DoubleLettreState extends State<DoubleLettre> {
                     border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(0),
-                      bottomRight: Radius.circular(70),
+                      bottomRight: Radius.circular(10),
                     ),
                     color: idxColorButton,
                   ),
                   child: SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: width / 70),
-                      child: IconButton(
-                        iconSize: height / 20,
-                        icon: Icon(
-                          Icons.home,
-                          color: Colors.white,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(null),
+                    child: IconButton(
+                      iconSize: height / 20,
+                      icon: Icon(
+                        Icons.home,
+                        color: Colors.white,
                       ),
+                      onPressed: () => Navigator.pushNamed(context, '/'),
                     ),
                   ),
                 ),
@@ -142,7 +161,7 @@ class _DoubleLettreState extends State<DoubleLettre> {
                     border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
-                      bottomLeft: Radius.circular(70),
+                      bottomLeft: Radius.circular(10),
                     ),
                     color: idxColorButton,
                   ),
@@ -269,7 +288,7 @@ class _DoubleLettreState extends State<DoubleLettre> {
                                     : lettre,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: height / 12, color: idxColorConsonne),
+                                fontSize: height / 17, color: idxColorConsonne),
                           ),
                         ),
                       ),
@@ -334,16 +353,19 @@ class _DoubleLettreState extends State<DoubleLettre> {
                                       ? image1U
                                       : image1,
                 ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Colonne_1("a", height, width),
-                      Colonne_1("e", height, width),
-                      Colonne_1("i", height, width),
-                      Colonne_1("o", height, width),
-                      Colonne_1("u", height, width),
-                    ],
+                FadeTransition(
+                  opacity: _animationController,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Colonne_1("a", height, width),
+                        Colonne_1("e", height, width),
+                        Colonne_1("i", height, width),
+                        Colonne_1("o", height, width),
+                        Colonne_1("u", height, width),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -363,16 +385,19 @@ class _DoubleLettreState extends State<DoubleLettre> {
                                       ? image2U
                                       : image2,
                 ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Colonne_2("a", height, width),
-                      Colonne_2("e", height, width),
-                      Colonne_2("i", height, width),
-                      Colonne_2("o", height, width),
-                      Colonne_2("u", height, width),
-                    ],
+                FadeTransition(
+                  opacity: _animationController2,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Colonne_2("a", height, width),
+                        Colonne_2("e", height, width),
+                        Colonne_2("i", height, width),
+                        Colonne_2("o", height, width),
+                        Colonne_2("u", height, width),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -437,7 +462,7 @@ class _DoubleLettreState extends State<DoubleLettre> {
     return new GestureDetector(
       child: Container(
         margin: new EdgeInsets.symmetric(horizontal: 5.0),
-        height: height / 8,
+        height: height / 7,
         width: width / 10,
         decoration: BoxDecoration(
           boxShadow: [
@@ -477,7 +502,7 @@ class _DoubleLettreState extends State<DoubleLettre> {
           children: [
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 2.0),
-              height: height / 8,
+              height: height / 7,
               width: width / 10,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -508,7 +533,7 @@ class _DoubleLettreState extends State<DoubleLettre> {
             ),
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 2.0),
-              height: height / 8,
+              height: height / 7,
               width: width / 10,
               decoration: BoxDecoration(
                 boxShadow: [

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -30,14 +30,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   flutter_tts: ^3.2.3
-  animations: ^1.1.2
+  animations: ^2.0.2
   flutter_button: ^0.0.4
   switcher_button: ^0.0.3
   # flutter_gen: ^1.3.1
   flutter_sound_lite: ^8.1.9
   swipe_gesture_recognizer: ^0.0.2
   shared_preferences: ^2.0.5
-  # avatar_glow: ^1.2.0
+  avatar_glow: ^2.0.2
   flutter_slidable: ^0.6.0
   flutter_colorpicker: ^1.0.3
   rflutter_alert: ^2.0.2
@@ -46,25 +46,25 @@ dependencies:
   fluttertoast: ^8.0.7
   share: ^2.0.4
   permission_handler: ^8.1.4+1
+  introduction_screen: ^3.0.0
   flutter_audio_recorder2: ^0.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^1.3.2
-
-    
   flutter_launcher_icons: ^0.9.0
 
 flutter_icons:
-  image_path: "assets/icons/yomuLogo.png"
   android: true  
   ios: true
   remove_alpha_ios: true
+  image_path: "assets/icons/carre.png"
+  
 
 flutter_native_splash:
   color: "#4385F5"
-  image: "assets/icons/yomuLogo.png"
+  image: "assets/icons/old.png"
 
 
 
@@ -74,22 +74,7 @@ flutter_native_splash:
 # The following section is specific to Flutter.
 flutter:
   assets:
-  - assets/a_file.mp3
-  - assets/abi_file.mp3
-  - assets/dab_file.mp3
-  - assets/v_file.mp3
-  - assets/va_file.mp3
-  - assets/ve_file.mp3
-  - assets/vi_file.mp3
-  - assets/vo_file.mp3
-  - assets/e_file.mp3
-  - assets/i_file.mp3
-  - assets/o_file.mp3
-  - assets/u_file.mp3
-  - assets/vu_file.mp3
-  - assets/f_file.mp3
-  - assets/la_file.mp3
-  - assets/error.mp3
+
   - assets/icons/
   - assets/fleches/
   # The following line ensures that the Material Icons font is

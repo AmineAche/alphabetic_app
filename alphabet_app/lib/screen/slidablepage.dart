@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alphabet_app/screen/doubleLettre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -21,13 +23,22 @@ class SlidePage extends StatefulWidget {
   _SlidePageState createState() => _SlidePageState();
 }
 
-class _SlidePageState extends State<SlidePage> {
+class _SlidePageState extends State<SlidePage> with TickerProviderStateMixin {
   final FlutterTts flutterTts = FlutterTts();
+  AnimationController _animationController;
+  AnimationController _animationController2;
+
   // AudioCache audioCache = AudioCache();
 
   @override
   void initState() {
     _load();
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 200), () => _animationController.forward());
+    _animationController2 = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1050));
+    Timer(Duration(milliseconds: 500), () => _animationController2.forward());
     super.initState();
   }
 
@@ -50,21 +61,28 @@ class _SlidePageState extends State<SlidePage> {
   Future _load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      idxColorButtonsave = (prefs.getString('idx_color_button_values'));
-      if (idxColorButtonsave == null) {
-        print('null');
-        idxColorButtonsave = 'FF8333e8';
-      }
-      value = int.parse(idxColorButtonsave, radix: 16);
-      idxColorButton = new Color(value);
+      // idxColorButtonsave = (prefs.getString('idx_color_button_values'));
+      // if (idxColorButtonsave == null) {
+      //   print('null');
+      //   idxColorButtonsave = 'FF8333e8';
+      // }
+      // value = int.parse(idxColorButtonsave, radix: 16);
+      // idxColorButton = new Color(value);
 
-      idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
-      if (idxColorBackgroundsave == null) {
-        idxColorBackgroundsave = 'F5F5F5';
-      }
-      valueback = int.parse(idxColorBackgroundsave, radix: 16);
-      idxColorBackground = new Color(valueback);
+      // idxColorBackgroundsave = (prefs.getString('idx_color_background_values'));
+      // if (idxColorBackgroundsave == null) {
+      //   idxColorBackgroundsave = 'F5F5F5';
+      // }
+      // valueback = int.parse(idxColorBackgroundsave, radix: 16);
+      // idxColorBackground = new Color(valueback);
     });
+  }
+
+  void dispose() {
+    _animationController.dispose();
+    _animationController2.dispose();
+
+    super.dispose();
   }
 
   int indiceletternow;
@@ -106,21 +124,18 @@ class _SlidePageState extends State<SlidePage> {
                     border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(0),
-                      bottomRight: Radius.circular(70),
+                      bottomRight: Radius.circular(10),
                     ),
                     color: idxColorButton,
                   ),
                   child: SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: width / 70),
-                      child: IconButton(
-                        iconSize: height / 20,
-                        icon: Icon(
-                          Icons.home,
-                          color: Colors.white,
-                        ),
-                        onPressed: () => Navigator.pushNamed(context, '/'),
+                    child: IconButton(
+                      iconSize: height / 20,
+                      icon: Icon(
+                        Icons.home,
+                        color: Colors.white,
                       ),
+                      onPressed: () => Navigator.of(context).pop(null),
                     ),
                   ),
                 ),
@@ -181,7 +196,7 @@ class _SlidePageState extends State<SlidePage> {
                     border: Border.all(color: Colors.grey[600], width: 0.5),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
-                      bottomLeft: Radius.circular(70),
+                      bottomLeft: Radius.circular(10),
                     ),
                     color: idxColorButton,
                   ),
@@ -374,16 +389,19 @@ class _SlidePageState extends State<SlidePage> {
                                       ? image1U
                                       : image1,
                 ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Colonne_1("a", height, width),
-                      Colonne_1("e", height, width),
-                      Colonne_1("i", height, width),
-                      Colonne_1("o", height, width),
-                      Colonne_1("u", height, width),
-                    ],
+                FadeTransition(
+                  opacity: _animationController,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Colonne_1("a", height, width),
+                        Colonne_1("e", height, width),
+                        Colonne_1("i", height, width),
+                        Colonne_1("o", height, width),
+                        Colonne_1("u", height, width),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -403,16 +421,19 @@ class _SlidePageState extends State<SlidePage> {
                                       ? image2U
                                       : image2,
                 ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Colonne_2("a", height, width),
-                      Colonne_2("e", height, width),
-                      Colonne_2("i", height, width),
-                      Colonne_2("o", height, width),
-                      Colonne_2("u", height, width),
-                    ],
+                FadeTransition(
+                  opacity: _animationController2,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Colonne_2("a", height, width),
+                        Colonne_2("e", height, width),
+                        Colonne_2("i", height, width),
+                        Colonne_2("o", height, width),
+                        Colonne_2("u", height, width),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -427,7 +448,7 @@ class _SlidePageState extends State<SlidePage> {
     return new GestureDetector(
       child: Container(
         margin: new EdgeInsets.symmetric(horizontal: 5.0),
-        height: height / 8,
+        height: height / 7,
         width: width / 10,
         decoration: BoxDecoration(
           boxShadow: [
@@ -467,7 +488,7 @@ class _SlidePageState extends State<SlidePage> {
           children: [
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 2.0),
-              height: height / 8,
+              height: height / 7,
               width: width / 10,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -498,7 +519,7 @@ class _SlidePageState extends State<SlidePage> {
             ),
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 2.0),
-              height: height / 8,
+              height: height / 7,
               width: width / 10,
               decoration: BoxDecoration(
                 boxShadow: [

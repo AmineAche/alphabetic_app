@@ -3,8 +3,7 @@ import 'dart:io';
 
 // Pour save/load les couleurs des boutons et fonds
 
-String idxColorBackgroundsave = 'FFF5F5F5';
-
+String idxColorBackgroundsave = 'FFffffff';
 int valueback = int.parse(idxColorBackgroundsave, radix: 16);
 Color idxColorBackground = new Color(valueback);
 

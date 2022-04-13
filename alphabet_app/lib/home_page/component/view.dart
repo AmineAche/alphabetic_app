@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:alphabet_app/list/letter_list.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
@@ -60,6 +61,8 @@ class _RecorderState extends State<Recorder> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -70,119 +73,160 @@ class _RecorderState extends State<Recorder> {
             ),
             Text(
               (_current == null)
-                  ? "Temps : 0:0:0:0 secondes"
-                  : _current.duration.toString() + " secondes" ?? "0:0:0:0",
+                  ? ""
+                  : _current.duration.inSeconds.toString() + " secondes" ?? "0",
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             stop == false
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          child: RaisedButton(
-                            color: Colors.orange,
-                            onPressed: null,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                      Container(
+                        child: RaisedButton(
+                          color: idxColorButton,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          shape: CircleBorder(),
+                          child: Container(
+                            width: width / 7.5,
+                            height: height / 3,
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: width / 8,
                             ),
-                            child: Container(
-                                width: 80,
-                                height: 115,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                      size: 80,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "Retour",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  ],
-                                )),
                           ),
                         ),
                       ),
-                      RaisedButton(
-                        color: Colors.orange,
-                        onPressed: () async {
-                          await _onRecordButtonPressed();
-                          setState(() {});
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              child: Icon(
-                                _recordIcon,
-                                color: Colors.white,
-                                size: 80,
-                              ),
+                      AvatarGlow(
+                        glowColor: idxColorButton,
+                        endRadius: width / 9,
+                        duration: Duration(milliseconds: 2000),
+                        repeat: true,
+                        showTwoGlows: true,
+                        repeatPauseDuration: Duration(milliseconds: 100),
+                        // child: RaisedButton(
+                        //   // color: idxColorButton,
+                        //   onPressed: () async {
+                        //     await _onRecordButtonPressed();
+                        //     setState(() {});
+                        //   },
+                        // shape: CircleBorder(),
+
+                        child: InkWell(
+                          onTap: () async {
+                            await _onRecordButtonPressed();
+                            setState(() {});
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: idxColorButton,
+                            radius: width / 11,
+                            child: Icon(
+                              _recordIcon,
+                              color: Colors.white,
+                              size: width / 8,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "S'enregistrer",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
+
+                        // Container(
+                        //   width: width / 7.5,
+                        //   height: height / 3,
+                        //   child: Icon(
+                        //     _recordIcon,
+                        //     color: Colors.white,
+                        //     size: width / 8,
+                        //   ),
+                        //   //  Column(
+                        //   //   children: [
+
+                        //   // Padding(
+                        //   //   padding: const EdgeInsets.all(8.0),
+                        //   //   child: Text(
+                        //   //     "S'enregistrer",
+                        //   //     style: TextStyle(color: Colors.white),
+                        //   //   ),
+                        //   // ),
+                        //   //   ],
+                        //   // ),
+                        // ),
                       ),
                     ],
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        RaisedButton(
-                          color: colo,
-                          onPressed: () async {
-                            await _onRecordButtonPressed();
-                            setState(() {});
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                            width: 80,
-                            height: 80,
-                            child: Icon(
-                              _recordIcon,
-                              color: Colors.white,
-                              size: 50,
+                        AvatarGlow(
+                          glowColor: idxColorButton,
+                          endRadius: width / 9,
+                          duration: Duration(milliseconds: 2000),
+                          repeat: true,
+                          showTwoGlows: true,
+                          repeatPauseDuration: Duration(milliseconds: 100),
+                          child: Material(
+                            // Replace this child with your own
+                            elevation: 1.0,
+                            shape: CircleBorder(),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.grey[100],
+                              child: Container(
+                                width: width / 6,
+                                height: height / 2,
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "$lettertot !",
+                                      style: TextStyle(
+                                          color: idxColorButton,
+                                          fontSize: width / 20),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              radius: width / 11,
                             ),
                           ),
                         ),
+
+                        // RaisedButton(
+                        //   color: colo,
+                        //   onPressed: () async {
+                        //     await _onRecordButtonPressed();
+                        //     setState(() {});
+                        //   },
+                        //   shape: CircleBorder(),
+                        //   child: Container(
+                        //     width: width / 7.5,
+                        //     height: height / 3,
+                        //     child: Icon(
+                        //       _recordIcon,
+                        //       color: Colors.white,
+                        //       size: width / 8,
+                        //     ),
+                        //   ),
+                        // ),
+
                         RaisedButton(
                           color: Colors.orange,
                           onPressed: _currentStatus != RecordingStatus.Unset
                               ? _stop
                               : null,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                          shape: CircleBorder(),
                           child: Container(
-                            width: 80,
-                            height: 80,
+                            width: width / 7.5,
+                            height: height / 3,
                             child: Icon(
                               Icons.stop,
                               color: Colors.white,
-                              size: 50,
+                              size: width / 8,
                             ),
                           ),
                         ),
@@ -259,7 +303,7 @@ class _RecorderState extends State<Recorder> {
       await audioRecorder.initialized;
     } else {
       appDirec.create(recursive: true);
-      Fluttertoast.showToast(msg: "Start Recording , Press Start");
+      // Fluttertoast.showToast(msg: "Start Recording , Press Start");
       String patho = "${appDirec.path}$dato";
       print("path for file22 ${patho}");
       audioRecorder =
@@ -310,7 +354,8 @@ class _RecorderState extends State<Recorder> {
 
   _stop() async {
     var result = await audioRecorder.stop();
-    Fluttertoast.showToast(msg: "Fin de l'enregistrement , Fichier sauvegardé");
+
+    Fluttertoast.showToast(msg: "Fin de l'enregistrement");
     widget.save();
     setState(() {
       _current = result;
@@ -318,6 +363,7 @@ class _RecorderState extends State<Recorder> {
       // _current.duration = null;
       _recordIcon = Icons.mic;
       stop = false;
+      Navigator.of(context).pop();
     });
   }
 
@@ -345,14 +391,15 @@ class _RecorderState extends State<Recorder> {
         stop = true;
       });
     } else {
-      Fluttertoast.showToast(msg: "Allow App To Use Mic");
+      Fluttertoast.showToast(msg: "Autorisez le microphone");
     }
 
     Timer(Duration(seconds: 5), () {
-      setState(() {
-        Fluttertoast.showToast(msg: "Temps dépassé");
-
-        _stop();
+      setState(() async {
+        if (_current == await audioRecorder.stop()) {
+          _stop();
+          // Fluttertoast.showToast(msg: "Temps dépassé");
+        }
       });
     });
   }

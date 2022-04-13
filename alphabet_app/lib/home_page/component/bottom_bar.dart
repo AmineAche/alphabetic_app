@@ -231,9 +231,10 @@ class _BottomBarState extends State<BottomBar> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => RevisionPage(
-                          maj: activeMaj,
-                        )),
+                  builder: (context) => RevisionPage(
+                    maj: activeMaj,
+                  ),
+                ),
               );
             },
             child: Text(
@@ -376,14 +377,25 @@ class _BottomBarState extends State<BottomBar> {
   void show(
     BuildContext context,
   ) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     showModalBottomSheet<void>(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(30),
+      )),
       isDismissible: false,
       enableDrag: false,
       context: context,
       builder: (BuildContext context) {
         return Container(
-            height: 200,
-            color: Colors.white70,
+            decoration: BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                )),
+            height: height / 1.5,
             child: Container(
               child: Recorder(
                 cardVisible: widget.visible,

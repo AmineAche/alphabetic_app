@@ -65,8 +65,8 @@ class _SettingPageState extends State<SettingPage> {
       idxColorConsonne = Color(0xffff0000);
       idxConsSave = "ffff0000";
 
-      idxColorBackground = Color(0xffF5F5F5);
-      idxBackSave = "ffF5F5F5";
+      idxColorBackground = Color(0xffffffff);
+      idxBackSave = "ffffffff";
 
       idxColorButton = Color(0xFF8333e8);
       idxBtnSave = "FF8333e8";
@@ -84,6 +84,7 @@ class _SettingPageState extends State<SettingPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: width / 5,
@@ -100,7 +101,7 @@ class _SettingPageState extends State<SettingPage> {
                   border: Border.all(color: Colors.grey[600], width: 0.5),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(0),
-                    bottomRight: Radius.circular(70),
+                    bottomRight: Radius.circular(10),
                   ),
                   color: idxColorButton,
                 ),
@@ -115,6 +116,38 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                       onPressed: () => Navigator.pushNamed(context, '/'),
                     ),
+                  ),
+                ),
+              ),
+              Container(
+                width: width / 5,
+                height: height / 10,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 0.1,
+                      blurRadius: 15,
+                      offset: Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
+                  border: Border.all(color: Colors.grey[600], width: 0.5),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(0),
+                    bottomLeft: Radius.circular(10),
+                  ),
+                  color: idxColorButton,
+                ),
+                child: SizedBox(
+                  child: IconButton(
+                    iconSize: height / 20,
+                    icon: Icon(
+                      Icons.lightbulb_outline,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/onBoarding');
+                    },
                   ),
                 ),
               ),
@@ -471,7 +504,7 @@ class _SettingPageState extends State<SettingPage> {
 
       idxBackSave = (prefs.getString('idx_color_background_values'));
       if (idxBackSave == null) {
-        idxBackSave = 'ffF5F5F5';
+        idxBackSave = 'ffffffff';
       }
       valueback = int.parse(idxBackSave, radix: 16);
       idxColorBackground = new Color(valueback);
@@ -500,7 +533,7 @@ class _SettingPageState extends State<SettingPage> {
     prefs.setString('idx_color_button_values', idxBtnSave);
 
     if (idxBackSave == null) {
-      idxBackSave = 'ffF5F5F5';
+      idxBackSave = 'ffffffff';
     }
     prefs.setString('idx_color_background_values', idxBackSave);
 
